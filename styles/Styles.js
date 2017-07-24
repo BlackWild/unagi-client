@@ -1,4 +1,3 @@
-import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
 
 
@@ -36,11 +35,6 @@ export const styles = StyleSheet.create({
     fontSize: 30,
     color: 'white',
     marginLeft: 13,
-  },
-
-  tabBox: {
-    marginBottom: 8,
-    backgroundColor: 'red',
   },
   deleteButton: {
     width: 24,
