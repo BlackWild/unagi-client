@@ -15,7 +15,7 @@ import uniqueId from 'react-native-unique-id';
 import { StackNavigator } from 'react-navigation';
 
 import {Post} from './components/Post';
-import {styles} from './styles/Styles';
+import {styles} from './styles/HomeScreenStyles';
 import {setIDState, setLocationState, setPostState} from './functions/StateSetters';
 
 
