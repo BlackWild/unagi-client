@@ -13,20 +13,12 @@ import {
 } from 'react-native';
 import ActionButton from 'react-native-action-button';
 import uniqueId from 'react-native-unique-id';
-import { 
-  StackRouter,
-  StackNavigator
-} from 'react-navigation';
+import { StackNavigator } from 'react-navigation';
 
 import {Post} from './components/Post';
-
 import {styles} from './styles/Styles';
 
-export default class unagiyooooo extends Component {
-  constructor(props) {
-    super(props);
-    this.setState.bind(this);
-    this.state = {
+const tempState = {
       Posts: [
         {
           userID: '454364343664',
@@ -51,28 +43,37 @@ export default class unagiyooooo extends Component {
 
       ]
     };
+
+
+class unagiyooooo extends Component {
+  constructor(props) {
+    super(props);
+    this.setState.bind(this);
+    this.state = tempState;
   }
 
   componentWillMount() {
+    
+    //////////////////////
+
     // AsyncStorage.removeItem("userID").then((res) => {
     //   console.log("\n item deleted");
     // })
     AsyncStorage.getItem("userID").then((res) => {
-      console.log("id geted:  " + res);
+      console.log("id was:  " + res);
       if(res) {
         console.log("is not first run");
-        this.setState((prevState, props) => {
+        this.setState(() => {
           return {userID: res};
         });
       } else {
-        console.log("hoy");
         uniqueId()
           .then(id => {
             console.log("id is : " + id);
             AsyncStorage.setItem("userID", id).then((res) => {
-              console.log("id seted!! ", res);
+              console.log("id saved!! ", res);
             });
-            this.setState((prevState, props) => {
+            this.setState(() => {
               return {userID: id};
             });
             // fetch({
@@ -90,27 +91,10 @@ export default class unagiyooooo extends Component {
       }
     });
 
-    
-
-    // setTimeout(()=>{
-    //   console.log(this.state.isFirstRun);
-    // }, 5000);
-
-    // fetch({
-    //   url: 'https://facebook.github.io/react-native/movies.json',
-    //   method: 'GET'
-    // }).then((response) => response.json())
-    //   .then((responseJson) => {
-    //     console.log(responseJson.movies);
-    //   })
-    //   .catch((error) => {
-    //     console.error(error);
-    //   });
-
   }
 
   render() {
-    if (!this.state.Posts) {
+    if (!this.state.userID || !this.state.Posts) {
       return null;
     } else {
       return (
