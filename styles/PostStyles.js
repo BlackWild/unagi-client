@@ -2,10 +2,10 @@ import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
   paragraph: {
-    margin: 24,
+    margin: 14,
     fontSize: 18,
-    fontWeight: 'bold',
-    textAlign: 'center',
+    // fontWeight: 'bold',
+    textAlign: 'right',
     color: '#34495e',
   },
   postBox: {

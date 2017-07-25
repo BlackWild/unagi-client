@@ -6,31 +6,22 @@ export const styles = StyleSheet.create({
     width: 30, height: 30,
     margin:10
   },
-  bar:{
-    padding: 10,
-    flexDirection: 'row',
-    backgroundColor: '#8BC34A',
-  },
   container: {
     flex:1,
     justifyContent: 'center',
     alignItems: 'center', 
     backgroundColor: '#F1F1F1',
-
-  },
-  post: {
-    fontSize: 20,
-    color:'#F1F1F1',
-    textAlign: 'center',
-    justifyContent:'center',
-    margin: 10,
   },
   charRemain: {
     fontSize: 20,
-    color:'#F1F1F1',
+    // color:'#F1F1F1',
+    color:'#0000FF',
     textAlign: 'center',
     justifyContent:'center',
     margin: 10,
+  },
+  overChar: {
+    color: '#ff0000' 
   },
   textarea: {
     flex:1,
