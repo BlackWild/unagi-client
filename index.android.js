@@ -5,9 +5,9 @@ import { StackNavigator } from 'react-navigation';
 
 import { HomeScreen } from './components/HomeScreen';
 
-// const App = StackNavigator({
-//   Home: { screen: unagiyooooo },
-//   Profile: { screen: unagiyooooo },
-// })
+const App = StackNavigator({
+  Home: { screen: HomeScreen },
+  // Profile: { screen: HomeScreen },
+})
 
-AppRegistry.registerComponent('unagiyooooo', () => HomeScreen);
+AppRegistry.registerComponent('unagiyooooo', () => App);
