@@ -27,7 +27,6 @@ export class HomeScreen extends Component {
   }
   
   componentWillMount() {
-    
     async.parallel([
       (callback) => {
         setIDState(this).then( () => callback()).catch( () => {} );
@@ -36,7 +35,7 @@ export class HomeScreen extends Component {
         setLocationState(this).then( () => callback()).catch( () => {} );
       }
     ], (err) => {
-      setPostState("id", "loc" , this).then( () => console.log("good")).catch( () => {} );
+      setPostState(this.state.userID, this.state.location, this).then( () => console.log("good")).catch( () => {} );
     });
   
   }

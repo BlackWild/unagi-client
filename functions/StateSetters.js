@@ -2,7 +2,7 @@ import { AsyncStorage } from 'react-native';
 import uniqueId from 'react-native-unique-id';
 
 export const setLocationState = function(that) {
-  return new Promise( (res, rej) => {
+    return new Promise( (res, rej) => {
     navigator.geolocation.getCurrentPosition( (pos) => {
       that.setState( () => {
           return { location:{
@@ -73,35 +73,29 @@ export const setIDState = function(that) {
 
 export const setPostState = function(id, location , that) {
   return new Promise( (res, rej) => {
-    const tempPosts = [
-      {
-        userID: '454364343664',
-        location: { x: 2312.213, y: 4234.21 },
-        content: 'salama aleyka',
-      },
-      {
-        userID: 'sd12e1ssdew',
-        location: { x: 23344542.213, y: 424534.21 },
-        content: 'salama aleyka sdasd',
-      },
-      {
-        userID: '4523rwvq3fvb3',
-        location: { x: 3.213, y: 4234.21 },
-        content: 'salama12323131d aleyka',
-      },
-      {
-        userID: '454364343664',
-        location: { x: 2312.213, y: 4234.21 },
-        content: 'salama aleyka',
-      }
-    ];
+      var tempPosts=[];
+      fetch({
+            url: 'http://192.168.10.215:3000/api/v1/posts/getPosts?userID='+id+'&location={"x":'+location.x+',"y":'+location.y+'}',
+            method: 'GET'
+        }).then((res) => {
 
-    that.setState(() => {
-      return {Posts: tempPosts};
-    }, () => {
-      console.log("Post done!");
-      res();
-    });
-  })
+          return res.json();
+      }).then((res)=>{
+          tempPosts=res;
+          that.setState(() => {
+              return {Posts: tempPosts};
+          }, () => {
+              console.log("Post done!");
+              res();
+          });
+      }).catch(()=>{})
+      });
+  //   that.setState(() => {
+  //     return {Posts: tempPosts};
+  //   }, () => {
+  //     console.log("Post done!");
+  //     res();
+  //   });
+  // })
 
 };
