@@ -27,9 +27,9 @@ class unagiyooooo extends Component {
   }
   
   componentWillMount() {
-    setPostState("id", "loc" , this);
     setIDState(this);
     setLocationState(this);
+    setPostState("id", "loc" , this);
     // if( this.state.userID && this.state.location ) {
     //   setPostState("id", "loc" , this);
     // }
