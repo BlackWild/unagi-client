@@ -13,7 +13,7 @@ export const setLocationState = function(that) {
         console.log("loc done!");
         res();
       });
-    }, (error) => {
+    }, (err) => {
         console.warn(`ERROR(${err.code}): ${err.message}`);
         rej();
     });
