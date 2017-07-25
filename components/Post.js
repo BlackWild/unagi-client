@@ -3,7 +3,7 @@ import {
   Text,
   View,
 } from 'react-native';
-import {styles} from '../styles/HomeScreenStyles'
+import {styles} from '../styles/PostStyles'
 
 
 export class Post extends Component {

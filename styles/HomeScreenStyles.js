@@ -17,14 +17,6 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#34495e',
   },
-  postBox: {
-    marginBottom: 8,
-    backgroundColor: '#f1f1f1',
-    borderColor: '#858585',
-    borderBottomWidth: 3,
-    borderLeftWidth: 1,
-    borderRightWidth: 1,
-  },
   headerBox: {
     height: 70,
     backgroundColor: '#8BC34A',
