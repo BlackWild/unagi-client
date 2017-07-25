@@ -48,16 +48,16 @@ export const setIDState = function(that) {
               console.log("id done!");
               resol();
             });
-            // fetch({
-            //   url: 'https://local..../register/felan?userID=' + id,
-            //   method: 'GET'
-            // }).then((res) => {
-            //     console.log("id sent to server");
-            //     console.log(res);
-            //   })
-            //   .catch((error) => {
-            //     console.error(error);
-            //   });
+            fetch({
+              url: 'http://192.168.10.215:3000/api/v1/register/registerGuest?userID='+id,
+              method: 'GET'
+            }).then((res) => {
+                console.log("id sent to server");
+                console.log(res);
+              })
+              .catch((error) => {
+                console.error(error);
+              });
           }).catch(error => {
             console.error(error);
             rej();
