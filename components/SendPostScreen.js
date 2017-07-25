@@ -1,18 +1,11 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
 
 import React, { Component } from 'react';
 import {
-  AppRegistry,
   StyleSheet,
   Text,
   TextInput,
   View,
   Image,
-  StatusBar
 } from 'react-native';
 
 import {styles} from '../styles/SendPostScreenStyles';
@@ -62,4 +55,3 @@ export class SendPostScreen extends Component {
   }
 }
 
-// AppRegistry.registerComponent('test', () => test);
