@@ -1,4 +1,5 @@
 import { AsyncStorage } from 'react-native';
+import uniqueId from 'react-native-unique-id';
 
 export const setLocationState = function(that) {
   return new Promise( (res, rej) => {
