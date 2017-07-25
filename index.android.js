@@ -14,6 +14,8 @@ import ActionButton from 'react-native-action-button';
 import uniqueId from 'react-native-unique-id';
 import { StackNavigator } from 'react-navigation';
 
+import async from 'async';
+
 import {Post} from './components/Post';
 import {styles} from './styles/HomeScreenStyles';
 import {setIDState, setLocationState, setPostState} from './functions/StateSetters';
@@ -22,22 +24,26 @@ import {setIDState, setLocationState, setPostState} from './functions/StateSette
 class unagiyooooo extends Component {
   constructor(props) {
     super(props);
-    // this.setState.bind(this);
     // getIDState.bind(this);
   }
   
   componentWillMount() {
-    setIDState(this);
-    setLocationState(this);
-    setPostState("id", "loc" , this);
-    // if( this.state.userID && this.state.location ) {
-    //   setPostState("id", "loc" , this);
-    // }
+    
+    async.parallel([
+      (callback) => {
+        setIDState(this).then( () => callback()).catch( () => {} );
+      },
+      (callback) => {
+        setLocationState(this).then( () => callback()).catch( () => {} );
+      }
+    ], (err) => {
+      setPostState("id", "loc" , this).then( () => console.log("good")).catch( () => {} );
+    });
   
   }
 
   render() {
-    if (!this.state.Posts) {
+    if (!this.state || !this.state.Posts) {
       console.log("not ready");
       return null;
     } else {
