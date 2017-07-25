@@ -41,24 +41,26 @@ export class HomeScreen extends Component {
   
   }
 
+  static navigationOptions = ({ navigation }) => ({
+    // title: `Chat with ${navigation.state.params.user}`,
+    title: 'اوناگی'
+  });
+
+
   render() {
     if (!this.state || !this.state.Posts) {
       console.log("not ready");
       return null;
     } else {
+      const { navigate } = this.props.navigation;
+      // const { params } = this.props.navigation.state;
       return (
         <View style={{ flex: 1 }}>
-          <StatusBar backgroundColor='#689F38' barStyle="light-content" />
-          <View style={styles.headerBox} >
-            <Text style={styles.logo}>اوناگی</Text>
-          </View>
           <View style={styles.container}>
             <ScrollView>
               {this.state.Posts.map((post) => (<Post key={this.state.Posts.indexOf(post)} content={post.content} />))}
             </ScrollView>
-            <ActionButton degrees={0} offsetX={10} offsetY={20} buttonColor="rgba(231,76,60,1)">
-              <Text style={styles.actionButtonIcon}>+</Text>
-            </ActionButton>
+            <ActionButton onPress={()=>{navigate('SendPostScreen')}} degrees={0} offsetX={10} offsetY={20} buttonColor="rgba(231,76,60,1)" fixNativeFeedbackRadius={true} hideShadow={true} />
           </View>
         </View>
       );

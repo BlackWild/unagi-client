@@ -17,7 +17,7 @@ import {
 
 import {styles} from '../styles/SendPostScreenStyles';
 
-export default class test extends Component {
+export class SendPostScreen extends Component {
   
   constructor(props) {
     super(props);
@@ -35,10 +35,8 @@ export default class test extends Component {
     
     return (
       <View style={styles.container}>
-        <StatusBar backgroundColor='#689F38' barStyle="light-content"/>
-        <View style={styles.bar}>
+        {/* <View style={styles.bar}>
           <View style={{flex: 1, flexDirection: 'row'}}>
-          <Image source={require('./img/back.png')} style={styles.pic}/>  
           <Text style={styles.post}>
             افزودن پست
           </Text>
@@ -46,8 +44,8 @@ export default class test extends Component {
           <Text style={[styles.charRemain, overChar]}>
             {160-this.state.textLenght}
           </Text>
-          <Image source={require('./img/send1.png')} style={styles.pic}/>  
-        </View>
+           <Image source={require('./img/send1.png')} style={styles.pic}/>   
+        </View> */}
         <View style={{flex:1}}>
         <TextInput style={styles.textarea} underlineColorAndroid="transparent" multiline={true} 
           placeholder="بنویسید" 
@@ -61,4 +59,4 @@ export default class test extends Component {
   }
 }
 
-AppRegistry.registerComponent('test', () => test);
+// AppRegistry.registerComponent('test', () => test);
