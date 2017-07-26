@@ -10,6 +10,8 @@ import {
 
 import {styles} from '../styles/SendPostScreenStyles';
 
+import { NavigationActions  } from 'react-navigation';
+
 export class SendPostScreen extends Component {
   
   constructor(props) {
@@ -20,34 +22,32 @@ export class SendPostScreen extends Component {
 
   static navigationOptions = ({ navigation }) => {
     const {state} = navigation;
-    
+    console.log(state);
+
     return {
-      // title: `Chat with ${navigation.state.params.user}`,
-      title: 'افزودن پست',
-      headerRight: (
-        <View>
-          <View style={{flex: 1, flexDirection: 'row'}}>
-          </View>
-          <Text
-            style={ state.isLengthOverLimit ? [styles.charRemain, styles.overChar] : [styles.charRemain] }
-          >
-            {160}
-          </Text>
-          
-        </View> 
-      ),
+      header: null,
     }
   };
 
-  // <Image source={require('./img/send1.png')} style={styles.pic}/>
-  // <Text style={[styles.charRemain, overChar]}>
-  //         {160-this.state.textLenght}
-  //       </Text>
+  render() {
 
-  render() { 
+    const { navigate } = this.props.navigation;
+    const onPre = () => {
+      const resetAction = NavigationActions.reset({
+        index: 0,
+        actions: [
+          NavigationActions.navigate({ routeName: 'Home'})
+        ]
+      });
+      navigation.dispatch(resetAction);
+    }
+
     
     return (
       <View style={{ flex: 1 }}>
+
+         {/* Header  */}
+
         <View style={styles.container}>
           <View style={{flex:1}}>
             <TextInput 

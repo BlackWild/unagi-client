@@ -11,13 +11,15 @@ import {
 } from 'react-native';
 import ActionButton from 'react-native-action-button';
 
-import { StackNavigator } from 'react-navigation';
+import { NavigationActions  } from 'react-navigation';
 
 import async from 'async';
 
 import {Post} from '../components/Post';
-import {styles} from '../styles/HomeScreenStyles';
 import {setIDState, setLocationState, setPostState} from '../functions/StateSetters';
+
+import {styles} from '../styles/HomeScreenStyles';
+import {headerStyles} from '../styles/HeaderStyles'
 
 
 export class HomeScreen extends Component {
@@ -37,13 +39,15 @@ export class HomeScreen extends Component {
     ], (err) => {
       setPostState(this.state.userID, this.state.location, this).then( () => console.log("good")).catch( () => {} );
     });
-  
+
   }
 
-  static navigationOptions = ({ navigation }) => ({
-    // title: `Chat with ${navigation.state.params.user}`,
-    title: 'اوناگی'
-  });
+  static navigationOptions = ({ navigation }) => {
+
+    return {
+      header: null,
+    }
+  };
 
 
   render() {
@@ -52,14 +56,21 @@ export class HomeScreen extends Component {
       return null;
     } else {
       const { navigate } = this.props.navigation;
-      // const { params } = this.props.navigation.state;
+
+      onPre = ()=>{
+        navigate('SendPostScreen');
+      };
+
       return (
         <View style={{ flex: 1 }}>
+          <View style={headerStyles.headerBox} >
+            <Text style={headerStyles.logo} >اونگی</Text>
+          </View>
           <View style={styles.container}>
             <ScrollView>
               {this.state.Posts.map((post) => (<Post key={this.state.Posts.indexOf(post)} content={post.content} />))}
             </ScrollView>
-            <ActionButton onPress={()=>{navigate('SendPostScreen')}} degrees={0} offsetX={10} offsetY={20} buttonColor="rgba(231,76,60,1)" fixNativeFeedbackRadius={true} hideShadow={true} />
+            <ActionButton onPress={onPre} degrees={0} offsetX={10} offsetY={20} buttonColor="rgba(231,76,60,1)" fixNativeFeedbackRadius={true} hideShadow={true} />
           </View>
         </View>
       );

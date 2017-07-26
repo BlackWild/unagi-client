@@ -24,7 +24,7 @@ export const setIDState = function(that) {
   return new Promise( (resol, rej) => {
     // AsyncStorage.removeItem("userID").then((res) => {
     //   console.log("\n item deleted");
-    // })
+    // });
     AsyncStorage.getItem("userID").then((res) => {
       console.log("id was:  " + res);
       if(res) {
@@ -72,21 +72,18 @@ export const setIDState = function(that) {
 };
 
 export const setPostState = function(id, location , that) {
-  return new Promise( (res, rej) => {
-      var tempPosts=[];
+  return new Promise( (resol, rej) => {
       fetch({
             url: 'http://192.168.10.215:3000/api/v1/posts/getPosts?userID='+id+'&location={"x":'+location.x+',"y":'+location.y+'}',
             method: 'GET'
         }).then((res) => {
-
           return res.json();
-      }).then((res)=>{
-          tempPosts=res;
+      }).then((resJ)=>{
           that.setState(() => {
-              return {Posts: tempPosts};
+              return {Posts: resJ};
           }, () => {
               console.log("Post done!");
-              res();
+              resol();
           });
       }).catch(()=>{})
       });
