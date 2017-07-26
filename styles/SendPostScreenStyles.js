@@ -3,7 +3,8 @@ import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
   pic:{
-    width: 30, height: 30,
+    width: 30,
+    height: 30,
     margin:10
   },
   container: {
@@ -16,6 +17,7 @@ export const styles = StyleSheet.create({
     fontSize: 20,
     // color:'#F1F1F1',
     color:'#FFFFFF',
+    fontFamily: 'Vazir',
     textAlign: 'center',
     justifyContent:'center',
     // margin: 10,
@@ -48,6 +50,7 @@ export const styles = StyleSheet.create({
     color:'#F1F1F1',
     textAlign: 'center',
     justifyContent:'center',
+    fontFamily: 'Vazir',
     // margin: 10,
   },
   

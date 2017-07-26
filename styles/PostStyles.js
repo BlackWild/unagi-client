@@ -7,6 +7,7 @@ export const styles = StyleSheet.create({
     // fontWeight: 'bold',
     textAlign: 'right',
     color: '#34495e',
+    fontFamily: 'Vazir',
   },
   postBox: {
     marginBottom: 8,
