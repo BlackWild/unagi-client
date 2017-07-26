@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Change the color value for your need -->
-    <color name="colorPrimary">#FF0000</color>
-    <color name="colorPrimaryDark">#FF0000</color>
-    <color name="colorAccent">#FF0000</color>
+    <color name="colorPrimary">#8BC34A</color>
+    <color name="colorPrimaryDark">#689F38</color>
+    <color name="colorAccent">#9E9E9E</color>
 </resources>
