@@ -6,11 +6,14 @@ import {
   TextInput,
   View,
   Image,
-  StatusBar
+  TouchableWithoutFeedback,
 } from 'react-native';
 
+import async from 'async';
+
 import { styles } from '../styles/SendPostScreenStyles';
-// import {} from '../functions/StateSetters'
+import {setIDState, setLocationState} from '../functions/StateSetters';
+import { sendPost } from '../functions/SendPost';
 
 import { NavigationActions } from 'react-navigation';
 
@@ -42,23 +45,51 @@ export class SendPostScreen extends Component {
         ]
       });
       this.props.navigation.dispatch(resetAction);
-    }
+    };
+
+    const sendPostToServer = () => {
+      if(this.state.isLengthOverLimit) {
+        return null
+      } else {
+        async.parallel([
+          (callback) => {
+            setIDState(this).then( () => callback()).catch( () => {} );
+          },
+          (callback) => {
+            setLocationState(this).then( () => callback()).catch( () => {} );
+          }
+        ], (err) => {
+          sendPost(this.state.userID, this.state.location, this.state.text, this).then( () => {
+            console.log("good");
+            onPre();
+          }).catch( () => {} );
+        });
+
+      }
+    };
 
 
     return (
       <View style={{ flex: 1 }}>
+
         <View style={styles.bar}>
           <View style={{ flex: 1, flexDirection: 'row' }}>
-            <Image source={require('../img/back.png')} style={styles.pic} />
+            <TouchableWithoutFeedback onPress={onPre}>
+              <Image source={require('../img/back.png')} style={styles.pic} />
+            </TouchableWithoutFeedback>
             <Text style={styles.post}>
               افزودن پست
             </Text>
           </View>
-          <Text onPress={()=>{onPre();}} style={this.state.isLengthOverLimit? [styles.charRemain, styles.overChar] : [styles.charRemain]}>
+          <Text style={this.state.isLengthOverLimit? [styles.charRemain, styles.overChar] : [styles.charRemain]}>
             {160 - this.state.textLenght}
           </Text>
-          <Image source={require('../img/send.png')} style={styles.pic} />
+          <TouchableWithoutFeedback onPress={sendPostToServer}>
+            <Image source={require('../img/send.png')} style={styles.pic} />
+          </TouchableWithoutFeedback>
+          
         </View>
+
         <View style={styles.container}>
           <View style={{ flex: 1 }}>
             <TextInput
@@ -72,11 +103,12 @@ export class SendPostScreen extends Component {
                   text,
                   textLenght: leng,
                   isLengthOverLimit: leng > 160
-                })
-                  ;
-              }} />
+                });
+              }} 
+              />
           </View>
         </View>
+
       </View>
     );
   }
