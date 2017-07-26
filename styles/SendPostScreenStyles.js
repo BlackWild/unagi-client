@@ -48,7 +48,7 @@ export const styles = StyleSheet.create({
     color:'#F1F1F1',
     textAlign: 'center',
     justifyContent:'center',
-    margin: 10,
+    // margin: 10,
   },
   
 });

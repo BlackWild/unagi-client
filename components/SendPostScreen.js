@@ -91,20 +91,28 @@ export class SendPostScreen extends Component {
       <View style={{ flex: 1 }}>
 
         <View style={styles.bar}>
-          <View style={{ flex: 1, flexDirection: 'row' }}>
-            <TouchableWithoutFeedback onPress={onPre}>
-              <Image source={require('../img/back.png')} style={styles.pic} />
-            </TouchableWithoutFeedback>
-            <Text style={styles.post}>
-              افزودن پست
-            </Text>
+
+          <View style={{flex:1, flexDirection: 'row', justifyContent: 'space-between', alignContent: 'center'}}>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <TouchableWithoutFeedback onPress={onPre}>
+                <Image source={require('../img/back.png')} style={styles.pic} />
+              </TouchableWithoutFeedback>
+              <Text style={styles.post}>
+                افزودن پست
+              </Text>
+            </View>
+            
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <Text style={this.state.isLengthOverLimit? [styles.charRemain, styles.overChar] : [styles.charRemain, {justifyContent: 'center', alignContent:'center'}]}>
+                {160 - this.state.textLenght}
+              </Text> 
+              <TouchableWithoutFeedback onPress={sendPostToServer}>
+                <Image source={require('../img/send.png')} style={styles.pic} />
+              </TouchableWithoutFeedback>
+            </View>
+
           </View>
-          <Text style={this.state.isLengthOverLimit? [styles.charRemain, styles.overChar] : [styles.charRemain]}>
-            {160 - this.state.textLenght}
-          </Text>
-          <TouchableWithoutFeedback onPress={sendPostToServer}>
-            <Image source={require('../img/send.png')} style={styles.pic} />
-          </TouchableWithoutFeedback>
+          
         </View>
 
         <View style={styles.container}>
