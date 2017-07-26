@@ -15,10 +15,10 @@ export const styles = StyleSheet.create({
   charRemain: {
     fontSize: 20,
     // color:'#F1F1F1',
-    color:'#0000FF',
+    color:'#FFFFFF',
     textAlign: 'center',
     justifyContent:'center',
-    margin: 10,
+    // margin: 10,
   },
   overChar: {
     color: '#ff0000' 
@@ -32,5 +32,23 @@ export const styles = StyleSheet.create({
     alignItems: 'flex-start',
     textAlign: 'auto',
     textAlignVertical: 'top'    
-  }
+  },
+  
+  bar:{
+    padding: 10,
+    margin: 0,
+    flexDirection: 'row',
+    backgroundColor: '#8BC34A',
+    justifyContent: 'center',
+    // textAlign: 'center'
+  },
+  
+  post: {
+    fontSize: 20,
+    color:'#F1F1F1',
+    textAlign: 'center',
+    justifyContent:'center',
+    margin: 10,
+  },
+  
 });

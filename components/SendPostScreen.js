@@ -6,6 +6,7 @@ import {
   TextInput,
   View,
   Image,
+  StatusBar
 } from 'react-native';
 
 import {styles} from '../styles/SendPostScreenStyles';
@@ -45,30 +46,36 @@ export class SendPostScreen extends Component {
     
     return (
       <View style={{ flex: 1 }}>
-
-         {/* Header  */}
-
-        <View style={styles.container}>
-          <View style={{flex:1}}>
-            <TextInput 
-              style={styles.textarea} 
-              underlineColorAndroid="transparent" 
-              multiline={true} 
-              placeholder="بنویسید" 
-              onChangeText={(text) => {
-                leng = text.split('').length;
-                this.setState({
-                  text,
-                  textLenght: leng,
-                  isLengthOverLimit: leng > 160
-                });}
-              }
-            />
-          
+        <StatusBar backgroundColor='#689F38' barStyle="light-content"/>
+        <View style={styles.bar}>
+          <View style={{flex: 1, flexDirection: 'row'}}>
+           <Image source={require('../img/back.png')} style={styles.pic}/>   
+          <Text style={styles.post}>
+            افزودن پست
+          </Text>
           </View>
+          <Text style={[styles.charRemain]}>
+            {160-this.state.textLenght}
+          </Text>
+           <Image source={require('../img/send.png')} style={styles.pic}/>   
         </View>
+        <View style={styles.container}>           
+          <View style={{flex:1}}>            
+             <TextInput               
+             style={styles.textarea}               
+             underlineColorAndroid="transparent"               
+             multiline={true}               
+             placeholder="بنویسید"               
+             onChangeText={(text) => {                 
+               leng = text.split('').length;                 
+               this.setState({                   
+                 text,                   
+                 textLenght: leng,                   
+                 isLengthOverLimit: leng > 160})
+               ;}}/> 
+          </View>         
+        </View>       
       </View>
-      
     );
   }
 }
