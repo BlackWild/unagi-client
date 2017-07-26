@@ -56,15 +56,17 @@ export class HomeScreen extends Component {
     } else {
       const { navigate } = this.props.navigation;
 
-      onPre = ()=>{
+      onPre = () => {
         navigate('SendPostScreen');
       };
 
       return (
         <View style={{ flex: 1 }}>
+          
           <View style={headerStyles.headerBox} >
             <Text style={headerStyles.logo} >اوناگی</Text>
           </View>
+
           <View style={styles.container}>
             <ScrollView>
               {this.state.Posts.map((post) => (<Post key={this.state.Posts.indexOf(post)} content={post.content} />))}

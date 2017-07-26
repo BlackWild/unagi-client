@@ -7,11 +7,13 @@ import {
   View,
   Image,
   TouchableWithoutFeedback,
+  BackHandler,
 } from 'react-native';
 
 import async from 'async';
 
 import { styles } from '../styles/SendPostScreenStyles';
+import { HomeScreen } from './HomeScreen';
 import {setIDState, setLocationState} from '../functions/StateSetters';
 import { sendPost } from '../functions/SendPost';
 
@@ -22,7 +24,23 @@ export class SendPostScreen extends Component {
   constructor(props) {
     super(props);
     this.state = { text: '', textLenght: 0 };
-  }
+    BackHandler.addEventListener('hardwareBackPress', () => {
+      if (this instanceof SendPostScreen) {
+        console.log("asfjnadkfjsadhdfbgihbgkhbd");
+        // this.goBack();
+        const resetAction = NavigationActions.reset({
+          index: 0,
+          actions: [
+            NavigationActions.navigate({ routeName: 'Home' })
+          ]
+        });
+        this.props.navigation.dispatch(resetAction);
+
+        return true;
+      }
+      return false;
+      });
+    }
 
 
   static navigationOptions = ({ navigation }) => {
@@ -87,7 +105,6 @@ export class SendPostScreen extends Component {
           <TouchableWithoutFeedback onPress={sendPostToServer}>
             <Image source={require('../img/send.png')} style={styles.pic} />
           </TouchableWithoutFeedback>
-          
         </View>
 
         <View style={styles.container}>
