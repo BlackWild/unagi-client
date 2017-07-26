@@ -71,7 +71,7 @@ export class HomeScreen extends Component {
             <ScrollView>
               {this.state.Posts.map((post) => (<Post key={this.state.Posts.indexOf(post)} content={post.content} />))}
             </ScrollView>
-            <ActionButton onPress={onPre} degrees={0} offsetX={10} offsetY={20} buttonColor='#9e9e9e' fixNativeFeedbackRadius={true} hideShadow={true} />
+            <ActionButton onPress={onPre} degrees={0} offsetX={10} offsetY={20} buttonColor='#858585' fixNativeFeedbackRadius={true} hideShadow={true} />
           </View>
         </View>
       );
