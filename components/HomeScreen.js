@@ -49,7 +49,6 @@ export class HomeScreen extends Component {
     }
   };
 
-
   render() {
     if (!this.state || !this.state.Posts) {
       console.log("not ready");

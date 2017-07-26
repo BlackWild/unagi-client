@@ -11,11 +11,11 @@ export const headerStyles = StyleSheet.create({
 
   ///// HOME
   
-    logo:{
-      fontSize:30,
-      color:'white',
-      marginLeft:13,
-    },
+  logo:{
+    fontSize:30,
+    color:'white',
+    marginLeft:13,
+  },
   
 
   ///// SENDPOST
