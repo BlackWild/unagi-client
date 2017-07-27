@@ -1,6 +1,8 @@
 import { AsyncStorage } from 'react-native';
 import uniqueId from 'react-native-unique-id';
 
+import { SERVER_DOMIN } from '../configs/config';
+
 export const setLocationState = function (that) {
   return new Promise((res, rej) => {
     navigator.geolocation.getCurrentPosition((pos) => {
@@ -51,7 +53,7 @@ export const setIDState = function (that) {
               resol();
             });
             fetch({
-              url: 'http://192.168.10.215:3000/api/v1/register/registerGuest?userID=' + id,
+              url: SERVER_DOMIN + '/api/v1/register/registerGuest?userID=' + id,
               method: 'GET'
             }).then((res) => {
               console.log("id sent to server");
@@ -76,7 +78,7 @@ export const setIDState = function (that) {
 export const setPostState = function (id, location, that) {
   return new Promise((resol, rej) => {
     fetch({
-      url: 'http://192.168.10.215:3000/api/v1/posts/getPosts?userID=' + id + '&location={"x":' + location.x + ',"y":' + location.y + '}',
+      url: SERVER_DOMIN + '/api/v1/posts/getPosts?userID=' + id + '&location={"x":' + location.x + ',"y":' + location.y + '}',
       method: 'GET'
     }).then((res) => {
       return res.json();
