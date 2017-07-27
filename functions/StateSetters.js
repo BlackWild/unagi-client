@@ -89,7 +89,10 @@ export const setPostState = function (id, location, that) {
         console.log("Post done!");
         resol();
       });
-    })
+    }).catch( (error) => {
+      console.log("post fetch error: "+ error);
+      rej();
+    });
   });
 
 };
