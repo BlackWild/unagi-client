@@ -8,6 +8,8 @@ import {
   StatusBar,
   Button,
   Image,
+  ListView,
+  FlatList,
 } from 'react-native';
 import ActionButton from 'react-native-action-button';
 
@@ -16,7 +18,7 @@ import { NavigationActions  } from 'react-navigation';
 import async from 'async';
 
 import {Post} from '../components/Post';
-import {setIDState, setLocationState, setPostState} from '../functions/StateSetters';
+import {setIDState, setLocationState, setPostState, getMorePost} from '../functions/StateSetters';
 
 import {styles} from '../styles/HomeScreenStyles';
 import {headerStyles} from '../styles/HeaderStyles'
@@ -25,8 +27,19 @@ import {headerStyles} from '../styles/HeaderStyles'
 export class HomeScreen extends Component {
   constructor(props) {
     super(props);
+
+    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    this.state = {
+      dataSource: ds,
+      Posts: [],
+    };
+
+    
     // getIDState.bind(this);
   }
+
+  // ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+  
   
   componentWillMount() {
     async.parallel([
@@ -60,6 +73,11 @@ export class HomeScreen extends Component {
         navigate('SendPostScreen');
       };
 
+      onEndHandler = () => {
+        console.log("end reached");
+        getMorePost(this.state.userID, this.state.location, this, this.state.nextStr).then( () => console.log("more good")).catch( () => console.log("no more post") );
+      };
+
       return (
         <View style={{ flex: 1 }}>
           
@@ -68,9 +86,15 @@ export class HomeScreen extends Component {
           </View>
 
           <View style={styles.container}>
-            <ScrollView>
+            {/* <ScrollView>
               {this.state.Posts.map((post) => (<Post key={this.state.Posts.indexOf(post)} content={post.content} />))}
-            </ScrollView>
+            </ScrollView> */}
+            <ListView
+              dataSource={this.state.dataSource}
+              renderRow={(rowData) => (<Post content={rowData.content} />)}
+              onEndReached={onEndHandler}
+              onEndReachedThreshold={320}
+            />
             <ActionButton onPress={onPre} degrees={0} offsetX={10} offsetY={20} buttonColor='#858585' fixNativeFeedbackRadius={true} hideShadow={true} />
           </View>
         </View>
