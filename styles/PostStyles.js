@@ -36,5 +36,15 @@ export const styles = StyleSheet.create({
     color:'#689F38', 
     // fontWeight: 'bold', 
     // fontSize: 16,
-    fontFamily: 'Vazir',}
+    fontFamily: 'Vazir',
+  },
+  replyText:{
+    paddingRight:10,
+    borderRightWidth: 3,
+    borderColor:'#689F38',
+  },
+  reply:{
+    paddingRight:10,
+    paddingTop:5,
+  }
 });

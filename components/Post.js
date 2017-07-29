@@ -14,6 +14,9 @@ export class Post extends Component {
         <View style={styles.userBox} >
           <Text style={styles.user}> کاربر مهمان</Text>
         </View>
+         <View style={styles.reply} >
+          <Text style={styles.replyText}> پاسخ این پست:</Text>
+         </View> 
         <View>
           <Text style={styles.paragraph}>
             {this.props.content}
