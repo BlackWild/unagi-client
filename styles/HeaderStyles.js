@@ -15,6 +15,7 @@ export const headerStyles = StyleSheet.create({
     fontSize:30,
     color:'white',
     marginLeft:13,
+    fontFamily: 'Vazir',
   },
   
 

@@ -26,9 +26,9 @@ export const setLocationState = function (that) {
 
 export const setIDState = function (that) {
   return new Promise((resol, rej) => {
-    // AsyncStorage.removeItem("userID").then((res) => {
-    //   console.log("\n item deleted");
-    // });
+    AsyncStorage.removeItem("userID").then((res) => {
+      console.log("\n item deleted");
+    });
     AsyncStorage.getItem("userID").then((res) => {
       console.log("id was:  " + res);
       if (res) {
