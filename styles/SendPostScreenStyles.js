@@ -33,7 +33,8 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'flex-start',
     textAlign: 'auto',
-    textAlignVertical: 'top'    
+    textAlignVertical: 'top',
+    fontFamily: 'Vazir',
   },
   
   bar:{

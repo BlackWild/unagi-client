@@ -121,7 +121,7 @@ export class SendPostScreen extends Component {
               style={styles.textarea}
               underlineColorAndroid="transparent"
               multiline={true}
-              placeholder="بنویسید"
+              placeholder="اونجا که هستی چه خبره!؟"
               onChangeText={(text) => {
                 leng = text.split('').length;
                 this.setState({
