@@ -11,4 +11,4 @@ const App = StackNavigator({
   SendPostScreen: { screen: SendPostScreen },
 })
 
-AppRegistry.registerComponent('unagiyooooo', () => App);
+AppRegistry.registerComponent('Unagi', () => App);
