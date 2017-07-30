@@ -42,6 +42,8 @@ export const styles = StyleSheet.create({
     paddingRight:10,
     borderRightWidth: 3,
     borderColor:'#689F38',
+    fontFamily: 'Vazir',
+    fontSize: 12,
   },
   reply:{
     paddingRight:10,
