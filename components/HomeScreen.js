@@ -84,6 +84,8 @@ export class HomeScreen extends Component {
 
       return (
         <View style={{ flex: 1 }}>
+
+
           <View style={styles.container}>
             {/* <ScrollView>
               {this.state.Posts.map((post) => (<Post key={this.state.Posts.indexOf(post)} content={post.content} />))}

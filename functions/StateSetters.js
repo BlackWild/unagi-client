@@ -110,6 +110,42 @@ export const setPostState = function (id, location, that) {
 
 };
 
+export const setPostStateHotScreen = function (id, location, that) {
+    return new Promise((resol, rej) => {
+
+        // const post = JSON.stringify({
+        //   userID: id,
+        //   location:{x: location.x, y:location.y },
+        // });
+
+        fetch({
+            url: SERVER_DOMIN + '/api/v2/posts/getHotPosts?userID=' + id + '&location={"x":' + location.x + ',"y":'+ location.y + '}',
+            method: 'GET'
+        }).then((res) => {
+            return res.json();
+        }).then((resJ) => {
+            // console.log("server result: ", resJ.results);
+            // console.log("that state: " , that.state.Posts);
+            that.setState(() => {
+                return {
+                    Posts: resJ.results,
+                    dataSource: that.state.dataSource.cloneWithRows(resJ.results),
+                    nextStr: resJ.next,
+                    hasNext: resJ.hasNext,
+                }
+            }, () => {
+                console.log("Post done!");
+                resol();
+            });
+        }).catch( (error) => {
+            console.log("post fetch error: "+ error);
+            rej();
+        });
+    });
+
+};
+
+
 
 export const getMorePost = (id, location, that, qu) => {
   return new Promise((resol, rej) => {
@@ -146,5 +182,42 @@ export const getMorePost = (id, location, that, qu) => {
       rej();
     });
   });
+
+};
+export const getMorePostHotScreen = (id, location, that, qu) => {
+    return new Promise((resol, rej) => {
+
+        if(!that.state.hasNext) rej();
+
+        // const post = JSON.stringify({
+        //   userID: id,
+        //   location:{x: location.x, y:location.y },
+        // });
+        fetch({
+            url: SERVER_DOMIN + '/api/v2/posts/getHotPosts?userID=' + id + '&location={"x":' + location.x + ',"y":'+ location.y + '}&cursor=' + qu,
+            method: 'GET',
+        }).then((res) => {
+            return res.json();
+        }).then((resJ) => {
+            // console.log("server result: ", resJ.results);
+            // console.log("that state: " , that.state.Posts);
+            that.setState(() => {
+                const newData = that.state.Posts.concat(resJ.results);
+                return {
+                    Posts: newData,
+                    dataSource: that.state.dataSource.cloneWithRows(newData),
+                    nextStr: resJ.next,
+                    hasNext: resJ.hasNext,
+
+                }
+            }, () => {
+                console.log("Post done!");
+                resol();
+            });
+        }).catch( (error) => {
+            console.log("post fetch error: "+ error);
+            rej();
+        });
+    });
 
 };
