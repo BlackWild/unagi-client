@@ -2,12 +2,36 @@ import React, { Component } from 'react';
 import {
   Text,
   View,
-  Image
+  Image,
+  TouchableWithoutFeedback,
 } from 'react-native';
-import {styles} from '../styles/PostStyles'
+import {styles} from '../styles/PostStyles';
+
+import {likePost, unlikePost} from '../functions/LikeFunctions';
 
 
 export class Post extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isLiked: this.props.isLiked,
+      likes: this.props.likes
+    };
+
+    
+    // getIDState.bind(this);
+  }
+  
+  
+  likeHandler = () => {
+    likePost(this.props.HomeScreen.state.userID, this.props.postID, this.props.HomeScreen, this).then(()=>console.log("POST LIKED"));
+  }
+
+  unlikeHandler = () => {
+    unlikePost(this.props.HomeScreen.state.userID, this.props.postID, this.props.HomeScreen, this).then(()=>console.log("POST UNLIKED"));
+  }
+  
   render() {
     return (
       <View style={styles.postBox}>
@@ -33,8 +57,10 @@ export class Post extends Component {
           </View>
           <View style={{flexDirection: 'row', alignItems:'center', }}>
             <Text style={{fontFamily: 'Vazir',}}>  نفر پسندیدند!</Text>
-            <Text>n </Text>
-            <Image source={require('../img/heartUnLike.png')} style={{height:20, width:22, margin:5,}} />
+            <Text>{this.state.likes}</Text>
+            <TouchableWithoutFeedback onPress={this.state.isLiked?this.unlikeHandler:this.likeHandler}>
+              <Image source={this.state.isLiked?require('../img/heartLike.png'):require('../img/heartUnLike.png')} style={{height:20, width:22, margin:5,}} />
+            </TouchableWithoutFeedback>
           </View>
         </View>
       </View>

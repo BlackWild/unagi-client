@@ -142,7 +142,7 @@ export const getMorePost = (id, location, that, qu) => {
         resol();
       });
     }).catch( (error) => {
-      console.log("post fetch error: "+ error);
+      console.log("more post fetch error: "+ error);
       rej();
     });
   });
