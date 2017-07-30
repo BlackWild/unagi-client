@@ -83,7 +83,9 @@ export class HotScreen extends Component {
                     <View style={styles.container}>
                         <ListView
                             dataSource={this.state.dataSource}
-                            renderRow={(rowData) => (<Post content={rowData.content} date={rowData.date}/>)}
+                            renderRow={(rowData) => (
+                                <Post likes={rowData.likes} isLiked={rowData.isLiked} content={rowData.content} date={rowData.date} postID={rowData._id} userID={rowData.userID} HomeScreen={this}/>
+                            )}
                             onEndReached={onEndHandler}
                             onEndReachedThreshold={320}
                         />
