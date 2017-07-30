@@ -91,7 +91,7 @@ export class HomeScreen extends Component {
             </ScrollView> */}
             <ListView
               dataSource={this.state.dataSource}
-              renderRow={(rowData) => (<Post content={rowData.content} />)}
+              renderRow={(rowData) => (<Post content={rowData.content} date={rowData.date}/>)}
               onEndReached={onEndHandler}
               onEndReachedThreshold={320}
             />

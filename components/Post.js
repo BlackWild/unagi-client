@@ -11,8 +11,13 @@ export class Post extends Component {
   render() {
     return (
       <View style={styles.postBox}>
-        <View style={styles.userBox} >
-          <Text style={styles.user}> کاربر مهمان</Text>
+        <View>
+          <View>
+            <Text> {this.props.date} </Text>
+          </View>
+          <View style={styles.userBox} >
+            <Text style={styles.user}> کاربر مهمان</Text>
+          </View>
         </View>
          <View style={styles.reply} >
           <Text style={styles.replyText}> پاسخ این پست:</Text>
