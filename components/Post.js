@@ -33,11 +33,18 @@ export class Post extends Component {
   }
   
   render() {
+    var date=new Date(this.props.date);
+    var monthNames = ['Jan ', 'Feb ', 'Mar ', 'Apr ', 'May ', 'Jun ', 'Jul ', 'Aug ', 'Sep ', 'Oct ', 'Nov ', 'Dec '];
     return (
       <View style={styles.postBox}>
-        <View>
-          <View>
-            <Text> {this.props.date} </Text>
+        <View style={{flexDirection:'row', justifyContent:'space-between',alignContent:'center'}}>
+          <View style={{justifyContent:'center'}}>
+            <Text style={{color:'#9E9E9E', fontSize:10}}> 
+             {monthNames[date.getMonth()-1]}  
+             {date.getUTCDate()} 
+             {'  '}
+             {date.getHours()}:{date.getMinutes()}
+            </Text>
           </View>
           <View style={styles.userBox} >
             <Text style={styles.user}> کاربر مهمان</Text>

@@ -59,7 +59,11 @@ export class HomeScreen extends Component {
   static navigationOptions = ({ navigation }) => {
 
     return {
-      header: null,
+      header:(
+      <View style={headerStyles.headerBox} >
+        <Text style={headerStyles.logo} >اوناگی</Text>
+      </View>
+      ) ,
     }
   };
 
@@ -81,10 +85,7 @@ export class HomeScreen extends Component {
 
       return (
         <View style={{ flex: 1 }}>
-          
-          <View style={headerStyles.headerBox} >
-            <Text style={headerStyles.logo} >اوناگی</Text>
-          </View>
+
 
           <View style={styles.container}>
             {/* <ScrollView>
