@@ -28,6 +28,7 @@ export class HomeScreen extends Component {
   constructor(props) {
     super(props);
 
+    // const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
       dataSource: ds,
@@ -50,7 +51,7 @@ export class HomeScreen extends Component {
         setLocationState(this).then( () => callback()).catch( () => {} );
       }
     ], (err) => {
-      setPostState(this.state.userID, this.state.location, this).then( () => console.log("good")).catch( () => {} );
+      setPostState(this.state.userID, this.state.location, this).then( () => console.log("good", this.state.Posts)).catch( () => {} );
     });
 
   }
@@ -92,7 +93,9 @@ export class HomeScreen extends Component {
             </ScrollView> */}
             <ListView
               dataSource={this.state.dataSource}
-              renderRow={(rowData) => (<Post content={rowData.content} date={rowData.date}/>)}
+              renderRow={(rowData) => (
+                <Post likes={rowData.likes} isLiked={rowData.isLiked} content={rowData.content} date={rowData.date} postID={rowData._id} userID={rowData.userID} HomeScreen={this}/>
+              )}
               onEndReached={onEndHandler}
               onEndReachedThreshold={320}
             />
