@@ -8,7 +8,7 @@ import { HomeScreen } from './HomeScreen';
 import { HotScreen } from './HotScreen';
 
 const BasicApp = TabNavigator({
-    Main: {screen:HomeScreen },
+    Home: {screen:HomeScreen },
     HotScreen: {screen:HotScreen },
 });
 module.exports=BasicApp;
