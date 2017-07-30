@@ -10,5 +10,11 @@ import { HotScreen } from './HotScreen';
 const BasicApp = TabNavigator({
     Home: {screen:HomeScreen },
     HotScreen: {screen:HotScreen },
+},{
+    tabBarOptions:{
+        style:{
+            backgroundColor:"#8BC34A"
+        }
+    }
 });
 module.exports=BasicApp;
