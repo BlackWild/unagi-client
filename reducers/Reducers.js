@@ -2,8 +2,12 @@ import { combineReducers } from 'redux'
 
 import {userIDReducer} from './UserIDReducer'
 import {locationReducer} from './locationReducer'
+import {postsReducer} from './PostsReducer'
+import {hotPostsReducer} from './HotPostsReducer'
 
 export const mainReducer = combineReducers({
     userID: userIDReducer,
-    location: locationReducer
+    location: locationReducer,
+    posts: postsReducer,
+    hotPosts: hotPostsReducer
 });
