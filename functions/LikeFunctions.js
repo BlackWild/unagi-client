@@ -13,13 +13,8 @@ export const likePost = (uID, pID, that, thePost) => {
 
     fetch(SERVER_DOMIN + '/api/v2/posts/likePost',{
       method: 'POST',
-      // mode: 'cors',
-      // cache: 'default',
       headers:{
-        // 'Accept': 'application/json',
-        // 'content-type': 'application/x-www-form-urlencoded;charset=UTF-8'
-      'Content-Type': 'application/json'
-      
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         userID: uID,
@@ -27,7 +22,6 @@ export const likePost = (uID, pID, that, thePost) => {
       })
     }).then((res) => {
       console.log("post Like Sent to server");
-      // console.log(res);
 
       if (res._bodyText === "liked") {
         console.log("res expression");
@@ -40,7 +34,6 @@ export const likePost = (uID, pID, that, thePost) => {
           _.find(newData, (post) => (post._id === pID)).likes++;
           that.setState(() => ({
             Posts: newData,
-            dataSource: that.state.dataSource.cloneWithRows(newData),
           }), () => {
             console.log("shad bashid");
             resol();
@@ -74,13 +67,8 @@ export const unlikePost = (uID, pID, that, thePost) => {
 
     fetch(SERVER_DOMIN + '/api/v2/posts/unlikePost',{
       method: 'POST',
-      // mode: 'cors',
-      // cache: 'default',
       headers:{
-        // 'Accept': 'application/json',
-        // 'content-type': 'application/x-www-form-urlencoded;charset=UTF-8'
-      'Content-Type': 'application/json'
-      
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         userID: uID,
@@ -88,7 +76,6 @@ export const unlikePost = (uID, pID, that, thePost) => {
       })
     }).then((res) => {
       console.log("post unLike Sent to server");
-      // console.log(res);
 
       if (res._bodyText === "unliked") {
         console.log("res expression");
@@ -101,7 +88,6 @@ export const unlikePost = (uID, pID, that, thePost) => {
           _.find(newData, (post) => (post._id === pID)).likes--;
           that.setState(() => ({
             Posts: newData,
-            dataSource: that.state.dataSource.cloneWithRows(newData),
           }), () => {
             console.log("shad bashid");
             resol();
