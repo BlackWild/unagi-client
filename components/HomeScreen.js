@@ -15,10 +15,12 @@ import { Post } from '../components/Post';
 import { setIDState, setLocationState, setPostState, getMorePost } from '../functions/StateSetters';
 
 import { styles } from '../styles/HomeScreenStyles';
-import { headerStyles } from '../styles/HeaderStyles'
+import { headerStyles } from '../styles/HeaderStyles';
+
+import {connect} from 'react-redux';
 
 
-export class HomeScreen extends Component {
+class HomeScreen extends Component {
   constructor(props) {
     super(props);
 
@@ -42,6 +44,8 @@ export class HomeScreen extends Component {
     ], (err) => {
       setPostState(this.state.userID, this.state.location, this).then(() => console.log("good")).catch(() => { });
     });
+
+    console.log(this.props.dispatch({type: "LOG"}));
 
   }
 
@@ -104,3 +108,6 @@ export class HomeScreen extends Component {
   }
 
 }
+
+
+export default connect()(HomeScreen);
