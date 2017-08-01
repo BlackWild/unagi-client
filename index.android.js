@@ -7,7 +7,7 @@ import {TabScreen} from './components/TabScreen';
 import { Provider } from 'react-redux';
 import {createStore} from 'redux';
 import React, { Component } from 'react';
-import {testReducer} from './reducers/Reducers'
+import {mainReducer} from './reducers/Reducers'
 
 const App = StackNavigator({
   Home: { screen: TabScreen },
@@ -15,9 +15,15 @@ const App = StackNavigator({
 });
 
 class Unagi extends Component {
+    constructor(props){
+        super(props);
+
+        this.store = createStore(mainReducer);
+    }
+
     render() {
         return (
-            <Provider store={createStore(testReducer)}>
+            <Provider store={this.store}>
               <App/>
             </Provider>
         );

@@ -44,9 +44,6 @@ class HomeScreen extends Component {
     ], (err) => {
       setPostState(this.state.userID, this.state.location, this).then(() => console.log("good")).catch(() => { });
     });
-
-    console.log(this.props.dispatch({type: "LOG"}));
-
   }
 
   static navigationOptions = ({ navigation }) => {
