@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import {
   Text,
   View,
-  ListView,
   FlatList,
 } from 'react-native';
 import ActionButton from 'react-native-action-button';
@@ -24,7 +23,9 @@ export class HomeScreen extends Component {
     super(props);
 
     this.refreshing = false;
-
+    this.state={
+      Posts: []
+    }
 
   }
 

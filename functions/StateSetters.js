@@ -94,7 +94,6 @@ export const setPostState = function (id, location, that) {
       that.setState(() => {
         return { 
           Posts: resJ.results,
-          dataSource: that.state.dataSource.cloneWithRows(resJ.results),
           nextStr: resJ.next,
           hasNext: resJ.hasNext,
         }
@@ -168,7 +167,6 @@ export const getMorePost = (id, location, that, qu) => {
         const newData = that.state.Posts.concat(resJ.results);
         return { 
           Posts: newData,
-          dataSource: that.state.dataSource.cloneWithRows(newData),
           nextStr: resJ.next,
           hasNext: resJ.hasNext,
           
