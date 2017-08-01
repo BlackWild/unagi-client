@@ -23,8 +23,9 @@ import {setIDState, setLocationState, setPostStateHotScreen, getMorePostHotScree
 import {styles} from '../styles/HomeScreenStyles';
 import {headerStyles} from '../styles/HeaderStyles'
 
+import {connect} from 'react-redux';
 
-export class HotScreen extends Component {
+class HotScreen extends Component {
     constructor(props) {
         super(props);
 
@@ -96,3 +97,4 @@ export class HotScreen extends Component {
     }
 
 }
+export default connect()(HotScreen);

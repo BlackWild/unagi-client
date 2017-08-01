@@ -2,7 +2,7 @@
 
 import { TabNavigator } from 'react-navigation';
 import HomeScreen from './HomeScreen';
-import { HotScreen } from './HotScreen';
+import HotScreen from './HotScreen';
 
 export const TabScreen = TabNavigator({
     Home: {screen:HomeScreen },
