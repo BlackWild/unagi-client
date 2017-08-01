@@ -9,8 +9,8 @@ export const setLocationState = function (that) {
       that.setState(() => {
         return {
           location: {
-            x: pos.coords.latitude,
-            y: pos.coords.longitude,
+            x: pos.coords.longitude,
+            y: pos.coords.latitude,
           }
         };
       }, () => {
