@@ -28,12 +28,10 @@ class HomeScreen extends Component {
     this.state={
       Posts: []
     }
-
   }
 
-
-
   componentWillMount() {
+
     async.parallel([
       (callback) => {
         setIDState(this).then(() => callback()).catch(() => { });

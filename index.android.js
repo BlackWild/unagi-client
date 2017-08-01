@@ -19,6 +19,10 @@ class Unagi extends Component {
         super(props);
 
         this.store = createStore(mainReducer);
+        this.store.subscribe(() => {
+            console.log("Current State");
+            console.log(this.store.getState());
+        });
     }
 
     render() {

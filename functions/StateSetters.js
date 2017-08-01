@@ -46,6 +46,7 @@ export const setIDState = function (that) {
             AsyncStorage.setItem("userID", id).then((res) => {
               console.log("id saved!! ", res);
             });
+
             that.setState(() => {
               return { userID: id };
             }, () => {
