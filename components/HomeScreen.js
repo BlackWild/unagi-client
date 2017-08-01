@@ -31,7 +31,6 @@ class HomeScreen extends Component {
   }
 
   componentWillMount() {
-
     async.parallel([
       (callback) => {
         setIDState(this).then(() => callback()).catch(() => { });
