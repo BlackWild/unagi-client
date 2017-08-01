@@ -1,3 +1,10 @@
 export const testReducer = (state, action) => {
-    return state;
+    switch (action.type) {
+        case 'LOG':
+            console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+            return state;
+            break;
+        default :
+            return state;
+    }
 }
