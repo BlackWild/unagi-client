@@ -15,6 +15,7 @@ export const setLocationState = function (that) {
         };
       }, () => {
         console.log("loc done!");
+        that.props.dispatch({type: "SET_LOCATION", location:{x: pos.coords.longitude,y: pos.coords.latitude}})
         res();
       });
     }, (err) => {
@@ -58,7 +59,7 @@ export const setIDState = function (that) {
               method: 'GET'
             }).then((res) => {
               console.log("id sent to server");
-              console.log(res);
+              // console.log(res);
             })
               .catch((error) => {
                 console.error(error);
