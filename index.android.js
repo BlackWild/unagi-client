@@ -2,10 +2,10 @@ import { AppRegistry } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
 import {SendPostScreen} from './components/SendPostScreen';
-BasicApp = require('./components/TabScreen');
+import {TabScreen} from './components/TabScreen';
 
 const App = StackNavigator({
-  Home: { screen: BasicApp },
+  Home: { screen: TabScreen },
   SendPostScreen: { screen: SendPostScreen },
 })
 

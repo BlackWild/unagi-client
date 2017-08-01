@@ -7,7 +7,7 @@ import {
 import { HomeScreen } from './HomeScreen';
 import { HotScreen } from './HotScreen';
 
-const BasicApp = TabNavigator({
+export const TabScreen = TabNavigator({
     Home: {screen:HomeScreen },
     HotScreen: {screen:HotScreen },
 },{
@@ -17,4 +17,3 @@ const BasicApp = TabNavigator({
         }
     }
 });
-module.exports=BasicApp;
