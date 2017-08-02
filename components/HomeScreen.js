@@ -68,11 +68,17 @@ class HomeScreen extends Component {
     this.setState({
       refreshing: true,
     }, () => {
-      setTimeout(() => {
-        this.setState({
-          refreshing: false,
-        }, () => { console.log("done refreshing"); })
-      }, 3000);
+        setPostState(this.props.userID, this.props.location, this).then(() => {
+          console.log("refreshing");
+            this.setState({
+                    refreshing: false,
+           })
+        }).catch(() => { })
+      // setTimeout(() => {
+      //   this.setState({
+      //     refreshing: false,
+      //   }, () => { console.log("done refreshing"); })
+      // }, 3000);
     });
   }
 

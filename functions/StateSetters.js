@@ -54,7 +54,7 @@ export const setPostState = function (id, location, that) {
     }).then((resJ) => {
       // console.log("server result: ", resJ.results);
       // console.log("that state: " , that.state.Posts);
-      that.props.dispatch({type: actions.ADD_POSTS, newPosts: resJ.results});
+      that.props.dispatch({type: actions.CLONE_WITH_POSTS, newPosts: resJ.results});
       
       that.setState(() => {
         return {
@@ -124,7 +124,7 @@ export const setHotPostState = function (id, location, that) {
     }).then((resJ) => {
       // console.log("server result: ", resJ.results);
       // console.log("that state: " , that.state.Posts);
-      that.props.dispatch({type: actions.ADD_HOT_POSTS, newPosts: resJ.results});
+      that.props.dispatch({type: actions.CLONE_WITH_HOTPOSTS, newPosts: resJ.results});
       
       that.setState(() => {
         return {

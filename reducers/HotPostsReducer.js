@@ -9,6 +9,9 @@ export const hotPostsReducer = (state = [], action) => {
                 ...action.newPosts,
             ];
             break;
+        case actions.CLONE_WITH_HOTPOSTS:
+            return (action.newPosts);
+            break;
         case actions.LIKE:
             return state.map(function(post){
                 if (post._id === action.postID){
