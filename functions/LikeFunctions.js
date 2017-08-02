@@ -40,11 +40,8 @@ export const likePost = (uID, pID, that) => {
 
 
 export const unlikePost = (uID, pID, that) => {
-
+  that.props.dispatch({ type: actions.UNLIKE, postID: pID });
   return new Promise((resol, rejec) => {
-
-
-
     fetch(SERVER_DOMIN + '/api/v2/posts/unlikePost', {
       method: 'POST',
       headers: {
@@ -58,11 +55,11 @@ export const unlikePost = (uID, pID, that) => {
       console.log("post Like Sent to server", res);
 
       if (res._bodyText === "unliked") {
-        console.log("expression resolve");
-        that.props.dispatch({ type: actions.UNLIKE, postID: pID })
-        console.log("shad bashid");
+        console.log("post unliked");
         resol();
-      };
+      } else {
+          that.props.dispatch({ type: actions.UNLIKE, postID: pID })
+      }
     }).catch((error) => {
       console.log("inja: ", error);
       rejec();
