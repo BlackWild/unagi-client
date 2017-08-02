@@ -13,16 +13,8 @@ import { connect } from 'react-redux';
 class Post extends Component {
   constructor(props) {
     super(props);
-
-    // this.state = {
-    //   isLiked: this.props.isLiked,
-    //   likes: this.props.likes
-    // };
-
-    
-    // getIDState.bind(this);
   }
-  
+
   
   likeHandler = () => {
     likePost(this.props.userID, this.props.postID, this).then(()=>console.log("POST LIKED"));
