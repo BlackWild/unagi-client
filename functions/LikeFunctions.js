@@ -58,7 +58,8 @@ export const unlikePost = (uID, pID, that) => {
         console.log("post unliked");
         resol();
       } else {
-          that.props.dispatch({ type: actions.UNLIKE, postID: pID })
+          that.props.dispatch({ type: action.LIKE, postID: pID })
+          resol();
       }
     }).catch((error) => {
       console.log("inja: ", error);
