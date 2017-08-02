@@ -14,7 +14,7 @@ import async from 'async';
 
 import { styles } from '../styles/SendPostScreenStyles';
 import { HomeScreen } from './HomeScreen';
-import {setIDState, setLocationState} from '../functions/StateSetters';
+import { setIDState, setLocationState } from '../functions/StateSetters';
 import { sendPost } from '../functions/SendPost';
 
 import { NavigationActions } from 'react-navigation';
@@ -41,8 +41,14 @@ class SendPostScreen extends Component {
         return true;
       }
       return false;
-      });
+    });
+
+    this.state = {
+      textLenght: 0,
+      isSending: false
     }
+
+  }
 
 
   static navigationOptions = ({ navigation }) => {
@@ -68,21 +74,34 @@ class SendPostScreen extends Component {
     };
 
     const sendPostToServer = () => {
-      if(this.state.isLengthOverLimit) {
-        return null
+      if (this.state.isSending || this.state.isLengthOverLimit) {
+        return null;
       } else {
-        async.parallel([
-          (callback) => {
-            setIDState(this).then( () => callback()).catch( () => {} );
-          },
-          (callback) => {
-            setLocationState(this).then( () => callback()).catch( () => {} );
-          }
-        ], (err) => {
-          sendPost(this.state.userID, this.state.location, this.state.text, this).then( () => {
-            console.log("good");
-            onPre();
-          }).catch( () => {} );
+        this.state.isSending = true;
+        this.setState({
+          isSending: true
+        }, () => {
+          async.parallel([
+            (callback) => {
+              setIDState(this).then(() => callback()).catch(() => { });
+            },
+            (callback) => {
+              setLocationState(this).then(() => callback()).catch(() => { });
+            }
+          ], (err) => {
+            sendPost(this.props.userID, this.props.location, this.state.text, this).then((res) => {
+              if (res === "ok") {
+                this.setState({
+                  isSending: false
+                }, () => {
+                  onPre();
+                });
+              }
+            }).catch(() => {
+
+            });
+          })
+
         });
 
       }
@@ -94,8 +113,8 @@ class SendPostScreen extends Component {
 
         <View style={styles.bar}>
 
-          <View style={{flex:1, flexDirection: 'row', justifyContent: 'space-between', alignContent: 'center'}}>
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+          <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between', alignContent: 'center' }}>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <TouchableWithoutFeedback onPress={onPre}>
                 <Image source={require('../img/back.png')} style={styles.pic} />
               </TouchableWithoutFeedback>
@@ -103,18 +122,18 @@ class SendPostScreen extends Component {
                 افزودن پست
               </Text>
             </View>
-            
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
-              <Text style={this.state.isLengthOverLimit? [styles.charRemain, styles.overChar] : [styles.charRemain, {justifyContent: 'center', alignContent:'center'}]}>
+
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <Text style={this.state.isLengthOverLimit ? [styles.charRemain, styles.overChar] : [styles.charRemain, { justifyContent: 'center', alignContent: 'center' }]}>
                 {160 - this.state.textLenght}
-              </Text> 
+              </Text>
               <TouchableWithoutFeedback onPress={sendPostToServer}>
                 <Image source={require('../img/send.png')} style={styles.pic} />
               </TouchableWithoutFeedback>
             </View>
 
           </View>
-          
+
         </View>
 
         <View style={styles.container}>
@@ -131,8 +150,8 @@ class SendPostScreen extends Component {
                   textLenght: leng,
                   isLengthOverLimit: leng > 160
                 });
-              }} 
-              />
+              }}
+            />
           </View>
         </View>
 
@@ -141,4 +160,11 @@ class SendPostScreen extends Component {
   }
 }
 
-export default connect()(SendPostScreen);
+const mapStateToProps = (state) => {
+  return {
+    userID: state.userID,
+    location: state.location,
+  }
+};
+
+export default connect(mapStateToProps)(SendPostScreen);

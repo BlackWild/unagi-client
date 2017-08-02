@@ -9,12 +9,14 @@ export const sendPost = function(id , loc ,content, that) {
       location: {x:loc.x, y:loc.y}
     });
     fetch({
-        url: SERVER_DOMIN + '/api/v1/posts/addPost?newPost='+newPost,
+        url: SERVER_DOMIN + '/api/v2/posts/addPost?newPost='+newPost,
         method: 'GET'
       }).then((res) => {
           console.log("post sent to server");
           console.log(res);
-          resol();
+          if(res._bodyText === "saved") {
+            resol("ok")
+          } else rejec();
         })
         .catch((error) => {
           console.error(error);
