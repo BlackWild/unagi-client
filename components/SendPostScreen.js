@@ -19,7 +19,9 @@ import { sendPost } from '../functions/SendPost';
 
 import { NavigationActions } from 'react-navigation';
 
-export class SendPostScreen extends Component {
+import { connect } from 'react-redux';
+
+class SendPostScreen extends Component {
 
   constructor(props) {
     super(props);
@@ -139,3 +141,4 @@ export class SendPostScreen extends Component {
   }
 }
 
+export default connect()(SendPostScreen);

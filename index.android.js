@@ -1,7 +1,7 @@
 import { AppRegistry } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
-import { SendPostScreen } from './components/SendPostScreen';
+import SendPostScreen from './components/SendPostScreen';
 import { TabScreen } from './components/TabScreen';
 
 import { Provider } from 'react-redux';
