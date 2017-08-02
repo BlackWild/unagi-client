@@ -63,18 +63,24 @@ class HotScreen extends Component {
     console.log("end reached");
     getMoreHotPost(this.props.userID, this.props.location, this, this.state.nextStr).then(() => console.log("more good")).catch(() => console.log("no more post"));
   };
-  onRefreshHandler = () => {
-    console.log("refreshing");
-    this.setState({
-      refreshing: true,
-    }, () => {
-      setTimeout(() => {
+    onRefreshHandler = () => {
+        console.log("refreshing");
         this.setState({
-          refreshing: false,
-        }, () => { console.log("done refreshing"); })
-      }, 3000);
-    });
-  }
+            refreshing: true,
+        }, () => {
+            setHotPostState(this.props.userID, this.props.location, this).then(() => {
+                console.log("refreshing");
+                this.setState({
+                    refreshing: false,
+                })
+            }).catch(() => { })
+            // setTimeout(() => {
+            //   this.setState({
+            //     refreshing: false,
+            //   }, () => { console.log("done refreshing"); })
+            // }, 3000);
+        });
+    }
 
   render() {
     return (
