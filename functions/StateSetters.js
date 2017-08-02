@@ -160,7 +160,10 @@ export const getMoreHotPost = (id, location, that, qu) => {
     }).then((resJ) => {
       // console.log("server result: ", resJ.results);
       // console.log("that state: " , that.state.Posts);
-      that.props.dispatch({type: actions.ADD_HOT_POSTS, newPosts: resJ.results});
+      let filteredPosts=resJ.results.filter((newItem)=>{
+          return !that.props.hotPosts.find((item)=>{return item._id===newItem._id})
+      });
+      that.props.dispatch({type: actions.ADD_HOT_POSTS, newPosts: filteredPosts});
       that.setState(() => {
         return {
           nextStr: resJ.next,
