@@ -5,6 +5,7 @@ import {
   Image,
   TouchableWithoutFeedback,
 } from 'react-native';
+import {BoxShadow} from 'react-native-shadow';
 import {styles} from '../styles/PostStyles';
 
 import {likePost, unlikePost} from '../functions/LikeFunctions';
@@ -35,12 +36,14 @@ export class Post extends Component {
   render() {
     var date=new Date(this.props.date);
     var monthNames = ['Jan ', 'Feb ', 'Mar ', 'Apr ', 'May ', 'Jun ', 'Jul ', 'Aug ', 'Sep ', 'Oct ', 'Nov ', 'Dec '];
+
     return (
+      // <View> <BoxShadow style={styles.shadowOpt}>
       <View style={styles.postBox}>
         <View style={{flexDirection:'row', justifyContent:'space-between',alignContent:'center'}}>
           <View style={{justifyContent:'center'}}>
             <Text style={{color:'#9E9E9E', fontSize:10}}> 
-             {monthNames[date.getMonth()-1]}  
+             {monthNames[date.getMonth()]}  
              {date.getUTCDate()} 
              {'  '}
              {date.getHours()}:{date.getMinutes()}
@@ -51,7 +54,7 @@ export class Post extends Component {
           </View>
         </View>
          <View style={styles.reply} >
-          <Text style={styles.replyText}> پاسخ این پست:</Text>
+           <Text style={styles.replyText}> پاسخ این پست:</Text> 
          </View> 
         <View>
           <Text style={styles.paragraph}>
@@ -60,7 +63,10 @@ export class Post extends Component {
         </View>
         <View style={styles.likeBox}>
           <View>
-            <Text style={{fontFamily: 'Vazir',}}>پاسخ</Text>
+            {/* <Text style={{fontFamily: 'Vazir',}}>پاسخ</Text> */}
+            <TouchableWithoutFeedback >
+              <Image source={require('../img/reply.png')} style={{height:20, width:22, margin:5,}} />
+            </TouchableWithoutFeedback>
           </View>
           <View style={{flexDirection: 'row', alignItems:'center', }}>
             <Text style={{fontFamily: 'Vazir',}}>  نفر پسندیدند!</Text>
@@ -68,9 +74,11 @@ export class Post extends Component {
             <TouchableWithoutFeedback onPress={this.state.isLiked?this.unlikeHandler:this.likeHandler}>
               <Image source={this.state.isLiked?require('../img/heartLike.png'):require('../img/heartUnLike.png')} style={{height:20, width:22, margin:5,}} />
             </TouchableWithoutFeedback>
+            
           </View>
         </View>
       </View>
+      // </BoxShadow></View>
     );
   }
 }
