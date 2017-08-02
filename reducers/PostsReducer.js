@@ -4,8 +4,8 @@ export const postsReducer = (state = [], action) => {
     switch (action.type){
         case actions.ADD_POSTS:
             return [
+                ...state,
                 ...action.newPosts,
-                ...state
             ];
             break;
         case actions.LIKE:
