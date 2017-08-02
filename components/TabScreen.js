@@ -5,12 +5,17 @@ import HomeScreen from './HomeScreen';
 import HotScreen from './HotScreen';
 
 export const TabScreen = TabNavigator({
-    Home: {screen:HomeScreen },
-    HotScreen: {screen:HotScreen },
-},{
+    "🏠": {screen:HomeScreen },
+    "🔥": {screen:HotScreen },
+    },
+{
     tabBarOptions:{
         style:{
-            backgroundColor:"#8BC34A"
-        }
+            backgroundColor:"#8BC34A",
+
+        }, 
+        labelStyle: {
+            fontSize: 18,
+        },
     }
 });

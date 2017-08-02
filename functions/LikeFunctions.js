@@ -8,11 +8,7 @@ import actions from '../reducers/Actions';
 export const likePost = (uID, pID, that) => {
 
   return new Promise((resol, rejec) => {
-
-
-    ///// if isLiked return
-
-
+    that.props.dispatch({ type: actions.LIKE, postID: pID })
     fetch(SERVER_DOMIN + '/api/v2/posts/likePost', {
       method: 'POST',
       headers: {
@@ -26,11 +22,11 @@ export const likePost = (uID, pID, that) => {
       console.log("post Like Sent to server", res);
 
       if (res._bodyText === "liked") {
-        console.log("expression resolve");
-        that.props.dispatch({ type: actions.LIKE, postID: pID })
-        console.log("shad bashid");
+        console.log("PostLiked");
         resol();
-      };
+      } else {
+          that.props.dispatch({ type: actions.UNLIKE, postID: pID })
+      }
     }).catch((error) => {
       console.log("inja: ", error);
       rejec();

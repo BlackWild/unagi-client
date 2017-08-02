@@ -22,6 +22,10 @@ export const postsReducer = (state = [], action) => {
                 }
             });
             break;
+        case actions.CLONE_WITH_POSTS:
+            return (action.newPosts);
+            break;
+
         case actions.UNLIKE:
             return state.map(function (post) {
                 if (post._id === action.postID) {
