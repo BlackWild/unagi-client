@@ -19,6 +19,7 @@ export const styles = StyleSheet.create({
     borderBottomWidth: 3,
     borderLeftWidth: 1,
     borderRightWidth: 2,
+    borderRadius: 10
     
   },
   userBox:{
