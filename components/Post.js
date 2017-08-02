@@ -8,16 +8,16 @@ import {
 import {styles} from '../styles/PostStyles';
 
 import {likePost, unlikePost} from '../functions/LikeFunctions';
+import { connect } from 'react-redux';
 
-
-export class Post extends Component {
+class Post extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      isLiked: this.props.isLiked,
-      likes: this.props.likes
-    };
+    // this.state = {
+    //   isLiked: this.props.isLiked,
+    //   likes: this.props.likes
+    // };
 
     
     // getIDState.bind(this);
@@ -25,11 +25,11 @@ export class Post extends Component {
   
   
   likeHandler = () => {
-    likePost(this.props.HomeScreen.state.userID, this.props.postID, this.props.HomeScreen, this).then(()=>console.log("POST LIKED"));
+    likePost(this.props.userID, this.props.postID, this).then(()=>console.log("POST LIKED"));
   }
 
   unlikeHandler = () => {
-    unlikePost(this.props.HomeScreen.state.userID, this.props.postID, this.props.HomeScreen, this).then(()=>console.log("POST UNLIKED"));
+    unlikePost(this.props.userID, this.props.postID, this).then(()=>console.log("POST UNLIKED"));
   }
   
   render() {
@@ -64,9 +64,9 @@ export class Post extends Component {
           </View>
           <View style={{flexDirection: 'row', alignItems:'center', }}>
             <Text style={{fontFamily: 'Vazir',}}>  نفر پسندیدند!</Text>
-            <Text>{this.state.likes}</Text>
-            <TouchableWithoutFeedback onPress={this.state.isLiked?this.unlikeHandler:this.likeHandler}>
-              <Image source={this.state.isLiked?require('../img/heartLike.png'):require('../img/heartUnLike.png')} style={{height:20, width:22, margin:5,}} />
+            <Text>{this.props.likes}</Text>
+            <TouchableWithoutFeedback onPress={this.props.isLiked?this.unlikeHandler:this.likeHandler}>
+              <Image source={this.props.isLiked?require('../img/heartLike.png'):require('../img/heartUnLike.png')} style={{height:20, width:22, margin:5,}} />
             </TouchableWithoutFeedback>
           </View>
         </View>
@@ -74,3 +74,12 @@ export class Post extends Component {
     );
   }
 }
+
+
+const mapStateToProps = (state) => {
+  return {
+    userID: state.userID,
+  }
+}
+
+export default connect(mapStateToProps)(Post);

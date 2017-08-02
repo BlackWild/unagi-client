@@ -1,7 +1,7 @@
 import { AsyncStorage } from 'react-native';
 import uniqueId from 'react-native-unique-id';
 
-import actions from '../reducers/Actions'
+import actions from '../reducers/Actions';
 
 import { SERVER_DOMIN } from '../configs/config';
 
@@ -108,14 +108,14 @@ export const getMorePost = (id, location, that, qu) => {
   });
 };
 
-export const setPostStateHotScreen = function (id, location, that) {
+export const setHotPostState = function (id, location, that) {
   return new Promise((resol, rej) => {
 
     // const post = JSON.stringify({
     //   userID: id,
     //   location:{x: location.x, y:location.y },
     // });
-
+    
     fetch({
       url: SERVER_DOMIN + '/api/v2/posts/getHotPosts?userID=' + id + '&location={"x":' + location.x + ',"y":' + location.y + '}',
       method: 'GET'
@@ -124,10 +124,10 @@ export const setPostStateHotScreen = function (id, location, that) {
     }).then((resJ) => {
       // console.log("server result: ", resJ.results);
       // console.log("that state: " , that.state.Posts);
+      that.props.dispatch({type: actions.ADD_HOT_POSTS, newPosts: resJ.results});
+      
       that.setState(() => {
         return {
-          Posts: resJ.results,
-          dataSource: that.state.dataSource.cloneWithRows(resJ.results),
           nextStr: resJ.next,
           hasNext: resJ.hasNext,
         }
@@ -143,7 +143,7 @@ export const setPostStateHotScreen = function (id, location, that) {
 
 };
 
-export const getMorePostHotScreen = (id, location, that, qu) => {
+export const getMoreHotPost = (id, location, that, qu) => {
   return new Promise((resol, rej) => {
 
     if (!that.state.hasNext) rej();
@@ -160,23 +160,19 @@ export const getMorePostHotScreen = (id, location, that, qu) => {
     }).then((resJ) => {
       // console.log("server result: ", resJ.results);
       // console.log("that state: " , that.state.Posts);
+      that.props.dispatch({type: actions.ADD_HOT_POSTS, newPosts: resJ.results});
       that.setState(() => {
-        const newData = that.state.Posts.concat(resJ.results);
         return {
-          Posts: newData,
-          dataSource: that.state.dataSource.cloneWithRows(newData),
           nextStr: resJ.next,
           hasNext: resJ.hasNext,
-
         }
       }, () => {
         console.log("Post done!");
         resol();
       });
     }).catch((error) => {
-      console.log("post fetch error: " + error);
+      console.log("more post fetch error: " + error);
       rej();
     });
   });
-
 };

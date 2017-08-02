@@ -1,6 +1,7 @@
 import actions from './Actions'
 
 export const postsReducer = (state = [], action) => {
+    
     switch (action.type){
         case actions.ADD_POSTS:
             return [
@@ -10,22 +11,24 @@ export const postsReducer = (state = [], action) => {
             break;
         case actions.LIKE:
             return state.map(function(post){
-                if (post.postID === action.postID){
+                if (post._id === action.postID){
                     return {
                         ...post,
-                        isLiked: true
+                        isLiked: true,
+                        likes: post.likes + 1
                     };
-                } else{
+                } else {
                     return post;
                 }
             });
             break;
         case actions.UNLIKE:
             return state.map(function(post){
-                if (post.postID === action.postID){
+                if (post._id === action.postID){
                     return {
                         ...post,
-                        isLiked: false
+                        isLiked: false,
+                        likes: post.likes - 1
                     };
                 } else{
                     return post;

@@ -11,7 +11,7 @@ import { NavigationActions } from 'react-navigation';
 
 import async from 'async';
 
-import { Post } from '../components/Post';
+import Post from '../components/Post';
 import { setIDState, setLocationState, setPostState, getMorePost } from '../functions/StateSetters';
 
 import { styles } from '../styles/HomeScreenStyles';
@@ -24,13 +24,15 @@ class HomeScreen extends Component {
   constructor(props) {
     super(props);
 
-    this.refreshing = false;
-
+    this.state = {
+      refreshing: false,
+    }
   }
 
   componentWillMount() {
     async.parallel([
       (callback) => {
+        if(this.props.userID) callback();
         setIDState(this).then(() => callback()).catch(() => { });
       },
       (callback) => {
@@ -63,11 +65,15 @@ class HomeScreen extends Component {
   };
   onRefreshHandler = () => {
     console.log("refreshing");
-    this.refreshing = true;
-    setTimeout(() => {
-      this.refreshing = false;
-      console.log("done refreshing");
-    }, 3000);
+    this.setState({
+      refreshing: true,
+    }, () => {
+      setTimeout(() => {
+        this.setState({
+          refreshing: false,
+        }, () => { console.log("done refreshing"); })
+      }, 3000);
+    });
   }
 
   render() {
@@ -82,11 +88,11 @@ class HomeScreen extends Component {
                 data={this.props.posts}
                 keyExtractor={(item, index) => item._id}
                 renderItem={({ item }) => (
-                  <Post likes={item.likes} isLiked={item.isLiked} content={item.content} date={item.date} postID={item._id} userID={item.userID} HomeScreen={this} />
+                  <Post likes={item.likes} isLiked={item.isLiked} content={item.content} date={item.date} postID={item._id} posterUserID={item.userID} />
                 )}
                 onEndReached={this.onEndHandler}
-                onEndReachedThreshold={3}
-                refreshing={this.refreshing}
+                onEndReachedThreshold={2}
+                refreshing={this.state.refreshing}
                 onRefresh={this.onRefreshHandler}
               />
             )

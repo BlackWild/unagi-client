@@ -4,5 +4,5 @@ export default actions = {
     ADD_POSTS: 'ADD_POSTS',
     ADD_HOT_POSTS: 'ADD_HOT_POSTS',
     LIKE: 'LIKE',
-    UNLIKE: 'UNLIKE'
+    UNLIKE: 'UNLIKE',
 }
