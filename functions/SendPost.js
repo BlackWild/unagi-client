@@ -5,7 +5,7 @@ export const sendPost = function(id , loc ,content, that) {
   return new Promise((resol, rejec) => {
     const newPost = JSON.stringify({
       userID: id,
-      content,
+      content: content,
       location: {x:loc.x, y:loc.y}
     });
     fetch({
