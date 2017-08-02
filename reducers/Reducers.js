@@ -9,5 +9,5 @@ export const mainReducer = combineReducers({
     userID: userIDReducer,
     location: locationReducer,
     posts: postsReducer,
-    hotPosts: hotPostsReducer
+    hotPosts: hotPostsReducer,
 });
