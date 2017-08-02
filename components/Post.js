@@ -5,7 +5,6 @@ import {
   Image,
   TouchableWithoutFeedback,
 } from 'react-native';
-import {BoxShadow} from 'react-native-shadow';
 import {styles} from '../styles/PostStyles';
 
 import {likePost, unlikePost} from '../functions/LikeFunctions';
