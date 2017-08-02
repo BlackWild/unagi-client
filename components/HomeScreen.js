@@ -120,6 +120,6 @@ const mapStateToProps = (state) => {
     userID: state.userID,
     location: state.location,
   }
-}
+};
 
 export default connect(mapStateToProps)(HomeScreen);

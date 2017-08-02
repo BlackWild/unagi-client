@@ -7,4 +7,5 @@ export default actions = {
     ADD_HOT_POSTS: 'ADD_HOT_POSTS',
     LIKE: 'LIKE',
     UNLIKE: 'UNLIKE',
+    ADD_POST_TO_TOP: "ADD_POST_TO_TOP",
 }
