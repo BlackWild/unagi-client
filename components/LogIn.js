@@ -9,11 +9,14 @@ import {
   StatusBar,
   TouchableWithoutFeedback,
   ScrollView,
+  ToastAndroid,
 } from 'react-native';
 import {styles} from '../styles/LogInStyles';
 
 import { connect } from 'react-redux';
 import actions from '../reducers/Actions';
+import {logIn} from '../functions/StateSetters';
+
 import {addBackHandler} from '../functions/BackHandlerAdder';
 
 export class LogIn extends Component {
@@ -32,7 +35,27 @@ export class LogIn extends Component {
 
   logInClickHandler = () => {
     this.props.dispatch({type: actions.SET_PAGE_NAME, pageName: "Home"});
-    this.props.navigation.navigate('Home');
+    try {
+
+        if (this.state.userName === '' || this.state.password === '')
+            throw "empty";
+        logIn(this.state.userName, this.state.password,this).then((arg) => {
+            // console.warn("hellow");
+
+            if (!arg) {
+                ToastAndroid.show('نام کاربری یا رمز عبور است', ToastAndroid.SHORT);
+            }
+            else {
+                this.props.navigation.navigate('Home');
+
+            }
+        }).catch(() => {
+        });
+    }
+    catch(err) {
+        ToastAndroid.show('نام کاربری یا رمز عبور نمی تواند خالی باشد', ToastAndroid.SHORT);
+
+    }
   }
   signUpClickHandler = () => {
     this.props.dispatch({type: actions.SET_PAGE_NAME, pageName: "SignUp"});
@@ -50,11 +73,11 @@ export class LogIn extends Component {
         <View style={{flex: 1,flexDirection: 'column',justifyContent:'center',alignItems:'center',alignContent:'center'}}>
           <View style={styles.textIn}>
             <Text>ایمیل:</Text>
-            <TextInput underlineColorAndroid="transparent" placeholder="ایمیل"style={styles.textarea}/>
+            <TextInput underlineColorAndroid="transparent" placeholder="ایمیل"style={styles.textarea} onChangeText={(userName) => this.setState({userName})}/>
           </View>
           <View style={styles.textIn}>
             <Text>رمز عبور:</Text>
-            <TextInput underlineColorAndroid="transparent" placeholder="رمز عبور" style={styles.textarea}/>
+            <TextInput underlineColorAndroid="transparent" placeholder="رمز عبور" style={styles.textarea} onChangeText={(password) => this.setState({password})}/>
           </View>
           <TouchableWithoutFeedback onPress={this.logInClickHandler} >
             <View style={styles.button}>

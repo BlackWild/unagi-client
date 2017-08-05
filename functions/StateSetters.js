@@ -37,7 +37,7 @@ export const setIDState = function (that) {
 
   });
 };
-export const sendUsernameId = function(username,password){
+export const sendUsernameId = function(username,password,that){
     return new Promise((resol, rej) => {
         fetch({
             url: SERVER_DOMIN + '/api/v3/users/signUp?username=' + username + '&password=' + password ,
@@ -45,7 +45,15 @@ export const sendUsernameId = function(username,password){
         }).then((res) => {
             return res.json();
         }).then((resJ) => {
-            that.props.dispatch({type: actions.SET_INFO, userName:username,passWord:password,});
+            if(resJ.success) {
+              that.props.dispatch({
+                  type: actions.SET_INFO,
+                  userName: username,
+                  passWord: password,
+                  accessToken: resJ.token,
+              });
+          }
+            resol(resJ.success);
         }).catch((error) => {
             console.log("post fetch error: " + error);
             rej();
@@ -53,6 +61,33 @@ export const sendUsernameId = function(username,password){
     });
 
 };
+export const logIn = function(username,password,that){
+    return new Promise((resol, rej) => {
+        fetch({
+            url: SERVER_DOMIN + '/api/v3/users/logIn?username=' + username + '&password=' + password ,
+            method: 'GET'
+        }).then((res) => {
+            return res.json();
+        }).then((resJ) => {
+          if(resJ.success){
+              that.props.dispatch({
+                  type: actions.SET_INFO,
+                  userName:username,
+                  passWord:password,
+                  accessToken:resJ.token});
+
+          }
+            resol(resJ.success);
+
+        }).catch((error) => {
+            console.log("post fetch error: " + error);
+            rej();
+        });
+    });
+
+};
+
+
 export const setPostState = function (id, location, that) {
   return new Promise((resol, rej) => {
 

@@ -5,9 +5,11 @@ export const registerReducer = (state = {}, action) => {
             return {
                 userName: action.userName,
                 passWord: action.passWord,
+                accessToken: action.accessToken,
             };
             break;
         default:
             return state;
+
     }
 }
