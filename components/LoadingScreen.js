@@ -3,6 +3,9 @@ import React, { Component } from 'react';
 import {
   Text,
   View,
+  StatusBar,
+  Image,
+  ActivityIndicator,
 } from 'react-native';
 
 import async from 'async';
@@ -47,7 +50,14 @@ class LoadingScreen extends Component {
     const { navigate } = this.props.navigation;
 
     return (
-      <Text>LOADING</Text>
+      <View style={{flex:1,backgroundColor:'#8BC34A'}}>
+        <StatusBar backgroundColor='#689F38' barStyle="light-content"/>
+        <View style={[styles.container]}>
+          <Image source={require('../img/logo.png')} style={styles.pic}/>  
+           <Text style={styles.welcome}> اوناگ کن! </Text> 
+          <ActivityIndicator style={{transform: [{scale: 1.5}]}} size="large" color='#DCEDC8'/>
+        </View>  
+      </View>
     );
   }
 }
