@@ -43,7 +43,7 @@ export class LogIn extends Component {
             // console.warn("hellow");
 
             if (!arg) {
-                ToastAndroid.show('نام کاربری یا رمز عبور است', ToastAndroid.SHORT);
+                ToastAndroid.show('نام کاربری یا رمز عبور نادرست است', ToastAndroid.SHORT);
             }
             else {
                 this.props.navigation.navigate('Home');
