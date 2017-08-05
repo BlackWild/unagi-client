@@ -1,5 +1,6 @@
 export default actions = {
     SET_ID: 'SET_ID',
+    SET_INFO: 'SET_INFO',
     SET_LOCATION: 'SET_LOCATION',
     ADD_POSTS: 'ADD_POSTS',
     CLONE_WITH_POSTS: 'CLONE_WITH_POSTS',

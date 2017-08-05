@@ -28,7 +28,6 @@ class HomeScreen extends Component {
     BackHandler.addEventListener('hardwareBackPress', () => {
       console.log("back clicked -->   " ,this.props.pageName);
       if (this.props.pageName == "SendPostScreen") {
-        console.log("asfjnadkfjsadhdfbgihbgkhbd");
         // this.goBack();
         const resetAction = NavigationActions.reset({
           index: 0,
