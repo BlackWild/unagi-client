@@ -35,7 +35,7 @@ class LoadingScreen extends Component {
       
       this.props.dispatch({type: actions.SET_PAGE_NAME, pageName: "LogIn"});
       this.props.navigation.navigate('LogIn');
-    }, 3000);
+    }, 500);
 
   }
 
