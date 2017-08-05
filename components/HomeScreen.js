@@ -4,6 +4,7 @@ import {
   Text,
   View,
   FlatList,
+  BackHandler,
 } from 'react-native';
 import ActionButton from 'react-native-action-button';
 
@@ -18,11 +19,35 @@ import { styles } from '../styles/HomeScreenStyles';
 import { headerStyles } from '../styles/HeaderStyles';
 
 import { connect } from 'react-redux';
+import actions from '../reducers/Actions'
 
 
 class HomeScreen extends Component {
   constructor(props) {
     super(props);
+    BackHandler.addEventListener('hardwareBackPress', () => {
+      console.log("back clicked -->   " ,this.props.pageName);
+      if (this.props.pageName == "SendPostScreen") {
+        console.log("asfjnadkfjsadhdfbgihbgkhbd");
+        // this.goBack();
+        const resetAction = NavigationActions.reset({
+          index: 0,
+          actions: [
+            NavigationActions.navigate({ routeName: 'Home' })
+          ]
+        });
+        this.props.dispatch({type: actions.SET_PAGE_NAME, pageName: "Home"})
+        this.props.navigation.dispatch(resetAction);
+
+        return true;
+      }
+      if(this.props.pageName === 'Home') {
+        return true;
+      }
+      // return false;
+    });
+
+    
 
     this.state = {
       refreshing: false,
@@ -56,6 +81,7 @@ class HomeScreen extends Component {
 
   onPre = () => {
     const { navigate } = this.props.navigation;
+    this.props.dispatch({type: actions.SET_PAGE_NAME, pageName: "SendPostScreen"})
     navigate('SendPostScreen');
   };
 
@@ -119,6 +145,7 @@ const mapStateToProps = (state) => {
     posts: state.posts,
     userID: state.userID,
     location: state.location,
+    pageName: state.pageName,
   }
 };
 

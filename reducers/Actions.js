@@ -8,4 +8,5 @@ export default actions = {
     LIKE: 'LIKE',
     UNLIKE: 'UNLIKE',
     ADD_POST_TO_TOP: "ADD_POST_TO_TOP",
+    SET_PAGE_NAME: "SET_PAGE_NAME",
 }

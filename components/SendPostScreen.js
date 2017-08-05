@@ -25,23 +25,6 @@ class SendPostScreen extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { text: '', textLenght: 0 };
-    BackHandler.addEventListener('hardwareBackPress', () => {
-      if (this instanceof SendPostScreen) {
-        console.log("asfjnadkfjsadhdfbgihbgkhbd");
-        // this.goBack();
-        const resetAction = NavigationActions.reset({
-          index: 0,
-          actions: [
-            NavigationActions.navigate({ routeName: 'Home' })
-          ]
-        });
-        this.props.navigation.dispatch(resetAction);
-
-        return true;
-      }
-      return false;
-    });
 
     this.state = {
       textLenght: 0,
@@ -64,12 +47,14 @@ class SendPostScreen extends Component {
 
     const { navigate } = this.props.navigation;
     const onPre = () => {
+      console.log("back clicked -->   " ,this.props.pageName);
       const resetAction = NavigationActions.reset({
         index: 0,
         actions: [
           NavigationActions.navigate({ routeName: 'Home' })
         ]
       });
+      this.props.dispatch({type: actions.SET_PAGE_NAME, pageName: "Home"});
       this.props.navigation.dispatch(resetAction);
     };
 
@@ -164,6 +149,7 @@ const mapStateToProps = (state) => {
   return {
     userID: state.userID,
     location: state.location,
+    pageName: state.pageName,
   }
 };
 

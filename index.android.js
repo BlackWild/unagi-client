@@ -1,6 +1,7 @@
 import { AppRegistry } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
+import LoadingScreen from './components/LoadingScreen'
 import SendPostScreen from './components/SendPostScreen';
 import { TabScreen } from './components/TabScreen';
 
@@ -10,6 +11,7 @@ import React, { Component } from 'react';
 import { mainReducer } from './reducers/Reducers'
 
 const App = StackNavigator({
+  LoadingScreen: { screen: LoadingScreen},
   Home: { screen: TabScreen },
   SendPostScreen: { screen: SendPostScreen },
 });
@@ -22,7 +24,7 @@ class Unagi extends Component {
     this.store.subscribe(() => {
       console.log("Current State");
       console.log("------------------------------");
-      console.log(this.store.getState());
+      // console.log(this.store.getState());
       console.log("------------------------------");
     });
   }
