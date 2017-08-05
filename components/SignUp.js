@@ -32,7 +32,12 @@ class SignUp extends Component {
     if(this.state.password!==this.state.repassword) {
       ToastAndroid.show('password doesn\'t match!', ToastAndroid.SHORT);
     } else {
-      sendUsernameId(this.state.userName,this.state.password);
+      this.props.dispatch({type: actions.SET_PAGE_NAME, pageName: "Home"});
+      this.props.navigation.navigate('Home');
+      // sendUsernameId(this.state.userName,this.state.password).then(()=>{
+      // 
+      // });
+
     }
   }
 
