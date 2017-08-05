@@ -12,11 +12,22 @@ import {
 } from 'react-native';
 import {styles} from '../styles/SignUpStyles';
 
-export default class SignUp extends Component {
+import { connect } from 'react-redux';
+import actions from '../reducers/Actions';
+import {addBackHandler} from '../functions/BackHandlerAdder';
+
+export class SignUp extends Component {
   
   constructor(props) {
     super(props);
+    addBackHandler(this);
   }
+
+  static navigationOptions = ({ navigation }) => {
+    return {
+      header: null,
+    }
+  };
 
   render() {
     return (
@@ -55,3 +66,11 @@ export default class SignUp extends Component {
     );
   }
 }
+
+
+const mapStateToProps = (state) => {
+  return {
+    pageName: state.pageName,
+  }
+};
+export default connect(mapStateToProps)(SignUp);

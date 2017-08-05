@@ -10,13 +10,15 @@ import async from 'async';
 import { styles } from '../styles/LoadingScreenStyles';
 
 import { connect } from 'react-redux';
-
 import actions from '../reducers/Actions'
+import {addBackHandler} from '../functions/BackHandlerAdder';
 
 class LoadingScreen extends Component {
 
   constructor(props) {
     super(props);
+
+    addBackHandler(this);
 
     this.state = {
       
@@ -27,9 +29,9 @@ class LoadingScreen extends Component {
   componentWillMount() {
     
     setTimeout(()=>{
-      console.log(this.props.navigation);
-      this.props.dispatch({type: actions.SET_PAGE_NAME, pageName: "Home"});
-      this.props.navigation.navigate('Home');
+      
+      this.props.dispatch({type: actions.SET_PAGE_NAME, pageName: "LogIn"});
+      this.props.navigation.navigate('LogIn');
     }, 3000);
 
   }
@@ -52,7 +54,7 @@ class LoadingScreen extends Component {
 
 const mapStateToProps = (state) => {
   return {
-
+    pageName: state.pageName,
   }
 };
 

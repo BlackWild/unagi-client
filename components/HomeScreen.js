@@ -8,8 +8,6 @@ import {
 } from 'react-native';
 import ActionButton from 'react-native-action-button';
 
-import { NavigationActions } from 'react-navigation';
-
 import async from 'async';
 
 import Post from '../components/Post';
@@ -20,33 +18,13 @@ import { headerStyles } from '../styles/HeaderStyles';
 
 import { connect } from 'react-redux';
 import actions from '../reducers/Actions'
+import {addBackHandler} from '../functions/BackHandlerAdder';
 
 
 class HomeScreen extends Component {
   constructor(props) {
     super(props);
-    BackHandler.addEventListener('hardwareBackPress', () => {
-      console.log("back clicked -->   " ,this.props.pageName);
-      if (this.props.pageName == "SendPostScreen") {
-        console.log("asfjnadkfjsadhdfbgihbgkhbd");
-        // this.goBack();
-        const resetAction = NavigationActions.reset({
-          index: 0,
-          actions: [
-            NavigationActions.navigate({ routeName: 'Home' })
-          ]
-        });
-        this.props.dispatch({type: actions.SET_PAGE_NAME, pageName: "Home"})
-        this.props.navigation.dispatch(resetAction);
-
-        return true;
-      }
-      if(this.props.pageName === 'Home') {
-        return true;
-      }
-      // return false;
-    });
-
+    addBackHandler(this);
     
 
     this.state = {
@@ -80,9 +58,8 @@ class HomeScreen extends Component {
   };
 
   onPre = () => {
-    const { navigate } = this.props.navigation;
     this.props.dispatch({type: actions.SET_PAGE_NAME, pageName: "SendPostScreen"})
-    navigate('SendPostScreen');
+    this.props.navigation.navigate('SendPostScreen');
   };
 
   onEndHandler = () => {

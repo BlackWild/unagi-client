@@ -8,14 +8,35 @@ import {
   Image,
   StatusBar,
   TouchableWithoutFeedback,
-  ScrollView
+  ScrollView,
 } from 'react-native';
 import {styles} from '../styles/LogInStyles';
 
-export default class LogIn extends Component {
+import { connect } from 'react-redux';
+import actions from '../reducers/Actions';
+import {addBackHandler} from '../functions/BackHandlerAdder';
+
+export class LogIn extends Component {
   
   constructor(props) {
     super(props);
+    addBackHandler(this);
+  }
+
+  static navigationOptions = ({ navigation }) => {
+    return {
+      header: null,
+    }
+  };
+
+
+  logInClickHandler = () => {
+    this.props.dispatch({type: actions.SET_PAGE_NAME, pageName: "Home"});
+    this.props.navigation.navigate('Home');
+  }
+  signUpClickHandler = () => {
+    this.props.dispatch({type: actions.SET_PAGE_NAME, pageName: "SignUp"});
+    this.props.navigation.navigate('SignUp');
   }
 
   render() {
@@ -35,12 +56,12 @@ export default class LogIn extends Component {
             <Text>رمز عبور:</Text>
             <TextInput underlineColorAndroid="transparent" placeholder="رمز عبور" style={styles.textarea}/>
           </View>
-          <TouchableWithoutFeedback>
+          <TouchableWithoutFeedback onPress={this.logInClickHandler} >
             <View style={styles.button}>
               <Text style={styles.buttonText} >ورود به حساب کاربری</Text>
             </View>
           </TouchableWithoutFeedback>
-          <TouchableWithoutFeedback>
+          <TouchableWithoutFeedback onPress={this.signUpClickHandler}>
             <View style={styles.button}>
               <Text style={styles.buttonText} > حساب کاربری ندارم </Text>
             </View>
@@ -51,3 +72,10 @@ export default class LogIn extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    pageName: state.pageName,
+  }
+};
+export default connect(mapStateToProps)(LogIn);

@@ -35,8 +35,6 @@ class SendPostScreen extends Component {
 
 
   static navigationOptions = ({ navigation }) => {
-    const { state } = navigation;
-    console.log(state);
 
     return {
       header: null,
