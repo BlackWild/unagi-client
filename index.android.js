@@ -3,7 +3,7 @@ import { StackNavigator } from 'react-navigation';
 
 import SendPostScreen from './components/SendPostScreen';
 import { TabScreen } from './components/TabScreen';
-
+import LogIn from './components/LogIn';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import React, { Component } from 'react';
