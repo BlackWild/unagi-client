@@ -1,7 +1,7 @@
 
 import { SERVER_DOMIN } from '../configs/config';
 
-export const sendPost = function(id , loc ,content, that, accessToken) {
+export const sendPost = function(accessToken , loc ,content, that) {
   return new Promise((resol, rejec) => {
     const newPost = JSON.stringify({
       username: id,
@@ -9,10 +9,12 @@ export const sendPost = function(id , loc ,content, that, accessToken) {
       location: {x:loc.x, y:loc.y}
     });
     fetch({
-        url: SERVER_DOMIN + '/api/v3/posts/addPost?accessToken='+accessToken+'&newPost='+newPost,
-        method: 'GET'
+        url: SERVER_DOMIN + '/api/v3/posts/addPost?newPost='+newPost,
+        headers: {
+          accessToken
+        },
+        method: 'GET',
       }).then((res) => {
-          console.log("post sent to server");
           console.log(res);
           if(res._bodyText === "saved") {
             resol("ok")
