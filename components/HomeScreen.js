@@ -11,7 +11,7 @@ import ActionButton from 'react-native-action-button';
 import async from 'async';
 
 import Post from '../components/Post';
-import { setIDState, setLocationState, setPostState, getMorePost } from '../functions/StateSetters';
+import {setIDState, setLocationState, setPostState, getMorePost, tokenProvider} from '../functions/StateSetters';
 
 import { styles } from '../styles/HomeScreenStyles';
 import { headerStyles } from '../styles/HeaderStyles';
@@ -123,6 +123,7 @@ const mapStateToProps = (state) => {
     accessToken: state.userInfo.accessToken,
     location: state.location,
     pageName: state.pageName,
+    refreshToken: state.userInfo.refreshToken,
   }
 };
 

@@ -9,6 +9,12 @@ export const registerReducer = (state = {}, action) => {
                 refreshToken: action.refreshToken,
             };
             break;
+        case actions.SET_TOKEN:
+            return {
+                accessToken: action.accessToken,
+                refreshToken: action.refreshToken,
+            };
+            break;
         default:
             return state;
 
