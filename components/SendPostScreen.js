@@ -26,6 +26,7 @@ class SendPostScreen extends Component {
   constructor(props) {
     super(props);
 
+    this.isSending = false;
     this.state = {
       textLenght: 0,
       isSending: false
@@ -57,23 +58,21 @@ class SendPostScreen extends Component {
     };
 
     const sendPostToServer = () => {
-      if (this.state.isSending || this.state.isLengthOverLimit) {
+      if (this.isSending || this.state.isSending || this.state.isLengthOverLimit) {
         return null;
       } else {
-        this.state.isSending = true;
+        this.isSending = true;
         this.setState({
           isSending: true
         }, () => {
           async.parallel([
             (callback) => {
-              setIDState(this).then(() => callback()).catch(() => { });
-            },
-            (callback) => {
               setLocationState(this).then(() => callback()).catch(() => { });
             }
           ], (err) => {
-            sendPost(this.props.userName, this.props.location, this.state.text, this, this.props.accessToken).then((res) => {
+            sendPost(this.props.accessToken, this.props.location, this.state.text, this).then((res) => {
               if (res === "ok") {
+                this.isSending = false;
                 this.setState({
                   isSending: false
                 }, () => {
@@ -110,7 +109,7 @@ class SendPostScreen extends Component {
               <Text style={this.state.isLengthOverLimit ? [styles.charRemain, styles.overChar] : [styles.charRemain, { justifyContent: 'center', alignContent: 'center' }]}>
                 {160 - this.state.textLenght}
               </Text>
-              <TouchableWithoutFeedback onPress={sendPostToServer}>
+              <TouchableWithoutFeedback onPress={this.isSending||this.state.isSending?()=>{}:sendPostToServer}>
                 <Image source={require('../img/send.png')} style={styles.pic} />
               </TouchableWithoutFeedback>
             </View>

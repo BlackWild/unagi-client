@@ -35,10 +35,6 @@ class HomeScreen extends Component {
   componentWillMount() {
     async.parallel([
       (callback) => {
-        if(this.props.accessToken) callback();
-        setIDState(this).then(() => callback()).catch(() => { });
-      },
-      (callback) => {
         setLocationState(this).then(() => callback()).catch(() => { });
       }
     ], (err) => {
