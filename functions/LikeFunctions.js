@@ -59,12 +59,12 @@ export const unlikePost = (uID, pID, that, accessToken) => {
         console.log("post unliked");
         resol();
       } else {
-          that.props.dispatch({ type: action.LIKE, postID: pID });
+          that.props.dispatch({ type: actions.LIKE, postID: pID });
           resol();
       }
     }).catch((error) => {
       console.log("inja: ", error);
-      that.props.dispatch({ type: action.LIKE, postID: pID });
+      that.props.dispatch({ type: actions.LIKE, postID: pID });
       rejec();
     });
 
