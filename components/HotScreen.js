@@ -32,14 +32,10 @@ class HotScreen extends Component {
   componentWillMount() {
     async.parallel([
       (callback) => {
-        if (this.props.userID) callback();
-        setIDState(this).then(() => callback()).catch(() => { });
-      },
-      (callback) => {
         setLocationState(this).then(() => callback()).catch(() => { });
       }
     ], (err) => {
-      setHotPostState(this.props.userID, this.props.location, this).then(() => console.log("good")).catch(() => { });
+      setHotPostState(this.props.accessToken, this.props.location, this).then(() => console.log("good")).catch(() => { });
     });
   }
 
@@ -61,14 +57,14 @@ class HotScreen extends Component {
 
   onEndHandler = () => {
     console.log("end reached");
-    getMoreHotPost(this.props.userID, this.props.location, this, this.state.nextStr).then(() => console.log("more good")).catch(() => console.log("no more post"));
+    getMoreHotPost(this.props.accessToken, this.props.location, this, this.state.nextStr).then(() => console.log("more good")).catch(() => console.log("no more post"));
   };
   onRefreshHandler = () => {
     console.log("refreshing");
     this.setState({
       refreshing: true,
     }, () => {
-      setHotPostState(this.props.userID, this.props.location, this).then(() => {
+      setHotPostState(this.props.accessToken, this.props.location, this).then(() => {
         this.setState({
           refreshing: false,
         })
@@ -88,7 +84,7 @@ class HotScreen extends Component {
                 data={this.props.hotPosts}
                 keyExtractor={(item, index) => item._id}
                 renderItem={({ item }) => (
-                  <Post likes={item.likes} isLiked={item.isLiked} content={item.content} date={item.date} postID={item._id} userID={item.userID} />
+                  <Post likes={item.likes} isLiked={item.isLiked} content={item.content} date={item.date} postID={item._id} username={item.username} posterID={item.userID} />
                 )}
                 onEndReached={this.onEndHandler}
                 onEndReachedThreshold={2}
@@ -109,7 +105,7 @@ class HotScreen extends Component {
 const mapStateToProps = (state) => {
   return {
     hotPosts: state.hotPosts,
-    userID: state.userID,
+    accessToken: state.userInfo.accessToken,
     location: state.location,
   }
 }

@@ -11,7 +11,7 @@ import ActionButton from 'react-native-action-button';
 import async from 'async';
 
 import Post from '../components/Post';
-import { setIDState, setLocationState, setPostState, getMorePost } from '../functions/StateSetters';
+import {setIDState, setLocationState, setPostState, getMorePost, tokenProvider} from '../functions/StateSetters';
 
 import { styles } from '../styles/HomeScreenStyles';
 import { headerStyles } from '../styles/HeaderStyles';
@@ -35,14 +35,10 @@ class HomeScreen extends Component {
   componentWillMount() {
     async.parallel([
       (callback) => {
-        if(this.props.userID) callback();
-        setIDState(this).then(() => callback()).catch(() => { });
-      },
-      (callback) => {
         setLocationState(this).then(() => callback()).catch(() => { });
       }
     ], (err) => {
-      setPostState(this.props.userID, this.props.location, this).then(() => console.log("good")).catch(() => { });
+      setPostState(this.props.accessToken, this.props.location, this).then(() => console.log("good")).catch(() => { });
     });
   }
 
@@ -64,14 +60,14 @@ class HomeScreen extends Component {
 
   onEndHandler = () => {
     console.log("end reached");
-    getMorePost(this.props.userID, this.props.location, this, this.state.nextStr).then(() => console.log("more good")).catch(() => console.log("no more post"));
+    getMorePost(this.props.accessToken, this.props.location, this, this.state.nextStr).then(() => console.log("more good")).catch(() => console.log("no more post"));
   };
   onRefreshHandler = () => {
     console.log("refreshing");
     this.setState({
       refreshing: true,
     }, () => {
-        setPostState(this.props.userID, this.props.location, this).then(() => {
+        setPostState(this.props.accessToken, this.props.location, this).then(() => {
           console.log("refreshing");
             this.setState({
                     refreshing: false,
@@ -97,7 +93,7 @@ class HomeScreen extends Component {
                 data={this.props.posts}
                 keyExtractor={(item, index) => item._id}
                 renderItem={({ item }) => (
-                  <Post likes={item.likes} isLiked={item.isLiked} content={item.content} date={item.date} postID={item._id} posterUserID={item.userID} />
+                  <Post likes={item.likes} isLiked={item.isLiked} content={item.content} date={item.date} postID={item._id} username={item.username} posterID={item.userID} />
                 )}
                 onEndReached={this.onEndHandler}
                 onEndReachedThreshold={2}
@@ -120,9 +116,10 @@ class HomeScreen extends Component {
 const mapStateToProps = (state) => {
   return {
     posts: state.posts,
-    userID: state.userID,
+    accessToken: state.userInfo.accessToken,
     location: state.location,
     pageName: state.pageName,
+    refreshToken: state.userInfo.refreshToken,
   }
 };
 

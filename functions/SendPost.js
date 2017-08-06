@@ -1,27 +1,36 @@
 
 import { SERVER_DOMIN } from '../configs/config';
 
-export const sendPost = function(id , loc ,content, that) {
+import actions from '../reducers/Actions';
+
+export const sendPost = function (accessToken, location, content, that) {
   return new Promise((resol, rejec) => {
-    const newPost = JSON.stringify({
-      userID: id,
-      content: content,
-      location: {x:loc.x, y:loc.y}
+    fetch(SERVER_DOMIN + '/api/v3/posts/addPost', {
+      headers: {
+        'Content-Type': 'application/json',
+        accessToken
+      },
+      body: JSON.stringify({
+        newPost: {
+          content,
+          location,
+        },
+      }),
+      method: 'POST',
+    }).then((res) => {
+      return res.json();
+    }).then((resJ) => {
+      if (!resJ.isAccessTokenValid) {
+        rejec();
+      } else if (!resJ.isAdded) {
+        rejec();
+      } else {
+        that.props.dispatch({type: actions.ADD_POST_TO_TOP, post: resJ.post})
+        resol("ok");
+      }
+    }).catch((error) => {
+      rejec();
     });
-    fetch({
-        url: SERVER_DOMIN + '/api/v2/posts/addPost?newPost='+newPost,
-        method: 'GET'
-      }).then((res) => {
-          console.log("post sent to server");
-          console.log(res);
-          if(res._bodyText === "saved") {
-            resol("ok")
-          } else rejec();
-        })
-        .catch((error) => {
-          console.error(error);
-          rejec();
-        });
-    });
+  });
 
 };

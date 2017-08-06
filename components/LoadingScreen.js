@@ -30,7 +30,7 @@ class LoadingScreen extends Component {
   }
 
   componentWillMount() {
-    
+
     setTimeout(()=>{
       
       this.props.dispatch({type: actions.SET_PAGE_NAME, pageName: "LogIn"});
@@ -69,4 +69,3 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps)(LoadingScreen);
-// export default connect()(LoadingScreen);

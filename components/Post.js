@@ -17,11 +17,11 @@ class Post extends Component {
 
   
   likeHandler = () => {
-    likePost(this.props.userID, this.props.postID, this).then(()=>console.log("POST LIKED"));
+    likePost(this.props.accessToken, this.props.postID, this).then(()=>console.log("POST LIKED"));
   }
 
   unlikeHandler = () => {
-    unlikePost(this.props.userID, this.props.postID, this).then(()=>console.log("POST UNLIKED"));
+    unlikePost(this.props.accessToken, this.props.postID, this).then(()=>console.log("POST UNLIKED"));
   }
   
   render() {
@@ -41,7 +41,7 @@ class Post extends Component {
             </Text>
           </View>
           <View style={styles.userBox} >
-            <Text style={styles.user}> کاربر مهمان</Text>
+            <Text style={styles.user}> {this.props.username? this.props.username: "کاربر مهمان"}</Text>
           </View>
         </View>
          <View style={styles.reply} >
@@ -77,7 +77,7 @@ class Post extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    userID: state.userID,
+    accessToken: state.userInfo.accessToken,
   }
 }
 

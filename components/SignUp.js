@@ -22,7 +22,7 @@ class SignUp extends Component {
     super(props);
     addBackHandler(this);
     this.state={
-      userName:'',
+      username:'',
       password:'',
       repassword:'',
     }
@@ -34,9 +34,9 @@ class SignUp extends Component {
     } else {
       this.props.dispatch({type: actions.SET_PAGE_NAME, pageName: "Home"});
       try {
-            if (this.state.userName === '' || this.state.password === '')
+            if (this.state.username === '' || this.state.password === '')
                 throw "empty";
-            sendUsernameId(this.state.userName,this.state.password,this).then((arg)=>{
+            sendUsernameId(this.state.username,this.state.password,this).then((arg)=>{
             if(!arg){
               ToastAndroid.show('نام کاربری تکراری است', ToastAndroid.SHORT);
             }
@@ -70,7 +70,7 @@ class SignUp extends Component {
         <View style={{flex: 1,flexDirection: 'column',justifyContent:'center',alignItems:'center',alignContent:'center'}}>
           <View style={styles.textIn}>
             <Text>نام کاربری:</Text>
-            <TextInput underlineColorAndroid="transparent" placeholder="ایمیل"style={styles.textarea} onChangeText={(userName) => this.setState({userName})}/>
+            <TextInput underlineColorAndroid="transparent" placeholder="ایمیل"style={styles.textarea} onChangeText={(username) => this.setState({username})}/>
           </View>
           <View style={styles.textIn}>
             <Text>رمز عبور:</Text>

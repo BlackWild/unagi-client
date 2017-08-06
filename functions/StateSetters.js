@@ -11,49 +11,62 @@ export const setLocationState = function (that) {
       that.props.dispatch({ type: actions.SET_LOCATION, location: { x: pos.coords.longitude, y: pos.coords.latitude } })
       res();
     }, (err) => {
-      console.warn(`ERROR(${err.code}): ${err.message}`);
       rej();
     });
   });
 }
 
-export const setIDState = function (that) {
-  return new Promise((resol, rej) => {
-
-    uniqueId().then(id => {
-      console.log("id is : " + id);
-      that.props.dispatch({ type: actions.SET_ID, userID: id });
-      fetch({
-        url: SERVER_DOMIN + '/api/v1/register/registerGuest?userID=' + id,
-        method: 'GET'
-      }).then((res) => {
-        console.log("id sent to server");
-        resol();
-      }).catch((error) => {
-        console.error(error);
-        rej();
-      });
-    })
-
-  });
-};
 export const sendUsernameId = function(username,password,that){
     return new Promise((resol, rej) => {
         fetch({
             url: SERVER_DOMIN + '/api/v3/users/signUp?username=' + username + '&password=' + password ,
-            method: 'GET'
+            method: 'GET',
+            // headers:{
+            //     username:username,
+            //     password:password,
+            // }
         }).then((res) => {
             return res.json();
         }).then((resJ) => {
             if(resJ.success) {
               that.props.dispatch({
-                  type: actions.SET_INFO,
-                  userName: username,
-                  passWord: password,
-                  accessToken: resJ.token,
+                type: actions.SET_INFO,
+                username: username,
+                password: password,
+                accessToken:resJ.accessToken,
+                refreshToken: resJ.refreshToken,
               });
           }
             resol(resJ.success);
+        }).catch((error) => {
+            console.log("post fetch error: " + error);
+            rej();
+        });
+    });
+};
+export const tokenProvider=function (that) {
+    return new Promise((resol, rej) => {
+        fetch({
+            url: SERVER_DOMIN + '/api/v3/users/tokenProvider',
+            method: 'GET',
+            headers:{
+              refreshToken: that.props.refreshToken,
+            }
+        }).then((res) => {
+            return res.json();
+        }).then((resJ) => {
+            if(resJ.isRefreshTokenValid) {
+                that.props.dispatch({
+                    type: actions.SET_TOKEN,
+                    accessToken:resJ.accessToken,
+                    refreshToken: resJ.refreshToken,
+                });
+                resol();
+            }
+            else{
+                rej();
+            }
+
         }).catch((error) => {
             console.log("post fetch error: " + error);
             rej();
@@ -64,167 +77,166 @@ export const sendUsernameId = function(username,password,that){
 export const logIn = function(username,password,that){
     return new Promise((resol, rej) => {
         fetch({
-            url: SERVER_DOMIN + '/api/v3/users/logIn?username=' + username + '&password=' + password ,
-            method: 'GET'
+          url: SERVER_DOMIN + '/api/v3/users/logIn?username=' + username + '&password=' + password ,
+          method: 'GET',
+          // headers:{
+          //     username:username,
+          //     password:password,
+          // }
         }).then((res) => {
-            return res.json();
+          return res.json();
         }).then((resJ) => {
           if(resJ.success){
-              that.props.dispatch({
-                  type: actions.SET_INFO,
-                  userName:username,
-                  passWord:password,
-                  accessToken:resJ.token});
-
+            that.props.dispatch({
+              type: actions.SET_INFO,
+              username:username,
+              password:password,
+              accessToken:resJ.accessToken,
+              refreshToken: resJ.refreshToken,
+            });
+            
           }
-            resol(resJ.success);
+          resol(resJ.success);
 
         }).catch((error) => {
-            console.log("post fetch error: " + error);
-            rej();
+          console.log("post fetch error: " + error);
+          rej();
         });
     });
 
 };
 
 
-export const setPostState = function (id, location, that) {
+export const setPostState = function (accessToken, location, that) {
   return new Promise((resol, rej) => {
-
-    // const post = JSON.stringify({
-    //   userID: id,
-    //   location:{x: location.x, y:location.y },
-    // });
     
     fetch({
-      url: SERVER_DOMIN + '/api/v2/posts/getPosts?userID=' + id + '&location={"x":' + location.x + ',"y":' + location.y + '}',
+      url: SERVER_DOMIN + '/api/v3/posts/getPosts?location='+JSON.stringify({x:location.x, y:location.y}),
+      headers: {
+        accessToken
+      },
       method: 'GET'
     }).then((res) => {
       return res.json();
     }).then((resJ) => {
-      // console.log("server result: ", resJ.results);
-      // console.log("that state: " , that.state.Posts);
-      that.props.dispatch({type: actions.CLONE_WITH_POSTS, newPosts: resJ.results});
-      
-      that.setState(() => {
-        return {
-          nextStr: resJ.next,
-          hasNext: resJ.hasNext,
-        }
-      }, () => {
-        console.log("Post done!");
-        resol();
-      });
+
+      if(!resJ.isAccessTokenValid) {
+        rej();
+      } else {
+        that.props.dispatch({type: actions.CLONE_WITH_POSTS, newPosts: resJ.results});
+        that.setState(() => {
+          return {
+            nextStr: resJ.next,
+            hasNext: resJ.hasNext,
+          }
+        }, () => {
+          resol();
+        });
+      }
     }).catch((error) => {
-      console.log("post fetch error: " + error);
       rej();
     });
   });
 
 };
 
-export const getMorePost = (id, location, that, qu) => {
+export const getMorePost = (accessToken, location, that, qu) => {
   return new Promise((resol, rej) => {
 
-    if (!that.state.hasNext) rej();
-
-    // const post = JSON.stringify({
-    //   userID: id,
-    //   location:{x: location.x, y:location.y },
-    // });
     fetch({
-      url: SERVER_DOMIN + '/api/v2/posts/getPosts?userID=' + id + '&location={"x":' + location.x + ',"y":' + location.y + '}&cursor=' + qu,
+      url: SERVER_DOMIN + '/api/v3/posts/getPosts?location='+JSON.stringify({x:location.x, y:location.y})
+                                                +'&cursor=' + qu,
+      headers: {
+        accessToken
+      },
       method: 'GET',
     }).then((res) => {
       return res.json();
     }).then((resJ) => {
-      // console.log("server result: ", resJ.results);
-      // console.log("that state: " , that.state.Posts);
-      that.props.dispatch({type: actions.ADD_POSTS, newPosts: resJ.results});
-      that.setState(() => {
-        return {
-          nextStr: resJ.next,
-          hasNext: resJ.hasNext,
 
-        }
-      }, () => {
-        console.log("Post done!");
-        resol();
-      });
+      if(!resJ.isAccessTokenValid) {
+        rej();
+      } else {
+        that.props.dispatch({type: actions.ADD_POSTS, newPosts: resJ.results});
+        that.setState(() => {
+          return {
+            nextStr: resJ.next,
+            hasNext: resJ.hasNext,
+          }
+        }, () => {
+          resol();
+        });
+      }
     }).catch((error) => {
-      console.log("more post fetch error: " + error);
       rej();
     });
   });
 };
 
-export const setHotPostState = function (id, location, that) {
+export const setHotPostState = (accessToken, location, that) => {
   return new Promise((resol, rej) => {
 
-    // const post = JSON.stringify({
-    //   userID: id,
-    //   location:{x: location.x, y:location.y },
-    // });
-    
     fetch({
-      url: SERVER_DOMIN + '/api/v2/posts/getHotPosts?userID=' + id + '&location={"x":' + location.x + ',"y":' + location.y + '}',
-      method: 'GET'
-    }).then((res) => {
-      return res.json();
-    }).then((resJ) => {
-      // console.log("server result: ", resJ.results);
-      // console.log("that state: " , that.state.Posts);
-      that.props.dispatch({type: actions.CLONE_WITH_HOTPOSTS, newPosts: resJ.results});
-      
-      that.setState(() => {
-        return {
-          nextStr: resJ.next,
-          hasNext: resJ.hasNext,
-        }
-      }, () => {
-        console.log("Post done!");
-        resol();
-      });
-    }).catch((error) => {
-      console.log("post fetch error: " + error);
-      rej();
-    });
-  });
-
-};
-
-export const getMoreHotPost = (id, location, that, qu) => {
-  return new Promise((resol, rej) => {
-
-    if (!that.state.hasNext) rej();
-
-    // const post = JSON.stringify({
-    //   userID: id,
-    //   location:{x: location.x, y:location.y },
-    // });
-    fetch({
-      url: SERVER_DOMIN + '/api/v2/posts/getHotPosts?userID=' + id + '&location={"x":' + location.x + ',"y":' + location.y + '}&cursor=' + qu,
+      url: SERVER_DOMIN + '/api/v3/posts/getHotPosts?location='+JSON.stringify({x:location.x, y:location.y}),
+      headers: {
+        accessToken
+      },
       method: 'GET',
     }).then((res) => {
       return res.json();
     }).then((resJ) => {
-      // console.log("server result: ", resJ.results);
-      // console.log("that state: " , that.state.Posts);
-      let filteredPosts=resJ.results.filter((newItem)=>{
+
+      if(!resJ.isAccessTokenValid) {
+        rej();
+      } else {
+        that.props.dispatch({type: actions.CLONE_WITH_HOTPOSTS, newPosts: resJ.results});
+        that.setState(() => {
+          return {
+            nextStr: resJ.next,
+            hasNext: resJ.hasNext,
+          }
+        }, () => {
+          resol();
+        });
+      }
+    }).catch((error) => {
+      rej();
+    });
+  });
+};
+
+
+export const getMoreHotPost = (accessToken, location, that, qu) => {
+  return new Promise((resol, rej) => {
+
+    fetch({
+      url: SERVER_DOMIN + '/api/v3/posts/getHotPosts?location='+JSON.stringify({x:location.x, y:location.y})
+                                                +'&cursor=' + qu,
+      headers: {
+        accessToken
+      },
+      method: 'GET',
+    }).then((res) => {
+      return res.json();
+    }).then((resJ) => {
+
+      if(!resJ.isAccessTokenValid) {
+        rej();
+      } else {
+        const filteredPosts=resJ.results.filter((newItem)=>{
           return !that.props.hotPosts.find((item)=>{return item._id===newItem._id})
-      });
-      that.props.dispatch({type: actions.ADD_HOT_POSTS, newPosts: filteredPosts});
-      that.setState(() => {
-        return {
-          nextStr: resJ.next,
-          hasNext: resJ.hasNext,
-        }
-      }, () => {
-        console.log("Post done!");
-        resol();
-      });
+        });
+        that.props.dispatch({type: actions.ADD_HOT_POSTS, newPosts: filteredPosts});
+        that.setState(() => {
+          return {
+            nextStr: resJ.next,
+            hasNext: resJ.hasNext,
+          }
+        }, () => {
+          resol();
+        });
+      }
     }).catch((error) => {
-      console.log("more post fetch error: " + error);
       rej();
     });
   });
