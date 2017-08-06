@@ -48,13 +48,34 @@ export const sendUsernameId = function(username,password,that){
             if(resJ.success) {
               that.props.dispatch({
                 type: actions.SET_INFO,
-                userName: username,
-                passWord: password,
+                username: username,
+                password: password,
                 accessToken:resJ.accessToken,
                 refreshToken: resJ.refreshToken,
               });
           }
             resol(resJ.success);
+        }).catch((error) => {
+            console.log("post fetch error: " + error);
+            rej();
+        });
+    });
+
+};
+export const tokenProvider=function (that) {
+    return new Promise((resol, rej) => {
+        fetch({
+            url: SERVER_DOMIN + '/api/v3/users/tokenProvider',
+            method: 'GET',
+            headers:{
+              refreshToken: that.props.refreshToken,
+            }
+        }).then((res) => {
+            console.log(res);
+            return res.json();
+        }).then((resJ) => {
+            console.log()
+            console.log(that.props.refreshToken);
         }).catch((error) => {
             console.log("post fetch error: " + error);
             rej();
@@ -73,8 +94,8 @@ export const logIn = function(username,password,that){
           if(resJ.success){
             that.props.dispatch({
               type: actions.SET_INFO,
-              userName:username,
-              passWord:password,
+              username:username,
+              password:password,
               accessToken:resJ.accessToken,
               refreshToken: resJ.refreshToken,
             });

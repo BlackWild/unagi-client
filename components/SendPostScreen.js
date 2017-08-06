@@ -72,7 +72,7 @@ class SendPostScreen extends Component {
               setLocationState(this).then(() => callback()).catch(() => { });
             }
           ], (err) => {
-            sendPost(this.props.userName, this.props.location, this.state.text, this, this.props.accessToken).then((res) => {
+            sendPost(this.props.username, this.props.location, this.state.text, this, this.props.accessToken).then((res) => {
               if (res === "ok") {
                 this.setState({
                   isSending: false
@@ -146,7 +146,7 @@ class SendPostScreen extends Component {
 const mapStateToProps = (state) => {
   return {
     accessToken: state.userInfo.accessToken,
-    userName: state.userInfo.userName,
+    username: state.userInfo.username,
     location: state.location,
     pageName: state.pageName,
   }

@@ -3,8 +3,8 @@ export const registerReducer = (state = {}, action) => {
     switch (action.type){
         case actions.SET_INFO:
             return {
-                userName: action.userName,
-                passWord: action.passWord,
+                username: action.username,
+                passnord: action.password,
                 accessToken: action.accessToken,
                 refreshToken: action.refreshToken,
             };
