@@ -145,7 +145,7 @@ class SendPostScreen extends Component {
 const mapStateToProps = (state) => {
   return {
     accessToken: state.userInfo.accessToken,
-    userName: state.userInfo.userName,
+    username: state.userInfo.username,
     location: state.location,
     pageName: state.pageName,
   }

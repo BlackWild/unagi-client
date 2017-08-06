@@ -36,9 +36,9 @@ export class LogIn extends Component {
   logInClickHandler = () => {
     try {
 
-      if (this.state.userName === '' || this.state.password === '')
+      if (this.state.username === '' || this.state.password === '')
         throw "empty";
-      logIn(this.state.userName, this.state.password, this).then((arg) => {
+      logIn(this.state.username, this.state.password, this).then((arg) => {
         // console.warn("hellow");
 
         if (!arg) {
@@ -73,7 +73,7 @@ export class LogIn extends Component {
           <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center', alignContent: 'center' }}>
             <View style={styles.textIn}>
               <Text>ایمیل:</Text>
-              <TextInput underlineColorAndroid="transparent" placeholder="ایمیل" style={styles.textarea} onChangeText={(userName) => this.setState({ userName })} />
+              <TextInput underlineColorAndroid="transparent" placeholder="ایمیل" style={styles.textarea} onChangeText={(username) => this.setState({ username })} />
             </View>
             <View style={styles.textIn}>
               <Text>رمز عبور:</Text>
