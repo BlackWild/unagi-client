@@ -3,7 +3,10 @@ module.exports = {
         "es6": true,
         "node": true
     },
-    "extends": "eslint:recommended",
+    "extends": [
+        "eslint:recommended",
+        "plugin:react-native/all"
+    ],
     "parserOptions": {
         "ecmaFeatures": {
             "experimentalObjectRestSpread": true,
@@ -12,7 +15,8 @@ module.exports = {
         "sourceType": "module"
     },
     "plugins": [
-        "react"
+        "react",
+        "react-native"
     ],
     "rules": {
         "accessor-pairs": "error",
@@ -271,6 +275,11 @@ module.exports = {
         "yoda": [
             "error",
             "never"
-        ]
+        ],
+        "react-native/no-unused-styles": 2,
+        "react-native/split-platform-components": 2,
+        "react-native/no-inline-styles": 2,
+        "react-native/no-color-literals": 2,
+
     }
 };
