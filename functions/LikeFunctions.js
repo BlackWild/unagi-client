@@ -5,31 +5,34 @@ import { SERVER_DOMIN } from '../configs/config';
 
 import actions from '../reducers/Actions';
 
-export const likePost = (uID, pID, that, accessToken) => {
+export const likePost = (accessToken, pID, that) => {
 
   return new Promise((resol, rejec) => {
     that.props.dispatch({ type: actions.LIKE, postID: pID })
-    fetch(SERVER_DOMIN + '/api/v3/posts/likePost?accessToken='+accessToken, {
+    fetch(SERVER_DOMIN + '/api/v3/posts/likePost',{
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        accessToken,
       },
       body: JSON.stringify({
-        userID: uID,
         postID: pID
-      })
+      }),
     }).then((res) => {
-      console.log("post Like Sent to server", res);
+      return res.json();
+    }).then((resJ) => {
 
-      if (res._bodyText === "liked") {
-        console.log("PostLiked");
-        resol();
+      if (!resJ.isAccessTokenValid) {
+        that.props.dispatch({ type: actions.UNLIKE, postID: pID });
+        rejec();
+      } else if (!resJ.isLiked) {
+        that.props.dispatch({ type: actions.UNLIKE, postID: pID });
+        rejec();
       } else {
-          that.props.dispatch({ type: actions.UNLIKE, postID: pID });
-          resol();
+        resol();
       }
+
     }).catch((error) => {
-      console.log("inja: ", error);
       that.props.dispatch({ type: actions.UNLIKE, postID: pID });
       rejec();
     });
@@ -40,30 +43,33 @@ export const likePost = (uID, pID, that, accessToken) => {
 
 
 
-export const unlikePost = (uID, pID, that, accessToken) => {
+export const unlikePost = (accessToken, pID, that) => {
   that.props.dispatch({ type: actions.UNLIKE, postID: pID });
   return new Promise((resol, rejec) => {
-    fetch(SERVER_DOMIN + '/api/v3/posts/unlikePost?accessToken=' + accessToken, {
+    fetch(SERVER_DOMIN + '/api/v3/posts/unlikePost', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        accessToken,
       },
       body: JSON.stringify({
-        userID: uID,
         postID: pID
       })
     }).then((res) => {
-      console.log("post Like Sent to server", res);
+      return res.json();
+    }).then((resJ) => {
 
-      if (res._bodyText === "unliked") {
-        console.log("post unliked");
-        resol();
+      if (!resJ.isAccessTokenValid) {
+        that.props.dispatch({ type: actions.LIKE, postID: pID });
+        rejec();
+      } else if (!resJ.isUnliked) {
+        that.props.dispatch({ type: actions.LIKE, postID: pID });
+        rejec();
       } else {
-          that.props.dispatch({ type: actions.LIKE, postID: pID });
-          resol();
+        resol();
       }
+
     }).catch((error) => {
-      console.log("inja: ", error);
       that.props.dispatch({ type: actions.LIKE, postID: pID });
       rejec();
     });

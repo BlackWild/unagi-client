@@ -103,7 +103,7 @@ export const setPostState = function (accessToken, location, that) {
       return res.json();
     }).then((resJ) => {
 
-      if(resJ.isAccessTokenExpired) {
+      if(!resJ.isAccessTokenValid) {
         rej();
       } else {
         that.props.dispatch({type: actions.CLONE_WITH_POSTS, newPosts: resJ.results});
@@ -137,7 +137,7 @@ export const getMorePost = (accessToken, location, that, qu) => {
       return res.json();
     }).then((resJ) => {
 
-      if(resJ.isAccessTokenExpired) {
+      if(!resJ.isAccessTokenValid) {
         rej();
       } else {
         that.props.dispatch({type: actions.ADD_POSTS, newPosts: resJ.results});
@@ -169,7 +169,7 @@ export const setHotPostState = (accessToken, location, that) => {
       return res.json();
     }).then((resJ) => {
 
-      if(resJ.isAccessTokenExpired) {
+      if(!resJ.isAccessTokenValid) {
         rej();
       } else {
         that.props.dispatch({type: actions.CLONE_WITH_HOTPOSTS, newPosts: resJ.results});
@@ -203,7 +203,7 @@ export const getMoreHotPost = (accessToken, location, that, qu) => {
       return res.json();
     }).then((resJ) => {
 
-      if(resJ.isAccessTokenExpired) {
+      if(!resJ.isAccessTokenValid) {
         rej();
       } else {
         const filteredPosts=resJ.results.filter((newItem)=>{

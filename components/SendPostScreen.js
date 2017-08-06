@@ -47,20 +47,16 @@ class SendPostScreen extends Component {
     const { navigate } = this.props.navigation;
     const onPre = () => {
       console.log("back clicked -->   " ,this.props.pageName);
-      const resetAction = NavigationActions.reset({
-        index: 0,
-        actions: [
-          NavigationActions.navigate({ routeName: 'Home' })
-        ]
-      });
       this.props.dispatch({type: actions.SET_PAGE_NAME, pageName: "Home"});
-      this.props.navigation.dispatch(resetAction);
+      this.props.navigation.goBack();
     };
 
     const sendPostToServer = () => {
+      
       if (this.isSending || this.state.isSending || this.state.isLengthOverLimit) {
         return null;
       } else {
+        
         this.isSending = true;
         this.setState({
           isSending: true
@@ -80,7 +76,12 @@ class SendPostScreen extends Component {
                 });
               }
             }).catch(() => {
-
+              this.isSending = false;
+              this.setState({
+                isSending: false
+              }, () => {
+                
+              });
             });
           })
 
@@ -109,7 +110,7 @@ class SendPostScreen extends Component {
               <Text style={this.state.isLengthOverLimit ? [styles.charRemain, styles.overChar] : [styles.charRemain, { justifyContent: 'center', alignContent: 'center' }]}>
                 {160 - this.state.textLenght}
               </Text>
-              <TouchableWithoutFeedback onPress={this.isSending||this.state.isSending?()=>{}:sendPostToServer}>
+              <TouchableWithoutFeedback onPress={this.state.isSending?()=>{}:sendPostToServer}>
                 <Image source={require('../img/send.png')} style={styles.pic} />
               </TouchableWithoutFeedback>
             </View>

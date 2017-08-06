@@ -18,18 +18,8 @@ export const addBackHandler = (that) => {
       return true;
     }
     if (that.props.pageName == "SendPostScreen") {
-      console.log("asfjnadkfjsadhdfbgihbgkhbd");
-      // that.goBack();
-      const resetAction = NavigationActions.reset({
-        index: 0,
-        actions: [
-          NavigationActions.navigate({ routeName: 'Home' })
-        ]
-      });
-
-      that.props.dispatch({ type: actions.SET_PAGE_NAME, pageName: "Home" })
-      that.props.navigation.dispatch(resetAction);
-
+      that.props.dispatch({type: actions.SET_PAGE_NAME, pageName: "Home"});
+      that.props.navigation.goBack();
       return true;
     }
     // return false;

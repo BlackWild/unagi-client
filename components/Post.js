@@ -17,11 +17,11 @@ class Post extends Component {
 
   
   likeHandler = () => {
-    likePost(this.props.userID, this.props.postID, this, this.props.accessToken).then(()=>console.log("POST LIKED"));
+    likePost(this.props.accessToken, this.props.postID, this).then(()=>console.log("POST LIKED"));
   }
 
   unlikeHandler = () => {
-    unlikePost(this.props.userID, this.props.postID, this, this.props.accessToken).then(()=>console.log("POST UNLIKED"));
+    unlikePost(this.props.accessToken, this.props.postID, this).then(()=>console.log("POST UNLIKED"));
   }
   
   render() {
@@ -77,7 +77,6 @@ class Post extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    userID: state.userID,
     accessToken: state.userInfo.accessToken,
   }
 }
