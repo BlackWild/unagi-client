@@ -30,13 +30,25 @@ class SignUp extends Component {
 
   clickedtime=()=>{
     if(this.state.password!==this.state.repassword) {
-      ToastAndroid.show('password doesn\'t match!', ToastAndroid.SHORT);
+      ToastAndroid.show('رمز عبور تطابق ندارد', ToastAndroid.SHORT);
     } else {
       this.props.dispatch({type: actions.SET_PAGE_NAME, pageName: "Home"});
-      this.props.navigation.navigate('Home');
-      // sendUsernameId(this.state.userName,this.state.password).then(()=>{
-      // 
-      // });
+      try {
+            if (this.state.userName === '' || this.state.password === '')
+                throw "empty";
+            sendUsernameId(this.state.userName,this.state.password,this).then((arg)=>{
+            if(!arg){
+              ToastAndroid.show('نام کاربری تکراری است', ToastAndroid.SHORT);
+            }
+            else{
+              this.props.navigation.navigate('Home');
+            }
+
+      });
+      }
+      catch (err){
+          ToastAndroid.show('نام کاربری یا رمز عبور نمی تواند خالی باشد', ToastAndroid.SHORT);
+      }
 
     }
   }
