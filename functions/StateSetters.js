@@ -47,10 +47,11 @@ export const sendUsernameId = function(username,password,that){
         }).then((resJ) => {
             if(resJ.success) {
               that.props.dispatch({
-                  type: actions.SET_INFO,
-                  userName: username,
-                  passWord: password,
-                  accessToken: resJ.token,
+                type: actions.SET_INFO,
+                userName: username,
+                passWord: password,
+                accessToken:resJ.accessToken,
+                refreshToken: resJ.refreshToken,
               });
           }
             resol(resJ.success);
@@ -64,24 +65,26 @@ export const sendUsernameId = function(username,password,that){
 export const logIn = function(username,password,that){
     return new Promise((resol, rej) => {
         fetch({
-            url: SERVER_DOMIN + '/api/v3/users/logIn?username=' + username + '&password=' + password ,
-            method: 'GET'
+          url: SERVER_DOMIN + '/api/v3/users/logIn?username=' + username + '&password=' + password ,
+          method: 'GET'
         }).then((res) => {
-            return res.json();
+          return res.json();
         }).then((resJ) => {
           if(resJ.success){
-              that.props.dispatch({
-                  type: actions.SET_INFO,
-                  userName:username,
-                  passWord:password,
-                  accessToken:resJ.token});
-
+            that.props.dispatch({
+              type: actions.SET_INFO,
+              userName:username,
+              passWord:password,
+              accessToken:resJ.accessToken,
+              refreshToken: resJ.refreshToken,
+            });
+            
           }
-            resol(resJ.success);
+          resol(resJ.success);
 
         }).catch((error) => {
-            console.log("post fetch error: " + error);
-            rej();
+          console.log("post fetch error: " + error);
+          rej();
         });
     });
 
@@ -92,12 +95,12 @@ export const setPostState = function (id, location, that) {
   return new Promise((resol, rej) => {
 
     // const post = JSON.stringify({
-    //   userID: id,
+    //   accessToken: id,
     //   location:{x: location.x, y:location.y },
     // });
     
     fetch({
-      url: SERVER_DOMIN + '/api/v2/posts/getPosts?userID=' + id + '&location={"x":' + location.x + ',"y":' + location.y + '}',
+      url: SERVER_DOMIN + '/api/v3/posts/getPosts?accessToken=' + id + '&location={"x":' + location.x + ',"y":' + location.y + '}',
       method: 'GET'
     }).then((res) => {
       return res.json();
@@ -129,11 +132,11 @@ export const getMorePost = (id, location, that, qu) => {
     if (!that.state.hasNext) rej();
 
     // const post = JSON.stringify({
-    //   userID: id,
+    //   accessToken: id,
     //   location:{x: location.x, y:location.y },
     // });
     fetch({
-      url: SERVER_DOMIN + '/api/v2/posts/getPosts?userID=' + id + '&location={"x":' + location.x + ',"y":' + location.y + '}&cursor=' + qu,
+      url: SERVER_DOMIN + '/api/v3/posts/getPosts?accessToken=' + id + '&location={"x":' + location.x + ',"y":' + location.y + '}&cursor=' + qu,
       method: 'GET',
     }).then((res) => {
       return res.json();
@@ -162,12 +165,12 @@ export const setHotPostState = function (id, location, that) {
   return new Promise((resol, rej) => {
 
     // const post = JSON.stringify({
-    //   userID: id,
+    //   accessToken: id,
     //   location:{x: location.x, y:location.y },
     // });
     
     fetch({
-      url: SERVER_DOMIN + '/api/v2/posts/getHotPosts?userID=' + id + '&location={"x":' + location.x + ',"y":' + location.y + '}',
+      url: SERVER_DOMIN + '/api/v3/posts/getHotPosts?accessToken=' + id + '&location={"x":' + location.x + ',"y":' + location.y + '}',
       method: 'GET'
     }).then((res) => {
       return res.json();
@@ -199,11 +202,11 @@ export const getMoreHotPost = (id, location, that, qu) => {
     if (!that.state.hasNext) rej();
 
     // const post = JSON.stringify({
-    //   userID: id,
+    //   accessToken: id,
     //   location:{x: location.x, y:location.y },
     // });
     fetch({
-      url: SERVER_DOMIN + '/api/v2/posts/getHotPosts?userID=' + id + '&location={"x":' + location.x + ',"y":' + location.y + '}&cursor=' + qu,
+      url: SERVER_DOMIN + '/api/v3/posts/getHotPosts?accessToken=' + id + '&location={"x":' + location.x + ',"y":' + location.y + '}&cursor=' + qu,
       method: 'GET',
     }).then((res) => {
       return res.json();

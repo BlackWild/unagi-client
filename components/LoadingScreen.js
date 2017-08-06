@@ -69,4 +69,3 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps)(LoadingScreen);
-// export default connect()(LoadingScreen);
