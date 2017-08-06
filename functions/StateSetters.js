@@ -20,7 +20,11 @@ export const sendUsernameId = function(username,password,that){
     return new Promise((resol, rej) => {
         fetch({
             url: SERVER_DOMIN + '/api/v3/users/signUp?username=' + username + '&password=' + password ,
-            method: 'GET'
+            method: 'GET',
+            // headers:{
+            //     username:username,
+            //     password:password,
+            // }
         }).then((res) => {
             return res.json();
         }).then((resJ) => {
@@ -49,11 +53,20 @@ export const tokenProvider=function (that) {
               refreshToken: that.props.refreshToken,
             }
         }).then((res) => {
-            console.log(res);
             return res.json();
         }).then((resJ) => {
-            console.log()
-            console.log(that.props.refreshToken);
+            if(resJ.isRefreshTokenValid) {
+                that.props.dispatch({
+                    type: actions.SET_TOKEN,
+                    accessToken:resJ.accessToken,
+                    refreshToken: resJ.refreshToken,
+                });
+                resol();
+            }
+            else{
+                rej();
+            }
+
         }).catch((error) => {
             console.log("post fetch error: " + error);
             rej();
@@ -65,7 +78,11 @@ export const logIn = function(username,password,that){
     return new Promise((resol, rej) => {
         fetch({
           url: SERVER_DOMIN + '/api/v3/users/logIn?username=' + username + '&password=' + password ,
-          method: 'GET'
+          method: 'GET',
+          // headers:{
+          //     username:username,
+          //     password:password,
+          // }
         }).then((res) => {
           return res.json();
         }).then((resJ) => {

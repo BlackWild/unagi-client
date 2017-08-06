@@ -30,7 +30,7 @@ class LoadingScreen extends Component {
   }
 
   componentWillMount() {
-    
+
     setTimeout(()=>{
       
       this.props.dispatch({type: actions.SET_PAGE_NAME, pageName: "LogIn"});
