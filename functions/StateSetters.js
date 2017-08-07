@@ -19,16 +19,16 @@ export const setLocationState = function (that) {
 export const sendUsernameId = function(username,password,that){
     return new Promise((resol, rej) => {
         fetch({
-            url: SERVER_DOMIN + '/api/v3/users/signUp?username=' + username + '&password=' + password ,
+            url: SERVER_DOMIN + '/api/v3/users/signUp',
             method: 'GET',
-            // headers:{
-            //     username:username,
-            //     password:password,
-            // }
+            headers:{
+                username:username,
+                password:password,
+            }
         }).then((res) => {
             return res.json();
         }).then((resJ) => {
-            if(resJ.success) {
+            if(resJ.isSignedUp) {
               that.props.dispatch({
                 type: actions.SET_INFO,
                 username: username,
@@ -37,7 +37,7 @@ export const sendUsernameId = function(username,password,that){
                 refreshToken: resJ.refreshToken,
               });
           }
-            resol(resJ.success);
+            resol(resJ.isSignedUp);
         }).catch((error) => {
             console.log("post fetch error: " + error);
             rej();
@@ -77,16 +77,16 @@ export const tokenProvider=function (that) {
 export const logIn = function(username,password,that){
     return new Promise((resol, rej) => {
         fetch({
-          url: SERVER_DOMIN + '/api/v3/users/logIn?username=' + username + '&password=' + password ,
+          url: SERVER_DOMIN + '/api/v3/users/logIn',
           method: 'GET',
-          // headers:{
-          //     username:username,
-          //     password:password,
-          // }
+          headers:{
+              username:username,
+              password:password,
+          }
         }).then((res) => {
           return res.json();
         }).then((resJ) => {
-          if(resJ.success){
+          if(resJ.isFound){
             that.props.dispatch({
               type: actions.SET_INFO,
               username:username,
@@ -96,7 +96,7 @@ export const logIn = function(username,password,that){
             });
             
           }
-          resol(resJ.success);
+          resol(resJ.isFound);
 
         }).catch((error) => {
           console.log("post fetch error: " + error);
