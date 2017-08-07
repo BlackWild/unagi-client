@@ -31,6 +31,7 @@ export const sendPost = function (accessToken, location, content, that) {
             console.log("this is our login page");
             this.props.dispatch({type: actions.SET_PAGE_NAME, pageName: "LogIn"})
             this.props.navigation.navigate('LogIn');
+            rejec();
           });
 
       }
