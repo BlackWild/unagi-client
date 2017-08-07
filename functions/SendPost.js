@@ -30,6 +30,7 @@ export const sendPost = function (accessToken, location, content, that) {
             });
           }).catch(() => {
             console.log("this is our login page");
+            rejec();
           });
 
       }
