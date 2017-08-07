@@ -4,7 +4,7 @@ export const registerReducer = (state = {}, action) => {
         case actions.SET_INFO:
             return {
                 username: action.username,
-                passnord: action.password,
+                password: action.password,
                 accessToken: action.accessToken,
                 refreshToken: action.refreshToken,
             };
