@@ -56,6 +56,7 @@ export const tokenProvider=function (that) {
             return res.json();
         }).then((resJ) => {
             if(resJ.isRefreshTokenValid) {
+                console.log("mehdiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
                 that.props.dispatch({
                     type: actions.SET_TOKEN,
                     accessToken:resJ.accessToken,
