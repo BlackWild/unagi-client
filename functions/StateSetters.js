@@ -122,7 +122,17 @@ export const setPostState = function (accessToken, location, that) {
     }).then((resJ) => {
 
       if(!resJ.isAccessTokenValid) {
-        rej();
+          tokenProvider(that).then(() => {
+              console.log("set post again");
+              setPostState(that.props.accessToken,location,that).then(()=>{
+                  // that.props.dispatch({type: actions.ADD_POST_TO_TOP, post: resJ.post});
+                  resol();
+              });
+          }).catch(() => {
+              console.log("this is our login page");
+              this.props.dispatch({type: actions.SET_PAGE_NAME, pageName: "LogIn"})
+              this.props.navigation.navigate('LogIn');
+          });
       } else {
         that.props.dispatch({type: actions.CLONE_WITH_POSTS, newPosts: resJ.results});
         that.setState(() => {
