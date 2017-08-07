@@ -40,12 +40,12 @@ class Unagi extends Component {
       )
     );
 
-    this.store.subscribe(() => {
-      console.log("State Changed");
-      console.log("------------------------------");
-      // console.log(this.store.getState().userInfo);
-      // console.log("------------------------------");
-    });
+    // this.store.subscribe(() => {
+    //   console.log("State Changed");
+    //   console.log("------------------------------");
+    //   // console.log(this.store.getState().userInfo);
+    //   // console.log("------------------------------");
+    // });
 
     const config = {
       storage: AsyncStorage,

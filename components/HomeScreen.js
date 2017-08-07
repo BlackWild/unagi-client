@@ -54,7 +54,7 @@ class HomeScreen extends Component {
   };
 
   onPre = () => {
-    this.props.dispatch({type: actions.SET_PAGE_NAME, pageName: "SendPostScreen"})
+    this.props.dispatch({type: actions.SET_PAGE_NAME, pageName: "SendPostScreen"});
     this.props.navigation.navigate('SendPostScreen');
   };
 

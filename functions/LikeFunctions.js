@@ -22,7 +22,6 @@ export const likePost = (accessToken, pID, that) => {
     }).then((res) => {
       return res.json();
     }).then((resJ) => {
-        console.log(resJ)
       if (!resJ.isAccessTokenValid) {
           tokenProvider(that).then(() => {
               that.props.dispatch({ type: actions.UNLIKE, postID: pID });
