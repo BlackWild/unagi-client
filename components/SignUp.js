@@ -32,7 +32,6 @@ class SignUp extends Component {
     if(this.state.password!==this.state.repassword) {
       ToastAndroid.show('رمز عبور تطابق ندارد', ToastAndroid.SHORT);
     } else {
-      this.props.dispatch({type: actions.SET_PAGE_NAME, pageName: "Home"});
       try {
             if (this.state.username === '' || this.state.password === '')
                 throw "empty";
@@ -41,6 +40,7 @@ class SignUp extends Component {
               ToastAndroid.show('نام کاربری تکراری است', ToastAndroid.SHORT);
             }
             else{
+              this.props.dispatch({type: actions.SET_PAGE_NAME, pageName: "Home"});
               this.props.navigation.navigate('Home');
             }
 
