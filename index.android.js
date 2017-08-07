@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistry , AsyncStorage} from 'react-native';
+import { View, AppRegistry , AsyncStorage} from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import { NavigationActions } from 'react-navigation';
 
@@ -27,6 +27,9 @@ class Unagi extends Component {
   constructor(props) {
     super(props);
     addBackHandler(this);
+    this.state = {
+      run: false
+    }
 
     this.store = createStore(
       mainReducer,
@@ -38,22 +41,27 @@ class Unagi extends Component {
     );
 
     this.store.subscribe(() => {
-      console.log("Current State");
+      console.log("State Changed");
       console.log("------------------------------");
-      // console.log(this.store.getState());
-      console.log("------------------------------");
+      // console.log(this.store.getState().userInfo);
+      // console.log("------------------------------");
     });
 
     const config = {
       storage: AsyncStorage,
     };
-    persistStore(this.store, config);
+    persistStore(this.store, config, ()=>{
+      console.log("Store loaded from local storage");
+      this.setState({
+        run: true
+      });
+    });
   }
 
   render() {
     return (
       <Provider store={this.store}>
-        <App />
+        { this.state.run ? (<App />) : (<View style={{flex:1, backgroundColor: "#8BC34A"}}/>) }
       </Provider>
     );
   }
