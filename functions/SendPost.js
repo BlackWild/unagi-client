@@ -22,6 +22,7 @@ export const sendPost = function (accessToken, location, content, that) {
       return res.json();
     }).then((resJ) => {
       if (!resJ.isAccessTokenValid) {
+        console.log("expire");
           tokenProvider(that).then(() => {
               sendPost(that.props.accessToken,location,content,that).then(()=>{
                 // that.props.dispatch({type: actions.ADD_POST_TO_TOP, post: resJ.post});
@@ -29,8 +30,8 @@ export const sendPost = function (accessToken, location, content, that) {
             });
           }).catch(() => {
             console.log("this is our login page");
-            this.props.dispatch({type: actions.SET_PAGE_NAME, pageName: "LogIn"})
-            this.props.navigation.navigate('LogIn');
+            that.props.dispatch({type: actions.SET_PAGE_NAME, pageName: "LogIn"})
+            that.props.navigation.navigate('LogIn');
             rejec();
           });
 

@@ -56,7 +56,6 @@ export const tokenProvider=function (that) {
             return res.json();
         }).then((resJ) => {
             if(resJ.isRefreshTokenValid) {
-                console.log("mehdiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
                 that.props.dispatch({
                     type: actions.SET_TOKEN,
                     accessToken:resJ.accessToken,
@@ -65,6 +64,7 @@ export const tokenProvider=function (that) {
                 resol();
             }
             else{
+                console.log("valid naboode refresh token");
                 rej();
             }
 
@@ -130,8 +130,8 @@ export const setPostState = function (accessToken, location, that) {
               });
           }).catch(() => {
               console.log("this is our login page");
-              this.props.dispatch({type: actions.SET_PAGE_NAME, pageName: "LogIn"})
-              this.props.navigation.navigate('LogIn');
+              that.props.dispatch({type: actions.SET_PAGE_NAME, pageName: "LogIn"})
+              that.props.navigation.navigate('LogIn');
           });
       } else {
         that.props.dispatch({type: actions.CLONE_WITH_POSTS, newPosts: resJ.results});

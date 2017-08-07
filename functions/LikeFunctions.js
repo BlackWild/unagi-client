@@ -3,6 +3,7 @@ import _ from 'lodash';
 
 import { SERVER_DOMIN } from '../configs/config';
 
+import {tokenProvider} from "./StateSetters"
 import actions from '../reducers/Actions';
 
 export const likePost = (accessToken, pID, that) => {
@@ -21,7 +22,7 @@ export const likePost = (accessToken, pID, that) => {
     }).then((res) => {
       return res.json();
     }).then((resJ) => {
-
+        console.log(resJ)
       if (!resJ.isAccessTokenValid) {
           tokenProvider(that).then(() => {
               that.props.dispatch({ type: actions.UNLIKE, postID: pID });
@@ -30,8 +31,9 @@ export const likePost = (accessToken, pID, that) => {
               });
           }).catch(()=>{
               that.props.dispatch({ type: actions.UNLIKE, postID: pID });
-              this.props.dispatch({type: actions.SET_PAGE_NAME, pageName: "LogIn"})
-              this.props.navigation.navigate('LogIn');
+              that.props.dispatch({type: actions.SET_PAGE_NAME, pageName: "LogIn"})
+              that.props.navigation.navigate('LogIn');
+              rejec();
           })
 
       } else if (!resJ.isLiked) {
@@ -75,9 +77,11 @@ export const unlikePost = (accessToken, pID, that) => {
                   resol();
               });
           }).catch(()=>{
+
               that.props.dispatch({ type: actions.LIKE, postID: pID });
-              this.props.dispatch({type: actions.SET_PAGE_NAME, pageName: "LogIn"})
-              this.props.navigation.navigate('LogIn');
+              that.props.dispatch({type: actions.SET_PAGE_NAME, pageName: "LogIn"})
+              that.props.navigation.navigate('LogIn');
+              rejec();
           })
       } else if (!resJ.isUnliked) {
         that.props.dispatch({ type: actions.LIKE, postID: pID });
