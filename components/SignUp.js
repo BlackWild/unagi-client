@@ -70,15 +70,15 @@ class SignUp extends Component {
         <View style={{flex: 1,flexDirection: 'column',justifyContent:'center',alignItems:'center',alignContent:'center'}}>
           <View style={styles.textIn}>
             <Text>نام کاربری:</Text>
-            <TextInput underlineColorAndroid="transparent" placeholder="ایمیل"style={styles.textarea} onChangeText={(username) => this.setState({username})}/>
+            <TextInput underlineColorAndroid="transparent" placeholder="نام کاربری"style={styles.textarea} onChangeText={(username) => this.setState({username})}/>
           </View>
           <View style={styles.textIn}>
             <Text>رمز عبور:</Text>
-            <TextInput underlineColorAndroid="transparent" placeholder="رمز عبور" style={styles.textarea} onChangeText={(password) => this.setState({password})}/>
+            <TextInput underlineColorAndroid="transparent" placeholder="رمز عبور" style={styles.textarea} secureTextEntry={true} onChangeText={(password) => this.setState({password})}/>
           </View>
           <View style={styles.textIn}>
             <Text >تکرار رمز عبور:</Text>
-            <TextInput underlineColorAndroid="transparent" placeholder="تکرار رمز عبور"style={styles.textarea}  onChangeText={(repassword) => this.setState({repassword})}/>
+            <TextInput underlineColorAndroid="transparent" placeholder="تکرار رمز عبور"style={styles.textarea} secureTextEntry={true}  onChangeText={(repassword) => this.setState({repassword})}/>
           </View>
           <View style={[styles.textIn,{height:40}]}>
             <Text style={{fontFamily: 'Vazir',}}>قوانین تیم5 را می پذیرم.</Text>

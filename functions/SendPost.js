@@ -21,7 +21,6 @@ export const sendPost = function (accessToken, location, content, that) {
     }).then((res) => {
       return res.json();
     }).then((resJ) => {
-
       if (!resJ.isAccessTokenValid) {
           tokenProvider(that).then(() => {
               sendPost(that.props.accessToken,location,content,that).then(()=>{
@@ -30,6 +29,8 @@ export const sendPost = function (accessToken, location, content, that) {
             });
           }).catch(() => {
             console.log("this is our login page");
+            this.props.dispatch({type: actions.SET_PAGE_NAME, pageName: "LogIn"})
+            this.props.navigation.navigate('LogIn');
             rejec();
           });
 
@@ -41,7 +42,6 @@ export const sendPost = function (accessToken, location, content, that) {
           that.props.dispatch({type: actions.ADD_POST_TO_TOP, post: resJ.post});
           resol("ok");
       }
-
     }).catch((error) => {
       rejec();
     });

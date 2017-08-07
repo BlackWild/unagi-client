@@ -47,7 +47,7 @@ export class LogIn extends Component {
         else {
           this.props.dispatch({ type: actions.SET_PAGE_NAME, pageName: "Home" });
           this.props.navigation.navigate('Home');
-
+//
         }
       }).catch(() => {
       });
@@ -72,12 +72,12 @@ export class LogIn extends Component {
         <ScrollView>
           <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center', alignContent: 'center' }}>
             <View style={styles.textIn}>
-              <Text>ایمیل:</Text>
-              <TextInput underlineColorAndroid="transparent" placeholder="ایمیل" style={styles.textarea} onChangeText={(username) => this.setState({ username })} />
+              <Text>نام کاربری:</Text>
+              <TextInput underlineColorAndroid="transparent" placeholder="نام کاربری" style={styles.textarea} onChangeText={(username) => this.setState({ username })} />
             </View>
             <View style={styles.textIn}>
               <Text>رمز عبور:</Text>
-              <TextInput underlineColorAndroid="transparent" placeholder="رمز عبور" style={styles.textarea} onChangeText={(password) => this.setState({ password })} />
+              <TextInput underlineColorAndroid="transparent" placeholder="رمز عبور" style={styles.textarea} secureTextEntry={true} onChangeText={(password) => this.setState({ password })} />
             </View>
             <TouchableWithoutFeedback onPress={this.logInClickHandler} >
               <View style={styles.button}>

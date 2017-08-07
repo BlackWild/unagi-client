@@ -23,8 +23,17 @@ export const likePost = (accessToken, pID, that) => {
     }).then((resJ) => {
 
       if (!resJ.isAccessTokenValid) {
-        that.props.dispatch({ type: actions.UNLIKE, postID: pID });
-        rejec();
+          tokenProvider(that).then(() => {
+              that.props.dispatch({ type: actions.UNLIKE, postID: pID });
+              likePost(that.props.accessToken, pID, that).then(() => {
+                  resol();
+              });
+          }).catch(()=>{
+              that.props.dispatch({ type: actions.UNLIKE, postID: pID });
+              this.props.dispatch({type: actions.SET_PAGE_NAME, pageName: "LogIn"})
+              this.props.navigation.navigate('LogIn');
+          })
+
       } else if (!resJ.isLiked) {
         that.props.dispatch({ type: actions.UNLIKE, postID: pID });
         rejec();
@@ -60,8 +69,16 @@ export const unlikePost = (accessToken, pID, that) => {
     }).then((resJ) => {
 
       if (!resJ.isAccessTokenValid) {
-        that.props.dispatch({ type: actions.LIKE, postID: pID });
-        rejec();
+          tokenProvider(that).then(() => {
+              that.props.dispatch({ type: actions.LIKE, postID: pID });
+              unlikePost(that.props.accessToken, pID, that).then(() => {
+                  resol();
+              });
+          }).catch(()=>{
+              that.props.dispatch({ type: actions.LIKE, postID: pID });
+              this.props.dispatch({type: actions.SET_PAGE_NAME, pageName: "LogIn"})
+              this.props.navigation.navigate('LogIn');
+          })
       } else if (!resJ.isUnliked) {
         that.props.dispatch({ type: actions.LIKE, postID: pID });
         rejec();
