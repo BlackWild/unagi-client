@@ -15,7 +15,7 @@ const initialState ={
     date:new Date("2017-08-06T13:05:33.340Z"),
     timeOfLastHotScoreUpdate:new Date("2017-08-06T13:05:33.340Z"),
     hotScore:6,
-    like:5,
+    likes:5,
     content:'post Content',
     }
   ],
@@ -29,14 +29,17 @@ const initialState ={
     date:new Date("2017-08-06T13:05:33.340Z"),
     timeOfLastHotScoreUpdate:new Date("2017-08-06T13:05:33.340Z"),
     hotScore:6,
-    like:5,
+    likes:5,
     content:'post Content 2',
   }],
   pageName: 'pageNameReducer',
   userInfo: {
-    username:'name',
-    password:'pass',
-    accessToken:'accessToken',
+    // username:'name',
+    // password:'pass',
+    // accessToken:'accessToken',
+    username:'fackUser',
+    password:'fackUserPass',
+    accessToken:'fackUserAccessToken',
   },
 };
 
@@ -70,7 +73,7 @@ const newPostAction={
       date:new Date("2017-08-06T13:05:33.340Z"),
       timeOfLastHotScoreUpdate:new Date("2017-08-06T13:05:33.340Z"),
       hotScore:6,
-      like:5,
+      likes:5,
       content:'post Content 2',
     }],
 }
@@ -78,22 +81,11 @@ const newPostAction={
 const likePostAction={
   type: actions.LIKE,
   postID:1,
-  // post:{
-    // like:5,
-  // }
-  // post:{
-  //     _id:1,
-  //     username:'user',
-  //     location:{
-  //       x:37,
-  //       y:40,
-  //   },
-  //   date:new Date("2017-08-06T13:05:33.340Z"),
-  //   timeOfLastHotScoreUpdate:new Date("2017-08-06T13:05:33.340Z"),
-  //   hotScore:6,
-  //   like:5,
-  //   content:'post Content',
-  //   }
+}
+
+const unLikePostAction={
+  type: actions.UNLIKE,
+  postID:1,
 }
 
 describe('reducers',()=>{
@@ -111,7 +103,7 @@ describe('reducers',()=>{
           date:new Date("2017-08-06T13:05:33.340Z"),
           timeOfLastHotScoreUpdate:new Date("2017-08-06T13:05:33.340Z"),
           hotScore:6,
-          like:5,
+          likes:5,
           content:'post Content',
           },{
             _id:2,
@@ -123,7 +115,7 @@ describe('reducers',()=>{
           date:new Date("2017-08-06T13:05:33.340Z"),
           timeOfLastHotScoreUpdate:new Date("2017-08-06T13:05:33.340Z"),
           hotScore:6,
-          like:5,
+          likes:5,
           content:'post Content 2',
           }]
         );
@@ -142,13 +134,64 @@ describe('reducers',()=>{
           date:new Date("2017-08-06T13:05:33.340Z"),
           timeOfLastHotScoreUpdate:new Date("2017-08-06T13:05:33.340Z"),
           hotScore:6,
-          like:6,
+          likes:6,
+          isLiked:true,              
           content:'post Content',
-
         });
       })
     })
     
+    describe('unlike post',()=>{
+      it('should unlike post',()=>{
+        expect(mainReducer(initialState,unLikePostAction).posts[0]).toEqual({
+          _id:1,
+          username:'user',
+          location:{
+            x:37,
+            y:40,
+          },
+          date:new Date("2017-08-06T13:05:33.340Z"),
+          timeOfLastHotScoreUpdate:new Date("2017-08-06T13:05:33.340Z"),
+          hotScore:6,
+          likes:4,
+          isLiked:false,              
+          content:'post Content',
+        });
+      })
+    })
+
+
+  })
+});
+
+const setInfo={
+  type:actions.SET_INFO,
+  userInfo: {
+    username:'fackUser',
+    password:'fackUserPass',
+    accessToken:'fackUserAccessToken',
+  },
+}
+
+describe('reducers',()=>{
+  describe('register',()=>{
+
+    describe('set info',()=>{
+      it('should set user info',()=>{
+        expect(mainReducer(initialState,setInfo).userInfo).toEqual({
+          username:'fackUser',
+          password:'fackUserPass',
+          accessToken:'fackUserAccessToken',
+        })
+      })
+    })
+    // describe('set token',()=>{
+    //   it('should set user token',()=>{
+        
+    //   })
+
+  // })
+
 
   })
 });
