@@ -11,7 +11,8 @@ import {
   ScrollView,
   ToastAndroid,
 } from 'react-native';
-import {styles} from '../styles/SignUpStyles';
+// import {styles} from '../styles/SignUpStyles';
+import {styles} from '../styles/formStyles';
 import {sendUsernameId} from '../functions/StateSetters';
 import { connect } from 'react-redux';
 import actions from '../reducers/Actions';
@@ -25,6 +26,9 @@ class SignUp extends Component {
       username:'',
       password:'',
       repassword:'',
+      passDisply:true,
+      rePassDisply:true,
+      accept:false,
     }
   }
 
@@ -58,40 +62,87 @@ class SignUp extends Component {
       header: null,
     }
   };
-
+  showPass = () => {
+    this.setState({passDisply:false,});
+  }
+  hidePass = () => {
+    this.setState({passDisply:true,});
+  }
+  showRePass = () => {
+    this.setState({rePassDisply:false,});
+  }
+  hideRePass = () => {
+    this.setState({rePassDisply:true,});
+  }
+  acceptLow=()=>{
+    if(! this.state.accept)
+      this.setState({accept:true},);
+    else this.setState({accept:false},);
+  }
+  
   render() {
     return (
-      <View style={{flex:1}}>
+      <View style={{flex:1,}}>
         <StatusBar backgroundColor='#689F38' barStyle="light-content"/>
         <View style= {styles.headerBox}>
-          <Text style={{fontSize:30,color:'#FFFFFF',textAlign:'left',fontFamily: 'Vazir'}}>اوناگی</Text>
+          <Text style={{fontSize:30,color:'#FFFFFF',textAlign:'left',fontFamily: 'Vazir',marginLeft:13}}>اوناگی</Text>
         </View>
-        <ScrollView>
+        {/* <View/> */}
+        <ScrollView style={{alignContent:'center'}}>
         <View style={{flex: 1,flexDirection: 'column',justifyContent:'center',alignItems:'center',alignContent:'center'}}>
+          <View>
+            <Image source={require('../img/logo.png')} style={styles.picUp}/>  
+          </View>  
           <View style={styles.textIn}>
-            <Text>نام کاربری:</Text>
-            <TextInput underlineColorAndroid="transparent" placeholder="ایمیل"style={styles.textarea} onChangeText={(username) => this.setState({username})}/>
+            <Text style={styles.fieldName} >نام کاربری:</Text>
+            <View style={styles.textAreaView}>
+              <TextInput underlineColorAndroid="transparent" 
+                placeholder="Username"
+                style={styles.textarea} 
+                onChangeText={(username) => this.setState({username})}/>
+            </View>
           </View>
           <View style={styles.textIn}>
-            <Text>رمز عبور:</Text>
-            <TextInput underlineColorAndroid="transparent" placeholder="رمز عبور" style={styles.textarea} onChangeText={(password) => this.setState({password})}/>
+            <Text style={styles.fieldName} >رمز عبور:</Text>
+            <View style={styles.textAreaView}>
+              <TextInput secureTextEntry={this.state.passDisply} underlineColorAndroid="transparent" 
+                placeholder="Password" style={styles.textarea} 
+                onChangeText={(password) => this.setState({password})}/>
+              <TouchableWithoutFeedback 
+                onPressIn={this.showPass} onPressOut={this.hidePass}>
+                <Image source={require('../img/eye.png')} 
+                  style={{height:25,width:25,marginHorizontal:5}}
+                />  
+              </TouchableWithoutFeedback>  
+            </View>
           </View>
           <View style={styles.textIn}>
-            <Text >تکرار رمز عبور:</Text>
-            <TextInput underlineColorAndroid="transparent" placeholder="تکرار رمز عبور"style={styles.textarea}  onChangeText={(repassword) => this.setState({repassword})}/>
+            <Text style={styles.fieldName} >تکرار رمز عبور:</Text>
+            <View style={styles.textAreaView}>
+              <TextInput secureTextEntry={this.state.rePassDisply} underlineColorAndroid="transparent" placeholder="ReType Password"style={styles.textarea}  onChangeText={(repassword) => this.setState({repassword})}/>
+              <TouchableWithoutFeedback onPressIn={this.showRePass} onPressOut={this.hideRePass}>
+                  <Image source={require('../img/eye.png')} style={{height:25,width:25,marginHorizontal:5}}/>  
+              </TouchableWithoutFeedback>
+            </View>
           </View>
-          <View style={[styles.textIn,{height:40}]}>
+          <View style={{flexDirection:'row',height:30,margin:5,alignItems:'center'}}>
             <Text style={{fontFamily: 'Vazir',}}>قوانین تیم5 را می پذیرم.</Text>
+            <TouchableWithoutFeedback onPress={this.acceptLow} >
+              <View style={this.state.accept
+                      ?[styles.checkBox,{backgroundColor:'#757575'}] 
+                      :styles.checkBox}  
+              />
+            </TouchableWithoutFeedback>
           </View>
           <TouchableWithoutFeedback onPress={this.clickedtime}>
-            <View style={styles.button}>
+            <View style={[styles.button,{marginBottom:5,marginTop:5}]}>
               <Text style={[styles.buttonText,{textAlign:'center',fontFamily: 'Vazir'}]} >ساخت حساب کاربری</Text>
             </View>
           </TouchableWithoutFeedback>
         </View>
         </ScrollView>
+        {/* <View/> */}
       </View>
-
 
     );
   }
