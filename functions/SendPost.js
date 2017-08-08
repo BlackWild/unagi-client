@@ -6,7 +6,7 @@ import {tokenProvider} from '../functions/StateSetters';
 
 export const sendPost = function (accessToken, location, content, that) {
   return new Promise((resol, rejec) => {
-    fetch(SERVER_DOMIN + '/api/v3/posts/addPost', {
+    fetch(SERVER_DOMIN + '/api/v4/posts/addPost', {
       headers: {
         'Content-Type': 'application/json',
         accessToken

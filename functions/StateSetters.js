@@ -19,7 +19,7 @@ export const setLocationState = function (that) {
 export const sendUsernameId = function(username,password,that){
     return new Promise((resol, rej) => {
         fetch({
-            url: SERVER_DOMIN + '/api/v3/users/signUp',
+            url: SERVER_DOMIN + '/api/v4/users/signUp',
             method: 'GET',
             headers:{
                 username:username,
@@ -47,7 +47,7 @@ export const sendUsernameId = function(username,password,that){
 export const tokenProvider=function (that) {
     return new Promise((resol, rej) => {
         fetch({
-            url: SERVER_DOMIN + '/api/v3/users/tokenProvider',
+            url: SERVER_DOMIN + '/api/v4/users/tokenProvider',
             method: 'GET',
             headers:{
               refreshToken: that.props.refreshToken,
@@ -78,7 +78,7 @@ export const tokenProvider=function (that) {
 export const logIn = function(username,password,that){
     return new Promise((resol, rej) => {
         fetch({
-          url: SERVER_DOMIN + '/api/v3/users/logIn',
+          url: SERVER_DOMIN + '/api/v4/users/logIn',
           method: 'GET',
           headers:{
               username:username,
@@ -112,7 +112,7 @@ export const setPostState = function (accessToken, location, that) {
   return new Promise((resol, rej) => {
     
     fetch({
-      url: SERVER_DOMIN + '/api/v3/posts/getPosts?location='+JSON.stringify({x:location.x, y:location.y}),
+      url: SERVER_DOMIN + '/api/v4/posts/getPosts?location='+JSON.stringify({x:location.x, y:location.y}),
       headers: {
         accessToken
       },
@@ -155,7 +155,7 @@ export const getMorePost = (accessToken, location, that, qu) => {
   return new Promise((resol, rej) => {
 
     fetch({
-      url: SERVER_DOMIN + '/api/v3/posts/getPosts?location='+JSON.stringify({x:location.x, y:location.y})
+      url: SERVER_DOMIN + '/api/v4/posts/getPosts?location='+JSON.stringify({x:location.x, y:location.y})
                                                 +'&cursor=' + qu,
       headers: {
         accessToken
@@ -188,7 +188,7 @@ export const setHotPostState = (accessToken, location, that) => {
   return new Promise((resol, rej) => {
 
     fetch({
-      url: SERVER_DOMIN + '/api/v3/posts/getHotPosts?location='+JSON.stringify({x:location.x, y:location.y}),
+      url: SERVER_DOMIN + '/api/v4/posts/getHotPosts?location='+JSON.stringify({x:location.x, y:location.y}),
       headers: {
         accessToken
       },
@@ -221,7 +221,7 @@ export const getMoreHotPost = (accessToken, location, that, qu) => {
   return new Promise((resol, rej) => {
 
     fetch({
-      url: SERVER_DOMIN + '/api/v3/posts/getHotPosts?location='+JSON.stringify({x:location.x, y:location.y})
+      url: SERVER_DOMIN + '/api/v4/posts/getHotPosts?location='+JSON.stringify({x:location.x, y:location.y})
                                                 +'&cursor=' + qu,
       headers: {
         accessToken

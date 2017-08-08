@@ -10,7 +10,7 @@ export const likePost = (accessToken, pID, that) => {
 
   return new Promise((resol, rejec) => {
     that.props.dispatch({ type: actions.LIKE, postID: pID })
-    fetch(SERVER_DOMIN + '/api/v3/posts/likePost',{
+    fetch(SERVER_DOMIN + '/api/v4/posts/likePost',{
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -56,7 +56,7 @@ export const likePost = (accessToken, pID, that) => {
 export const unlikePost = (accessToken, pID, that) => {
   that.props.dispatch({ type: actions.UNLIKE, postID: pID });
   return new Promise((resol, rejec) => {
-    fetch(SERVER_DOMIN + '/api/v3/posts/unlikePost', {
+    fetch(SERVER_DOMIN + '/api/v4/posts/unlikePost', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
