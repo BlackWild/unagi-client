@@ -24,10 +24,12 @@ class Post extends Component {
     unlikePost(this.props.accessToken, this.props.postID, this).then(()=>console.log("POST UNLIKED"));
   }
   replyHandler = () => {
-    
+    this.props.dispatch({type: actions.SET_PAGE_NAME, pageName: "ReplayScreen"});
+    this.props.navigation.navigate('ReplayScreen');
   }
   postTouchHandler = () => {
-    
+    this.props.dispatch({type: actions.SET_PAGE_NAME, pageName: "PostScreen"});
+    this.props.navigation.navigate('PostScreen');
   }
   
   render() {

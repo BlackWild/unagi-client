@@ -25,6 +25,16 @@ export const addBackHandler = (that) => {
       that.props.navigation.goBack();
       return true;
     }
+    if (that.props.pageName == "PostScreen") {
+      that.props.dispatch({type: actions.SET_PAGE_NAME, pageName: "Home"});
+      that.props.navigation.navigate("Home");
+      return true;
+    }
+    if (that.props.pageName == "ReplayScreen") {
+      that.props.dispatch({type: actions.SET_PAGE_NAME, pageName: "PostScreen"});
+      that.props.navigation.navigate("PostScreen");
+      return true;
+    }
     // return false;
   });
 }
