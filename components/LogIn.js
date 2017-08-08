@@ -11,7 +11,8 @@ import {
   ScrollView,
   ToastAndroid,
 } from 'react-native';
-import { styles } from '../styles/LogInStyles';
+// import { styles } from '../styles/LogInStyles';
+import { styles } from '../styles/formStyles';
 
 import { connect } from 'react-redux';
 import actions from '../reducers/Actions';
@@ -24,6 +25,9 @@ export class LogIn extends Component {
   constructor(props) {
     super(props);
     addBackHandler(this);
+    this.state={
+      passDisply:true,
+    }
   };
 
   static navigationOptions = ({ navigation }) => {
@@ -62,22 +66,42 @@ export class LogIn extends Component {
     this.props.navigation.navigate('SignUp');
   }
 
+  showPass = () => {
+    this.setState({passDisply:false,});
+  }
+  hidePass = () => {
+    this.setState({passDisply:true,});
+  }
   render() {
     return (
       <View style={{ flex: 1 }}>
         <StatusBar backgroundColor='#689F38' barStyle="light-content" />
         <View style={styles.headerBox}>
-          <Text style={{ fontSize: 30, color: '#FFFFFF', textAlign: 'left', fontFamily: 'Vazir', }}>اوناگی</Text>
+          <Text style={{ fontSize: 30, color: '#FFFFFF', textAlign: 'left', fontFamily: 'Vazir', marginLeft:13}}>اوناگی</Text>
         </View>
         <ScrollView>
           <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center', alignContent: 'center' }}>
+            <View>
+              <Image source={require('../img/logo.png')} style={styles.picIn}/>  
+            </View>  
             <View style={styles.textIn}>
-              <Text>نام کاربری:</Text>
-              <TextInput underlineColorAndroid="transparent" placeholder="نام کاربری" style={styles.textarea} onChangeText={(username) => this.setState({ username })} />
+              <Text style={styles.fieldName} >نام کاربری:</Text>
+              <View style={[{flexDirection:'row',alignItems:'center'},styles.textAreaView]}> 
+                <TextInput underlineColorAndroid="transparent" placeholder="Username" 
+                  style={styles.textarea} 
+                  onChangeText={(username) => this.setState({ username })} />
+              </View>
             </View>
-            <View style={styles.textIn}>
-              <Text>رمز عبور:</Text>
-              <TextInput underlineColorAndroid="transparent" placeholder="رمز عبور" style={styles.textarea} secureTextEntry={true} onChangeText={(password) => this.setState({ password })} />
+            <View style={styles.textIn}> 
+              <Text style={styles.fieldName}>رمز عبور:</Text>
+              <View style={[{flexDirection:'row',alignItems:'center'},styles.textAreaView]}> 
+                <TextInput secureTextEntry={this.state.passDisply} underlineColorAndroid="transparent" placeholder="Password" 
+                  style={[styles.textarea,]} onChangeText={(password) => this.setState({ password })} 
+                />
+                <TouchableWithoutFeedback onPressIn={this.showPass} onPressOut={this.hidePass}>
+                  <Image source={require('../img/eye.png')} style={{height:25,width:25,marginHorizontal:5}}/>  
+                </TouchableWithoutFeedback>
+              </View> 
             </View>
             <TouchableWithoutFeedback onPress={this.logInClickHandler} >
               <View style={styles.button}>
