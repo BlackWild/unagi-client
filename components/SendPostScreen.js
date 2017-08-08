@@ -43,54 +43,51 @@ class SendPostScreen extends Component {
     }
   };
 
-  render() {
-
-    const { navigate } = this.props.navigation;
-    const onPre = () => {
-      console.log("back clicked -->   " ,this.props.pageName);
-      this.props.dispatch({type: actions.SET_PAGE_NAME, pageName: "Home"});
-      this.props.navigation.goBack();
-    };
-
-    const sendPostToServer = () => {
+  sendPostToServer = () => {
       
-      if (this.isSending || this.state.isSending || this.state.isLengthOverLimit) {
-        return null;
-      } else {
-        
-        this.isSending = true;
-        this.setState({
-          isSending: true
-        }, () => {
-          async.parallel([
-            (callback) => {
-              setLocationState(this).then(() => callback()).catch(() => { });
+    if (this.isSending || this.state.isSending || this.state.isLengthOverLimit) {
+      return null;
+    } else {
+      
+      this.isSending = true;
+      this.setState({
+        isSending: true
+      }, () => {
+        async.parallel([
+          (callback) => {
+            setLocationState(this).then(() => callback()).catch(() => { });
+          }
+        ], (err) => {
+          sendPost(this.props.accessToken, this.props.location, this.state.text, this).then((res) => {
+            if (res === "ok") {
+              // this.setState({
+              //   isSending: false
+              // }, () => {
+              //   this.isSending = false;
+              //   onPre();
+              // });
+              onPre();
             }
-          ], (err) => {
-            sendPost(this.props.accessToken, this.props.location, this.state.text, this).then((res) => {
-              if (res === "ok") {
-                // this.setState({
-                //   isSending: false
-                // }, () => {
-                //   this.isSending = false;
-                //   onPre();
-                // });
-                onPre();
-              }
-            }).catch(() => {
-              this.setState({
-                isSending: false
-              }, () => {
-                this.isSending = false;
-              });
+          }).catch(() => {
+            this.setState({
+              isSending: false
+            }, () => {
+              this.isSending = false;
             });
-          })
+          });
+        })
 
-        });
+      });
 
-      }
-    };
+    }
+  };
+  backTouchHandler = () => {
+    console.log("back clicked -->   " ,this.props.pageName);
+    this.props.dispatch({type: actions.SET_PAGE_NAME, pageName: "Home"});
+    this.props.navigation.goBack();
+  };
 
+  render() {
 
     return (
       <View style={{ flex: 1 }}>
@@ -99,7 +96,7 @@ class SendPostScreen extends Component {
 
           <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between', alignContent: 'center' }}>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-              <TouchableWithoutFeedback onPress={onPre}>
+              <TouchableWithoutFeedback onPress={this.backTouchHandler}>
                 <Image source={require('../img/back.png')} style={styles.pic} />
               </TouchableWithoutFeedback>
               <Text style={styles.post}>
@@ -111,7 +108,7 @@ class SendPostScreen extends Component {
               <Text style={this.state.isLengthOverLimit ? [styles.charRemain, styles.overChar] : [styles.charRemain, { justifyContent: 'center', alignContent: 'center' }]}>
                 {160 - this.state.textLenght}
               </Text>
-              <TouchableWithoutFeedback onPress={this.state.isSending?()=>{}:sendPostToServer}>
+              <TouchableWithoutFeedback onPress={this.state.isSending?()=>{}:this.sendPostToServer}>
                 <Image source={require('../img/send.png')} style={styles.pic} />
               </TouchableWithoutFeedback>
             </View>
