@@ -6,7 +6,9 @@ export const addBackHandler = (that) => {
 
   BackHandler.addEventListener('hardwareBackPress', () => {
     console.log("back clicked -->   ", that.props.pageName);
+
     if (that.props.pageName === 'LogIn') {
+      BackHandler.exitApp();
       return true;
     }
     if (that.props.pageName === "SignUp"){
@@ -15,6 +17,7 @@ export const addBackHandler = (that) => {
       return true;
     }
     if (that.props.pageName === 'Home') {
+      BackHandler.exitApp();
       return true;
     }
     if (that.props.pageName == "SendPostScreen") {
