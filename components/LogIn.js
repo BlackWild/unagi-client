@@ -51,7 +51,7 @@ export class LogIn extends Component {
         else {
           this.props.dispatch({ type: actions.SET_PAGE_NAME, pageName: "Home" });
           this.props.navigation.navigate('Home');
-
+//
         }
       }).catch(() => {
       });
@@ -85,6 +85,7 @@ export class LogIn extends Component {
               <Image source={require('../img/logo.png')} style={styles.picIn}/>  
             </View>  
             <View style={styles.textIn}>
+<<<<<<< HEAD
               <Text style={styles.fieldName} >نام کاربری:</Text>
               <View style={[{flexDirection:'row',alignItems:'center'},styles.textAreaView]}> 
                 <TextInput underlineColorAndroid="transparent" placeholder="Username" 
@@ -102,6 +103,14 @@ export class LogIn extends Component {
                   <Image source={require('../img/eye.png')} style={{height:25,width:25,marginHorizontal:5}}/>  
                 </TouchableWithoutFeedback>
               </View> 
+=======
+              <Text>نام کاربری:</Text>
+              <TextInput underlineColorAndroid="transparent" placeholder="نام کاربری" style={styles.textarea} onChangeText={(username) => this.setState({ username })} />
+            </View>
+            <View style={styles.textIn}>
+              <Text>رمز عبور:</Text>
+              <TextInput underlineColorAndroid="transparent" placeholder="رمز عبور" style={styles.textarea} secureTextEntry={true} onChangeText={(password) => this.setState({ password })} />
+>>>>>>> 7766a714051b2f5214e955fb73f540d9f90e1a2a
             </View>
             <TouchableWithoutFeedback onPress={this.logInClickHandler} >
               <View style={styles.button}>

@@ -54,7 +54,7 @@ class HomeScreen extends Component {
   };
 
   onPre = () => {
-    this.props.dispatch({type: actions.SET_PAGE_NAME, pageName: "SendPostScreen"})
+    this.props.dispatch({type: actions.SET_PAGE_NAME, pageName: "SendPostScreen"});
     this.props.navigation.navigate('SendPostScreen');
   };
 
@@ -93,7 +93,7 @@ class HomeScreen extends Component {
                 data={this.props.posts}
                 keyExtractor={(item, index) => item._id}
                 renderItem={({ item }) => (
-                  <Post likes={item.likes} isLiked={item.isLiked} content={item.content} date={item.date} postID={item._id} username={item.username} posterID={item.userID} />
+                  <Post likes={item.likes} isLiked={item.isLiked} content={item.content} date={item.date} postID={item._id} username={item.username} posterID={item.userID} navigation={this.props.navigation} />
                 )}
                 onEndReached={this.onEndHandler}
                 onEndReachedThreshold={2}

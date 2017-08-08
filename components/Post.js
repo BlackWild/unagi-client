@@ -78,6 +78,8 @@ class Post extends Component {
 const mapStateToProps = (state) => {
   return {
     accessToken: state.userInfo.accessToken,
+    refreshToken: state.userInfo.refreshToken,
+
   }
 }
 

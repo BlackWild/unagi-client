@@ -18,6 +18,7 @@ import { setIDState, setLocationState } from '../functions/StateSetters';
 import { sendPost } from '../functions/SendPost';
 
 import { NavigationActions } from 'react-navigation';
+import {addBackHandler} from '../functions/BackHandlerAdder';
 
 import { connect } from 'react-redux';
 
@@ -25,6 +26,7 @@ class SendPostScreen extends Component {
 
   constructor(props) {
     super(props);
+    addBackHandler(this);
 
     this.isSending = false;
     this.state = {
