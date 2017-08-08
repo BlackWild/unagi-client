@@ -38,7 +38,6 @@ class SendPostScreen extends Component {
 
 
   static navigationOptions = ({ navigation }) => {
-
     return {
       header: null,
     }
@@ -70,19 +69,19 @@ class SendPostScreen extends Component {
           ], (err) => {
             sendPost(this.props.accessToken, this.props.location, this.state.text, this).then((res) => {
               if (res === "ok") {
-                this.isSending = false;
-                this.setState({
-                  isSending: false
-                }, () => {
-                  onPre();
-                });
+                // this.setState({
+                //   isSending: false
+                // }, () => {
+                //   this.isSending = false;
+                //   onPre();
+                // });
+                onPre();
               }
             }).catch(() => {
-              this.isSending = false;
               this.setState({
                 isSending: false
               }, () => {
-                
+                this.isSending = false;
               });
             });
           })
