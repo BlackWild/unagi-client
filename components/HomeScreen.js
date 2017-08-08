@@ -60,7 +60,9 @@ class HomeScreen extends Component {
 
   onEndHandler = () => {
     console.log("end reached");
-    getMorePost(this.props.accessToken, this.props.location, this, this.state.nextStr).then(() => console.log("more good")).catch(() => console.log("no more post"));
+    if(this.state.hasNext) {
+      getMorePost(this.props.accessToken, this.props.location, this, this.state.nextStr).then(() => console.log("more good")).catch(() => console.log("no more post"));
+    }
   };
   onRefreshHandler = () => {
     console.log("refreshing");
