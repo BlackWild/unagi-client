@@ -94,7 +94,6 @@ class SignUp extends Component {
             <Image source={require('../img/logo.png')} style={styles.picUp}/>  
           </View>  
           <View style={styles.textIn}>
-<<<<<<< HEAD
             <Text style={styles.fieldName} >نام کاربری:</Text>
             <View style={styles.textAreaView}>
               <TextInput underlineColorAndroid="transparent" 
@@ -120,23 +119,12 @@ class SignUp extends Component {
           <View style={styles.textIn}>
             <Text style={styles.fieldName} >تکرار رمز عبور:</Text>
             <View style={styles.textAreaView}>
-              <TextInput secureTextEntry={this.state.rePassDisply} underlineColorAndroid="transparent" placeholder="ReType Password"style={styles.textarea}  onChangeText={(repassword) => this.setState({repassword})}/>
+              <TextInput secureTextEntry={this.state.rePassDisply} underlineColorAndroid="transparent" placeholder="ReType Password"
+                style={styles.textarea}  onChangeText={(repassword) => this.setState({repassword})}/>
               <TouchableWithoutFeedback onPressIn={this.showRePass} onPressOut={this.hideRePass}>
                   <Image source={require('../img/eye.png')} style={{height:25,width:25,marginHorizontal:5}}/>  
               </TouchableWithoutFeedback>
             </View>
-=======
-            <Text>نام کاربری:</Text>
-            <TextInput underlineColorAndroid="transparent" placeholder="نام کاربری"style={styles.textarea} onChangeText={(username) => this.setState({username})}/>
-          </View>
-          <View style={styles.textIn}>
-            <Text>رمز عبور:</Text>
-            <TextInput underlineColorAndroid="transparent" placeholder="رمز عبور" style={styles.textarea} secureTextEntry={true} onChangeText={(password) => this.setState({password})}/>
-          </View>
-          <View style={styles.textIn}>
-            <Text >تکرار رمز عبور:</Text>
-            <TextInput underlineColorAndroid="transparent" placeholder="تکرار رمز عبور"style={styles.textarea} secureTextEntry={true}  onChangeText={(repassword) => this.setState({repassword})}/>
->>>>>>> 7766a714051b2f5214e955fb73f540d9f90e1a2a
           </View>
           <View style={{flexDirection:'row',height:30,margin:5,alignItems:'center'}}>
             <Text style={{fontFamily: 'Vazir',}}>قوانین تیم5 را می پذیرم.</Text>
