@@ -132,6 +132,7 @@ export const setPostState = function (accessToken, location, that) {
               console.log("this is our login page");
               that.props.dispatch({type: actions.SET_PAGE_NAME, pageName: "LogIn"})
               that.props.navigation.navigate('LogIn');
+              rej();
           });
       } else {
         that.props.dispatch({type: actions.CLONE_WITH_POSTS, newPosts: resJ.results});
@@ -166,7 +167,17 @@ export const getMorePost = (accessToken, location, that, qu) => {
     }).then((resJ) => {
 
       if(!resJ.isAccessTokenValid) {
-        rej();
+          tokenProvider(that).then(() => {
+              console.log("set post again");
+              getMorePost(that.props.accessToken,location,that,qu).then(()=>{
+                  resol();
+              });
+          }).catch(() => {
+              console.log("this is our login page");
+              that.props.dispatch({type: actions.SET_PAGE_NAME, pageName: "LogIn"})
+              that.props.navigation.navigate('LogIn');
+              rej();
+          });
       } else {
         that.props.dispatch({type: actions.ADD_POSTS, newPosts: resJ.results});
         that.setState(() => {
@@ -198,7 +209,17 @@ export const setHotPostState = (accessToken, location, that) => {
     }).then((resJ) => {
 
       if(!resJ.isAccessTokenValid) {
-        rej();
+          tokenProvider(that).then(() => {
+              console.log("set post again");
+              setHotPostState(that.props.accessToken,location,that).then(()=>{
+                  resol();
+              });
+          }).catch(() => {
+              console.log("this is our login page");
+              that.props.dispatch({type: actions.SET_PAGE_NAME, pageName: "LogIn"})
+              that.props.navigation.navigate('LogIn');
+              rej();
+          });
       } else {
         that.props.dispatch({type: actions.CLONE_WITH_HOTPOSTS, newPosts: resJ.results});
         that.setState(() => {
@@ -232,7 +253,17 @@ export const getMoreHotPost = (accessToken, location, that, qu) => {
     }).then((resJ) => {
 
       if(!resJ.isAccessTokenValid) {
-        rej();
+          tokenProvider(that).then(() => {
+              console.log("set post again");
+              getMoreHotPost(that.props.accessToken,location,that,qu).then(()=>{
+                  resol();
+              });
+          }).catch(() => {
+              console.log("this is our login page");
+              that.props.dispatch({type: actions.SET_PAGE_NAME, pageName: "LogIn"})
+              that.props.navigation.navigate('LogIn');
+              rej();
+          });
       } else {
         const filteredPosts=resJ.results.filter((newItem)=>{
           return !that.props.hotPosts.find((item)=>{return item._id===newItem._id})
