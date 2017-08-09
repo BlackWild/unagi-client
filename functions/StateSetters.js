@@ -1,5 +1,4 @@
 import { AsyncStorage } from 'react-native';
-import uniqueId from 'react-native-unique-id';
 
 import actions from '../reducers/Actions';
 
