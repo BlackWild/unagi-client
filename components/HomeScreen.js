@@ -4,7 +4,7 @@ import {
   Text,
   View,
   FlatList,
-  BackHandler,
+  TouchableWithoutFeedback,
 } from 'react-native';
 import ActionButton from 'react-native-action-button';
 
@@ -20,16 +20,23 @@ import { connect } from 'react-redux';
 import actions from '../reducers/Actions'
 import {addBackHandler} from '../functions/BackHandlerAdder';
 
+import Icon from 'react-native-vector-icons/Entypo';
 
 class HomeScreen extends Component {
   constructor(props) {
     super(props);
     addBackHandler(this);
-    
+
 
     this.state = {
       refreshing: false,
     }
+  }
+
+  componentWillMount = () => {
+    this.props.navigation.setParams({
+      openDrawer: this.props.app.openDrawer,
+    });
   }
 
   componentDillMount() {
@@ -38,16 +45,16 @@ class HomeScreen extends Component {
     });
   }
 
-  static navigationOptions = ({ navigation }) => {
-
-    return {
-      header: (
-        <View style={headerStyles.headerBox} >
-          <Text style={headerStyles.logo} >اوناگی</Text>
-        </View>
-      ),
-    }
-  };
+  static navigationOptions = ({ navigation }) => ({
+    header: (
+      <View style={headerStyles.headerBox} >
+        <Text style={headerStyles.logo} >اوناگی</Text>
+        <TouchableWithoutFeedback onPress={()=> navigation.state.params.openDrawer()}>
+          <Icon name="menu" size={50}/>
+        </TouchableWithoutFeedback>
+      </View>
+    ),
+  });
 
   onPre = () => {
     this.props.dispatch({type: actions.SET_PAGE_NAME, pageName: "SendPostScreen"});
@@ -118,6 +125,7 @@ const mapStateToProps = (state) => {
     location: state.location,
     pageName: state.pageName,
     refreshToken: state.userInfo.refreshToken,
+    app: state.app,
   }
 };
 

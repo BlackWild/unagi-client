@@ -5,11 +5,10 @@ export const headerStyles = StyleSheet.create({
   headerBox: {
     height:70,
     backgroundColor: '#8BC34A',
-    justifyContent: 'center',
-    alignItems:'flex-start',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems:'center',
   },
-
-  ///// HOME
   
   logo:{
     fontSize:30,
