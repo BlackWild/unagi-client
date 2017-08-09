@@ -10,11 +10,21 @@ import {styles} from '../styles/PostStyles';
 import {likePost, unlikePost} from '../functions/LikeFunctions';
 import { connect } from 'react-redux';
 
+import actions from '../reducers/Actions';
+
 class Post extends Component {
   constructor(props) {
     super(props);
   }
 
+  thisPost = () => ({
+    _id: this.props.postID,
+    content: this.props.content,
+    likes: this.props.likes,
+    isLiked: this.props.isLiked,
+    username: this.props.username,
+    date: this.props.date,
+  }); 
   
   likeHandler = () => {
     likePost(this.props.accessToken, this.props.postID, this).then(()=>console.log("POST LIKED"));
@@ -24,10 +34,12 @@ class Post extends Component {
     unlikePost(this.props.accessToken, this.props.postID, this).then(()=>console.log("POST UNLIKED"));
   }
   replyHandler = () => {
+    this.props.dispatch({type: actions.SET_PARENT_POST, parentPost: this.thisPost()});
     this.props.dispatch({type: actions.SET_PAGE_NAME, pageName: "ReplayScreen"});
     this.props.navigation.navigate('ReplayScreen');
   }
   postTouchHandler = () => {
+    this.props.dispatch({type: actions.SET_PARENT_POST, parentPost: this.thisPost()});    
     this.props.dispatch({type: actions.SET_PAGE_NAME, pageName: "PostScreen"});
     this.props.navigation.navigate('PostScreen');
   }
