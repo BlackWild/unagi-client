@@ -58,7 +58,7 @@ class PostScreen extends Component {
           </View>
         </View>
 
-         <View style={{flex:1,padding:10,margin:10,borderBottomWidth:2,borderColor:'#757575'}}>
+         <View style={{padding:10,margin:10,borderBottomWidth:2,borderColor:'#757575',}}>
           <View style={{flexDirection:'row',justifyContent:'flex-end',alignContent:'center',alignItems:'center',}}>
             <View style={{flexDirection:'column',justifyContent:'space-between',alignContent:'center',alignItems:'center'}}> 
               <View>
@@ -93,7 +93,7 @@ class PostScreen extends Component {
           </Text>
         </View>
 
-        <View style={{height:250}}>
+        <View>
           {/*list of replies  */}
         </View>
       </View>
