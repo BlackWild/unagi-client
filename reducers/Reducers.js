@@ -7,6 +7,7 @@ import {hotPostsReducer} from './HotPostsReducer'
 import {pageNameReducer} from './PageNameReducer'
 import {registerReducer} from './registerReducer'
 import {replyReducer} from './replyReducer'
+import {appRefReducer} from './AppRefReducer'
 
 export const mainReducer = combineReducers({
     userID: userIDReducer,
@@ -16,4 +17,5 @@ export const mainReducer = combineReducers({
     pageName: pageNameReducer,
     userInfo: registerReducer,
     replyContent: replyReducer,
+    app: appRefReducer,
 });
