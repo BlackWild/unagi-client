@@ -66,7 +66,7 @@ class SendPostScreen extends Component {
               //   this.isSending = false;
               //   onPre();
               // });
-              onPre();
+              this.backTouchHandler();
             }
           }).catch(() => {
             this.setState({
