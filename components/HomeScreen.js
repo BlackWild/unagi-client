@@ -49,6 +49,11 @@ class HomeScreen extends Component {
     }
   };
 
+  onPre = () => {
+    this.props.dispatch({type: actions.SET_PAGE_NAME, pageName: "SendPostScreen"});
+    this.props.navigation.navigate("SendPostScreen");
+  }
+
   onEndHandler = () => {
     if(this.state.hasNext) {
       getMorePost(this.props.accessToken, this.props.location, this, this.state.nextStr);
@@ -68,37 +73,37 @@ class HomeScreen extends Component {
 
   render() {
     return (
-      <View style={{ flex: 1 }}>
+        <View style={{ flex: 1 }}>
 
-        <View style={styles.container}>
-          {!this.props || !this.props.posts ?
-            (<View style={{ flex: 1, justifyContent: 'center' }}><Text>LODING</Text></View>) :
-            (
-              <FlatList
-                data={this.props.posts}
-                keyExtractor={(item, index) => item._id}
-                renderItem={({ item }) => (
-                  <Post
-                    likes={item.likes}
-                    isLiked={item.isLiked}
-                    content={item.content}
-                    date={item.date}
-                    postID={item._id}
-                    username={item.username}
-                    posterID={item.userID}
-                    navigation={this.props.navigation} />
-                )}
-                onEndReached={this.onEndHandler}
-                onEndReachedThreshold={2}
-                refreshing={this.state.refreshing}
-                onRefresh={this.onRefreshHandler}
-              />
-            )
-          }
+          <View style={styles.container}>
+            {!this.props || !this.props.posts ?
+              (<View style={{ flex: 1, justifyContent: 'center' }}><Text>LODING</Text></View>) :
+              (
+                <FlatList
+                  data={this.props.posts}
+                  keyExtractor={(item, index) => item._id}
+                  renderItem={({ item }) => (
+                    <Post
+                      likes={item.likes}
+                      isLiked={item.isLiked}
+                      content={item.content}
+                      date={item.date}
+                      postID={item._id}
+                      username={item.username}
+                      posterID={item.userID}
+                      navigation={this.props.navigation} />
+                  )}
+                  onEndReached={this.onEndHandler}
+                  onEndReachedThreshold={2}
+                  refreshing={this.state.refreshing}
+                  onRefresh={this.onRefreshHandler}
+                />
+              )
+            }
 
-          <ActionButton onPress={this.onPre} degrees={0} offsetX={10} offsetY={20} buttonColor='#858585' fixNativeFeedbackRadius={true} hideShadow={true} />
+            <ActionButton onPress={this.onPre} degrees={0} offsetX={10} offsetY={20} buttonColor='#858585' fixNativeFeedbackRadius={true} hideShadow={true} />
+          </View>
         </View>
-      </View>
     );
 
   }
