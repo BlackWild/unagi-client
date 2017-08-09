@@ -283,3 +283,87 @@ export const getMoreHotPost = (accessToken, location, that, qu) => {
     });
   });
 };
+
+
+export const getReplies = function (accessToken, location, that) {
+  return new Promise((resol, rej) => {
+    
+    fetch({
+      url: SERVER_DOMIN + '/api/v4/posts/getReplies?location='+JSON.stringify({x:location.x, y:location.y}),
+      headers: {
+        accessToken
+      },
+      method: 'GET'
+    }).then((res) => {
+      return res.json();
+    }).then((resJ) => {
+
+      if(!resJ.isAccessTokenValid) {
+          tokenProvider(that).then(() => {
+              console.log("set post again");
+              getReplies(that.props.accessToken,location,that).then(()=>{
+                  resol();
+              });
+          }).catch(() => {
+              that.props.dispatch({type: actions.SET_PAGE_NAME, pageName: "LogIn"})
+              that.props.navigation.navigate('LogIn');
+              rej();
+          });
+      } else {
+        that.props.dispatch({type: actions.CLONE_WITH_REPLY_POSTS, newPosts: resJ.results});
+        that.setState(() => {
+          return {
+            nextStr: resJ.next,
+            hasNext: resJ.hasNext,
+          }
+        }, () => {
+          resol();
+        });
+      }
+    }).catch((error) => {
+      rej();
+    });
+  });
+
+};
+
+export const getMoreReplies = (accessToken, location, that, qu) => {
+  return new Promise((resol, rej) => {
+
+    fetch({
+      url: SERVER_DOMIN + '/api/v4/posts/getReplies?location='+JSON.stringify({x:location.x, y:location.y})
+                                                +'&cursor=' + qu,
+      headers: {
+        accessToken
+      },
+      method: 'GET',
+    }).then((res) => {
+      return res.json();
+    }).then((resJ) => {
+
+      if(!resJ.isAccessTokenValid) {
+          tokenProvider(that).then(() => {
+              getMoreReplies(that.props.accessToken,location,that,qu).then(()=>{
+                  resol();
+              });
+          }).catch(() => {
+              that.props.dispatch({type: actions.SET_PAGE_NAME, pageName: "LogIn"})
+              that.props.navigation.navigate('LogIn');
+              rej();
+          });
+      } else {
+        that.props.dispatch({type: actions.ADD_REPLY_POSTS, newPosts: resJ.results});
+        that.setState(() => {
+          return {
+            nextStr: resJ.next,
+            hasNext: resJ.hasNext,
+          }
+        }, () => {
+          resol();
+        });
+      }
+    }).catch((error) => {
+      rej();
+    });
+  });
+};
