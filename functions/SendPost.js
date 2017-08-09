@@ -21,7 +21,6 @@ export const sendPost = function (accessToken, location, content, that) {
     }).then((res) => {
       return res.json();
     }).then((resJ) => {
-      console.log(resJ,"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
       if (!resJ.isAccessTokenValid) {
         console.log("expire");
           tokenProvider(that).then(() => {
@@ -37,11 +36,10 @@ export const sendPost = function (accessToken, location, content, that) {
           });
 
       }
-      if (!resJ.isAdded) {
-        console.log("khaaaaaaaaaaaar");
+      else if (!resJ.isAdded) {
         rejec();
       } else {
-        console.log("man omadam");
+
           that.props.dispatch({type: actions.ADD_POST_TO_TOP, post: resJ.post});
           resol("ok");
       }

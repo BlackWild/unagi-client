@@ -58,6 +58,7 @@ export const replyPost=(content, that)=>{
         }).then((res) => {
             return res.json();
         }).then((resJ) => {
+             console.log("salaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaam",resJ);
             if (!resJ.isAccessTokenValid) {
                 console.log("expire");
                 tokenProvider(that).then(() => {

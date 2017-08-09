@@ -29,7 +29,7 @@ export const addBackHandler = (that) => {
       that.props.navigation.navigate("Home");
       return true;
     }
-    if (that.props.pageName == "ReplayScreen") {
+    if (that.props.pageName == "SendReplayScreen") {
       that.props.dispatch({type: actions.SET_PAGE_NAME, pageName: "PostScreen"});
       that.props.navigation.navigate("PostScreen");
       return true;

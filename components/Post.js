@@ -35,8 +35,8 @@ class Post extends Component {
   }
   replyHandler = () => {
     this.props.dispatch({type: actions.SET_PARENT_POST, parentPost: this.thisPost()});
-    this.props.dispatch({type: actions.SET_PAGE_NAME, pageName: "ReplayScreen"});
-    this.props.navigation.navigate('ReplayScreen');
+    this.props.dispatch({type: actions.SET_PAGE_NAME, pageName: "SendReplyScreen"});
+    this.props.navigation.navigate('SendReplyScreen');
   }
   postTouchHandler = () => {
     this.props.dispatch({type: actions.SET_PARENT_POST, parentPost: this.thisPost()});    

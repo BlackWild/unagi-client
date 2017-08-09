@@ -60,12 +60,6 @@ class SendPostScreen extends Component {
         ], (err) => {
           sendPost(this.props.accessToken, this.props.location, this.state.text, this).then((res) => {
             if (res === "ok") {
-              // this.setState({
-              //   isSending: false
-              // }, () => {
-              //   this.isSending = false;
-              //   onPre();
-              // });
               this.backTouchHandler();
             }
           }).catch(() => {
