@@ -39,7 +39,6 @@ class PostScreen extends Component {
   };
 
   backTouchHandler = () => {
-    console.log("back clicked -->   " ,this.props.pageName);
     this.props.dispatch({type: actions.SET_PAGE_NAME, pageName: "Home"});
     this.props.navigation.navigate("Home");
   }

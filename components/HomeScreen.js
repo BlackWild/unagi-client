@@ -32,13 +32,9 @@ class HomeScreen extends Component {
     }
   }
 
-  componentWillMount() {
-    async.parallel([
-      (callback) => {
-        setLocationState(this).then(() => callback()).catch(() => { });
-      }
-    ], (err) => {
-      setPostState(this.props.accessToken, this.props.location, this).then(() => console.log("good")).catch(() => { });
+  componentDillMount() {
+    setLocationState(this).then(() => {
+      setPostState(this.props.accessToken, this.props.location, this);
     });
   }
 
@@ -59,27 +55,19 @@ class HomeScreen extends Component {
   };
 
   onEndHandler = () => {
-    console.log("end reached");
     if(this.state.hasNext) {
       getMorePost(this.props.accessToken, this.props.location, this, this.state.nextStr).then(() => console.log("more good")).catch(() => console.log("no more post"));
     }
   };
   onRefreshHandler = () => {
-    console.log("refreshing");
     this.setState({
       refreshing: true,
     }, () => {
         setPostState(this.props.accessToken, this.props.location, this).then(() => {
-          console.log("refreshing");
             this.setState({
-                    refreshing: false,
+              refreshing: false,
            })
         }).catch(() => { })
-      // setTimeout(() => {
-      //   this.setState({
-      //     refreshing: false,
-      //   }, () => { console.log("done refreshing"); })
-      // }, 3000);
     });
   }
 

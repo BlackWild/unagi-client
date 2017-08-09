@@ -5,7 +5,6 @@ import { NavigationActions } from 'react-navigation';
 export const addBackHandler = (that) => {
 
   BackHandler.addEventListener('hardwareBackPress', () => {
-    console.log("back clicked -->   ", that.props.pageName);
 
     if (that.props.pageName === 'LogIn') {
       BackHandler.exitApp();

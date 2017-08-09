@@ -39,7 +39,6 @@ export const sendUsernameId = function(username,password,that){
           }
             resol(resJ.isSignedUp);
         }).catch((error) => {
-            console.log("post fetch error: " + error);
             rej();
         });
     });
@@ -64,12 +63,10 @@ export const tokenProvider=function (that) {
                 resol();
             }
             else{
-                console.log("valid naboode refresh token");
                 rej();
             }
 
         }).catch((error) => {
-            console.log("post fetch error: " + error);
             rej();
         });
     });
@@ -100,7 +97,6 @@ export const logIn = function(username,password,that){
           resol(resJ.isFound);
 
         }).catch((error) => {
-          console.log("post fetch error: " + error);
           rej();
         });
     });
@@ -123,13 +119,10 @@ export const setPostState = function (accessToken, location, that) {
 
       if(!resJ.isAccessTokenValid) {
           tokenProvider(that).then(() => {
-              console.log("set post again");
               setPostState(that.props.accessToken,location,that).then(()=>{
-                  // that.props.dispatch({type: actions.ADD_POST_TO_TOP, post: resJ.post});
                   resol();
               });
           }).catch(() => {
-              console.log("this is our login page");
               that.props.dispatch({type: actions.SET_PAGE_NAME, pageName: "LogIn"})
               that.props.navigation.navigate('LogIn');
               rej();
@@ -168,12 +161,10 @@ export const getMorePost = (accessToken, location, that, qu) => {
 
       if(!resJ.isAccessTokenValid) {
           tokenProvider(that).then(() => {
-              console.log("set post again");
               getMorePost(that.props.accessToken,location,that,qu).then(()=>{
                   resol();
               });
           }).catch(() => {
-              console.log("this is our login page");
               that.props.dispatch({type: actions.SET_PAGE_NAME, pageName: "LogIn"})
               that.props.navigation.navigate('LogIn');
               rej();
@@ -210,12 +201,10 @@ export const setHotPostState = (accessToken, location, that) => {
 
       if(!resJ.isAccessTokenValid) {
           tokenProvider(that).then(() => {
-              console.log("set post again");
               setHotPostState(that.props.accessToken,location,that).then(()=>{
                   resol();
               });
           }).catch(() => {
-              console.log("this is our login page");
               that.props.dispatch({type: actions.SET_PAGE_NAME, pageName: "LogIn"})
               that.props.navigation.navigate('LogIn');
               rej();
@@ -254,12 +243,10 @@ export const getMoreHotPost = (accessToken, location, that, qu) => {
 
       if(!resJ.isAccessTokenValid) {
           tokenProvider(that).then(() => {
-              console.log("set post again");
               getMoreHotPost(that.props.accessToken,location,that,qu).then(()=>{
                   resol();
               });
           }).catch(() => {
-              console.log("this is our login page");
               that.props.dispatch({type: actions.SET_PAGE_NAME, pageName: "LogIn"})
               that.props.navigation.navigate('LogIn');
               rej();
@@ -300,7 +287,6 @@ export const getReplies = function (accessToken, location, that) {
 
       if(!resJ.isAccessTokenValid) {
           tokenProvider(that).then(() => {
-              console.log("set post again");
               getReplies(that.props.accessToken,location,that).then(()=>{
                   resol();
               });

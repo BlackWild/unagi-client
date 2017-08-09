@@ -23,19 +23,14 @@ import { connect } from 'react-redux';
 class HotScreen extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       refreshing: false,
     }
   }
 
-  componentWillMount() {
-    async.parallel([
-      (callback) => {
-        setLocationState(this).then(() => callback()).catch(() => { });
-      }
-    ], (err) => {
-      setHotPostState(this.props.accessToken, this.props.location, this).then(() => console.log("good")).catch(() => { });
+  componentDidMount() {
+    setLocationState(this).then(() => {
+      setHotPostState(this.props.accessToken, this.props.location, this);
     });
   }
 
@@ -50,19 +45,12 @@ class HotScreen extends Component {
     }
   };
 
-  onPre = () => {
-    const { navigate } = this.props.navigation;
-    navigate('SendPostScreen');
-  };
-
   onEndHandler = () => {
-    console.log("end reached");
-    if(this.state.hasNext) {
-      getMoreHotPost(this.props.accessToken, this.props.location, this, this.state.nextStr).then(() => console.log("more good")).catch(() => console.log("no more post"));
+    if (this.state.hasNext) {
+      getMoreHotPost(this.props.accessToken, this.props.location, this, this.state.nextStr);
     }
   };
   onRefreshHandler = () => {
-    console.log("refreshing");
     this.setState({
       refreshing: true,
     }, () => {
@@ -70,7 +58,7 @@ class HotScreen extends Component {
         this.setState({
           refreshing: false,
         })
-      }).catch(() => { })
+      });
     });
   }
 
@@ -86,7 +74,15 @@ class HotScreen extends Component {
                 data={this.props.hotPosts}
                 keyExtractor={(item, index) => item._id}
                 renderItem={({ item }) => (
-                  <Post likes={item.likes} isLiked={item.isLiked} content={item.content} date={item.date} postID={item._id} username={item.username} posterID={item.userID} navigation={this.props.navigation} />
+                  <Post
+                    likes={item.likes}
+                    isLiked={item.isLiked}
+                    content={item.content}
+                    date={item.date}
+                    postID={item._id}
+                    username={item.username}
+                    posterID={item.userID}
+                    navigation={this.props.navigation} />
                 )}
                 onEndReached={this.onEndHandler}
                 onEndReachedThreshold={2}
