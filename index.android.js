@@ -19,8 +19,8 @@ import { TabScreen } from './components/TabScreen';
 import LogIn from './components/LogIn';
 import SignUp from './components/SignUp';
 import PostScreen from './components/PostScreen';
-import ReplayScreen from './components/ReplayScreen';
-import DrawerMenu from './components/DrawerMenu'
+import SendReplyScreen from './components/SendReplyScreen';
+import DrawerMenu from './components/DrawerMenu';
 
 import {addBackHandler} from './functions/BackHandlerAdder';
 
@@ -30,7 +30,7 @@ const App = StackNavigator({
   SignUp: {screen: SignUp},
   Home: { screen: TabScreen },
   SendPostScreen: { screen: SendPostScreen },
-  ReplayScreen: {screen: ReplayScreen},
+  SendReplyScreen: {screen: SendReplyScreen},
   PostScreen: {screen: PostScreen},
 });
 
