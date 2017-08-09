@@ -112,6 +112,8 @@ const mapStateToProps = (state) => {
     location: state.location,
     pageName: state.pageName,
     refreshToken: state.userInfo.refreshToken,
+    parentPost: state.replyContent.parentPost,
+    replyPosts: state.replyContent.replyPosts
   }
 };
 
