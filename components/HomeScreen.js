@@ -49,14 +49,9 @@ class HomeScreen extends Component {
     }
   };
 
-  onPre = () => {
-    this.props.dispatch({type: actions.SET_PAGE_NAME, pageName: "SendPostScreen"});
-    this.props.navigation.navigate('SendPostScreen');
-  };
-
   onEndHandler = () => {
     if(this.state.hasNext) {
-      getMorePost(this.props.accessToken, this.props.location, this, this.state.nextStr).then(() => console.log("more good")).catch(() => console.log("no more post"));
+      getMorePost(this.props.accessToken, this.props.location, this, this.state.nextStr);
     }
   };
   onRefreshHandler = () => {
@@ -83,7 +78,15 @@ class HomeScreen extends Component {
                 data={this.props.posts}
                 keyExtractor={(item, index) => item._id}
                 renderItem={({ item }) => (
-                  <Post likes={item.likes} isLiked={item.isLiked} content={item.content} date={item.date} postID={item._id} username={item.username} posterID={item.userID} navigation={this.props.navigation} />
+                  <Post
+                    likes={item.likes}
+                    isLiked={item.isLiked}
+                    content={item.content}
+                    date={item.date}
+                    postID={item._id}
+                    username={item.username}
+                    posterID={item.userID}
+                    navigation={this.props.navigation} />
                 )}
                 onEndReached={this.onEndHandler}
                 onEndReachedThreshold={2}
