@@ -133,8 +133,8 @@ class PostScreen extends Component {
         </View>
 
         <View>
-          {!this.props || !this.props.replyPosts ?
-            (<View style={{ flex: 1, justifyContent: 'center' }}><Text>LODING</Text></View>) :
+          {!this.props.replyPosts || this.props.replyPosts == [] ?
+             (<View style={{ flex: 1, justifyContent: 'center' }}></View>) : 
             (
               <PostWithoutReplay
                 data={this.props.replyPosts}
