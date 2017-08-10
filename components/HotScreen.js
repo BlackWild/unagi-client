@@ -4,6 +4,7 @@ import {
   Text,
   View,
   FlatList,
+  TouchableWithoutFeedback,
 } from 'react-native';
 import ActionButton from 'react-native-action-button';
 
@@ -19,6 +20,7 @@ import { headerStyles } from '../styles/HeaderStyles';
 
 import { connect } from 'react-redux';
 
+import Icon from 'react-native-vector-icons/Entypo';
 
 class HotScreen extends Component {
   constructor(props) {
@@ -28,22 +30,24 @@ class HotScreen extends Component {
     }
   }
 
-  componentDidMount() {
+  componentWillMount = () => {
     setLocationState(this).then(() => {
       setHotPostState(this.props.accessToken, this.props.location, this);
     });
   }
 
   static navigationOptions = ({ navigation }) => {
-
     return {
       header: (
         <View style={headerStyles.headerBox} >
           <Text style={headerStyles.logo} >اوناگی</Text>
+          <TouchableWithoutFeedback onPress={() => navigation.state.params.openDrawer()}>
+            <Icon name="menu" size={50} />
+          </TouchableWithoutFeedback>
         </View>
       ),
-    }
-  };
+    };
+  }
 
   onEndHandler = () => {
     if (this.state.hasNext) {
@@ -63,6 +67,12 @@ class HotScreen extends Component {
   }
 
   render() {
+    if(!(this.props.navigation.state.params)||!(this.props.navigation.state.params.openDrawer)) {
+      this.props.navigation.setParams({
+        ...(this.props.navigation.state.params),
+        openDrawer: this.props.app.openDrawer,
+      });
+    }
     return (
       <View style={{ flex: 1 }}>
 
@@ -105,6 +115,7 @@ const mapStateToProps = (state) => {
     hotPosts: state.hotPosts,
     accessToken: state.userInfo.accessToken,
     location: state.location,
+    app: state.app,
   }
 }
 
