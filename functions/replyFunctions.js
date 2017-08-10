@@ -117,9 +117,7 @@ export const replyPost=(content, that)=>{
             else if (!resJ.isReplied) {
                 rejec();
             } else {
-                // console.warn(resJ.post.content);
-                that.props.dispatch({type: actions.ADD_POST_TO_TOP, newPost: resJ.post});                
-                that.props.dispatch({type: actions.ADD_REPLY_TO_TOP, newPost: resJ.post});
+                // that.props.dispatch({type: actions.ADD_REPLY_TO_TOP, newPost: resJ.post});
                 resol("ok");
             }
         }).catch((error) => {

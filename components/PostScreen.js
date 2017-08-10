@@ -134,13 +134,13 @@ class PostScreen extends Component {
 
         <View>
           {!this.props.replyPosts || this.props.replyPosts == [] ?
-            (<View style={{ flex: 1, justifyContent: 'center' }}></View>) : 
+             (<View style={{ flex: 1, justifyContent: 'center' }}></View>) : 
             (
-              <FlatList
+              <PostWithoutReplay
                 data={this.props.replyPosts}
                 keyExtractor={(item, index) => item._id}
                 renderItem={({ item }) => (
-                  <PostWithoutReplay
+                  <Post
                     likes={item.likes}
                     isLiked={item.isLiked}
                     content={item.content}
