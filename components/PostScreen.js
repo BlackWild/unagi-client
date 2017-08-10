@@ -18,6 +18,7 @@ import actions from '../reducers/Actions'
 import {addBackHandler} from '../functions/BackHandlerAdder';
 import PostWithoutReplay from './PostWithoutReplay';
 import { sendParentGetReplies, } from '../functions/replyFunctions';
+import ActionButton from "react-native-action-button";
 
 import {likePost, unlikePost} from '../functions/LikeFunctions';
 
@@ -156,8 +157,8 @@ class PostScreen extends Component {
             )
           }
 
-          <ActionButton onPress={this.onPre} degrees={0} offsetX={10} offsetY={20} buttonColor='#858585' fixNativeFeedbackRadius={true} hideShadow={true} />
         </View>
+          <ActionButton onPress={this.onPre} degrees={0} offsetX={10} offsetY={20} buttonColor='#858585' fixNativeFeedbackRadius={true} hideShadow={true} />
       </View>
 
       
