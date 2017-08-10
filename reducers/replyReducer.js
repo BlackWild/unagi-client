@@ -50,7 +50,6 @@ export const replyReducer = (state = {parentPost: {}, replayPosts: []}, action) 
                         return post;
                     }
                 });
-                break;
             })()
         }
         break;
@@ -79,7 +78,6 @@ export const replyReducer = (state = {parentPost: {}, replayPosts: []}, action) 
                         return post;
                     }
                 });
-                break;
             })()
         }
         break;
