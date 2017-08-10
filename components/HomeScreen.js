@@ -39,7 +39,7 @@ class HomeScreen extends Component {
     });
   }
 
-  componentDillMount() {
+  componentWillMount() {
     setLocationState(this).then(() => {
       setPostState(this.props.accessToken, this.props.location, this);
     });

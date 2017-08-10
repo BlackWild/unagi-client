@@ -142,6 +142,7 @@ const mapStateToProps = (state) => {
     username: state.userInfo.username,
     location: state.location,
     pageName: state.pageName,
+    parentPost: state.replyContent.parentPost,
   }
 };
 
