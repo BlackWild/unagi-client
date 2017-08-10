@@ -17,6 +17,13 @@ class UserPage extends Component {
     addBackHandler(this);
   }
 
+  static navigationOptions = ({ navigation }) => {
+    return {
+      header: (
+        null
+      )
+    };
+  };
   render() {
     return (
       <View>
