@@ -27,6 +27,7 @@ class LoadingScreen extends Component {
 
   componentWillMount() {
     // this.props.dispatch({type: actions.SET_PAGE_NAME, pageName: "LoadingScreen"});
+    this.props.dispatch({type: actions.SET_NAV_REF, nav: this.props.navigation})
     if(this.props.refreshToken) {
       tokenProvider(this).then(()=>{
         this.props.dispatch({type: actions.SET_PAGE_NAME, pageName: "Home"});
