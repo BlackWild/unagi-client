@@ -1,37 +1,37 @@
-import React, { Component } from 'react';
-import { 
+import React, { Component } from "react";
+import {
   View,
   AppRegistry,
   AsyncStorage,
-  DrawerLayoutAndroid, 
-} from 'react-native';
-import { StackNavigator } from 'react-navigation';
-import { NavigationActions } from 'react-navigation';
+  DrawerLayoutAndroid
+} from "react-native";
+import { StackNavigator } from "react-navigation";
+import { NavigationActions } from "react-navigation";
 
-import { compose, applyMiddleware, createStore } from 'redux';
-import { Provider } from 'react-redux';
-import {persistStore, autoRehydrate} from 'redux-persist'
-import { mainReducer } from './reducers/Reducers'
+import { compose, applyMiddleware, createStore } from "redux";
+import { Provider } from "react-redux";
+import { persistStore, autoRehydrate } from "redux-persist";
+import { mainReducer } from "./reducers/Reducers";
 
-import LoadingScreen from './components/LoadingScreen'
-import SendPostScreen from './components/SendPostScreen';
-import { TabScreen } from './components/TabScreen';
-import LogIn from './components/LogIn';
-import SignUp from './components/SignUp';
-import PostScreen from './components/PostScreen';
-import SendReplyScreen from './components/SendReplyScreen';
-import DrawerMenu from './components/DrawerMenu';
+import LoadingScreen from "./components/LoadingScreen";
+import SendPostScreen from "./components/SendPostScreen";
+import { TabScreen } from "./components/TabScreen";
+import LogIn from "./components/LogIn";
+import SignUp from "./components/SignUp";
+import PostScreen from "./components/PostScreen";
+import SendReplyScreen from "./components/SendReplyScreen";
+import DrawerMenu from "./components/DrawerMenu";
 
-import {addBackHandler} from './functions/BackHandlerAdder';
+import { addBackHandler } from "./functions/BackHandlerAdder";
 
 const App = StackNavigator({
-  LoadingScreen: { screen: LoadingScreen},
-  LogIn: {screen: LogIn},
-  SignUp: {screen: SignUp},
+  LoadingScreen: { screen: LoadingScreen },
+  LogIn: { screen: LogIn },
+  SignUp: { screen: SignUp },
   Home: { screen: TabScreen },
   SendPostScreen: { screen: SendPostScreen },
-  SendReplyScreen: {screen: SendReplyScreen},
-  PostScreen: {screen: PostScreen},
+  SendReplyScreen: { screen: SendReplyScreen },
+  PostScreen: { screen: PostScreen }
 });
 
 class Unagi extends Component {
@@ -42,15 +42,12 @@ class Unagi extends Component {
     addBackHandler(this);
     this.state = {
       run: false
-    }
+    };
 
     this.store = createStore(
       mainReducer,
       undefined,
-      compose(
-        applyMiddleware(),
-        autoRehydrate()
-      )
+      compose(applyMiddleware(), autoRehydrate())
     );
 
     // this.store.subscribe(() => {
@@ -62,19 +59,16 @@ class Unagi extends Component {
 
     const config = {
       storage: AsyncStorage,
-      blacklist: [
-        'app'
-      ],
+      blacklist: ["app"]
     };
-    persistStore(this.store, config, ()=>{
+    persistStore(this.store, config, () => {
       console.log("Store loaded from local storage");
       this.setState({
         run: true
       });
-      this.store.dispatch({type: "SET_APP_REF", app: this});
+      this.store.dispatch({ type: "SET_APP_REF", app: this });
     });
   }
-
 
   openDrawer() {
     this.drawer.openDrawer();
@@ -86,24 +80,19 @@ class Unagi extends Component {
   render() {
     return (
       <Provider store={this.store}>
-          {this.state.run? 
-            (
-              <DrawerLayoutAndroid
-                ref={(rf) => this.drawer = rf}
-                drawerWidth={300}
-                drawerPosition={DrawerLayoutAndroid.positions.Right}
-                renderNavigationView={() => DrawerMenu}
-              >
-                <App />
-              </DrawerLayoutAndroid>
-            ): 
-            (
-              <View style={{flex:1, backgroundColor: "#8BC34A"}}/>
-            )
-          }
+        {this.state.run
+          ? <DrawerLayoutAndroid
+              ref={rf => (this.drawer = rf)}
+              drawerWidth={250}
+              drawerPosition={DrawerLayoutAndroid.positions.Right}
+              renderNavigationView={() => DrawerMenu}
+            >
+              <App />
+            </DrawerLayoutAndroid>
+          : <View style={{ flex: 1, backgroundColor: "#8BC34A" }} />}
       </Provider>
     );
   }
 }
 
-AppRegistry.registerComponent('Unagi', () => Unagi);
+AppRegistry.registerComponent("Unagi", () => Unagi);
