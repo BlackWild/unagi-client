@@ -16,4 +16,5 @@ export default actions = {
     ADD_POST_TO_TOP: "ADD_POST_TO_TOP",
     SET_PAGE_NAME: "SET_PAGE_NAME",
     SET_APP_REF: "SET_APP_REF",
+    SET_NAV_REF: "SET_NAV_REF",
 }
