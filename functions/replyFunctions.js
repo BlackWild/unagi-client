@@ -83,19 +83,18 @@ export const getMoreReplyPost=(that,parentPost,qu)=>{
 };
 export const replyPost=(content, that)=>{
     return new Promise((resol, rejec) => {
-        let temp = JSON.stringify({
-            post: {
-                content,
-                location: that.props.location,
-            },
-            repliedPost: that.props.parentPost._id
-        });
         fetch(SERVER_DOMIN + '/api/v4/posts/replyPost', {
             headers: {
                 'Content-Type': 'application/json',
                 accessToken: that.props.accessToken,
             },
-            body: temp,
+            body: JSON.stringify({
+                post: {
+                    content,
+                    location: that.props.location,
+                },
+                repliedPostID: that.props.parentPost._id
+            }),
             method: 'POST',
 
         }).then((res) => {
@@ -115,11 +114,10 @@ export const replyPost=(content, that)=>{
                 });
 
             }
-            else if (!resJ.isAdded) {
+            else if (!resJ.isReplied) {
                 rejec();
             } else {
-
-                that.props.dispatch({type: actions.ADD_REPLY_TO_TOP, newPost: resJ.post});
+                // that.props.dispatch({type: actions.ADD_REPLY_TO_TOP, newPost: resJ.post});
                 resol("ok");
             }
         }).catch((error) => {
