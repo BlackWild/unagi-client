@@ -21,6 +21,7 @@ import SignUp from "./components/SignUp";
 import PostScreen from "./components/PostScreen";
 import SendReplyScreen from "./components/SendReplyScreen";
 import UserPage from "./components/UserPage";
+import AboutUsPage from "./components/AboutUsPage";
 import DrawerMenu from "./components/DrawerMenu";
 
 import { addBackHandler } from "./functions/BackHandlerAdder";
@@ -33,7 +34,8 @@ const App = StackNavigator({
   SendPostScreen: { screen: SendPostScreen },
   SendReplyScreen: { screen: SendReplyScreen },
   PostScreen: { screen: PostScreen },
-  UserPage: { screen: UserPage }
+  UserPage: { screen: UserPage },
+  AboutUsPage: { screen: AboutUsPage }
 });
 
 class Unagi extends Component {
