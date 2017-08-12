@@ -8,10 +8,6 @@ import {
 } from 'react-native';
 import ActionButton from 'react-native-action-button';
 
-import { NavigationActions } from 'react-navigation';
-
-import async from 'async';
-
 import Post from '../components/Post';
 import { setIDState, setLocationState, setHotPostState, getMoreHotPost } from '../functions/StateSetters';
 
@@ -69,7 +65,6 @@ class HotScreen extends Component {
   render() {
     if(!(this.props.navigation.state.params)||!(this.props.navigation.state.params.openDrawer)) {
       this.props.navigation.setParams({
-        ...(this.props.navigation.state.params),
         openDrawer: this.props.app.openDrawer,
       });
     }
@@ -115,6 +110,8 @@ const mapStateToProps = (state) => {
     hotPosts: state.hotPosts,
     accessToken: state.userInfo.accessToken,
     location: state.location,
+    pageName: state.pageName,
+    refreshToken: state.userInfo.refreshToken,    
     app: state.app,
   }
 }
