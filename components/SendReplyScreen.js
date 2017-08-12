@@ -9,16 +9,14 @@ import {
   BackHandler,
 } from 'react-native';
 
-import async from 'async';
-
 import { styles } from '../styles/SendPostScreenStyles';
 import { HomeScreen } from './HomeScreen';
 import { setIDState, setLocationState } from '../functions/StateSetters';
-import { replyPost,sendParentGetReplies} from '../functions/replyFunctions';
+import { replyPost, sendParentGetReplies } from '../functions/replyFunctions';
 import { sendPost } from '../functions/SendPost';
 
 import { NavigationActions } from 'react-navigation';
-import {addBackHandler} from '../functions/BackHandlerAdder';
+import { addBackHandler } from '../functions/BackHandlerAdder';
 
 import { connect } from 'react-redux';
 
@@ -44,20 +42,16 @@ class SendReplyScreen extends Component {
   };
 
   sendReplyToServer = () => {
-      
+
     if (this.isSending || this.state.isSending || this.state.isLengthOverLimit) {
       return null;
     } else {
-      
+
       this.isSending = true;
       this.setState({
         isSending: true
       }, () => {
-        async.parallel([
-          (callback) => {
-            setLocationState(this).then(() => callback()).catch(() => { });
-          }
-        ], (err) => {
+        setLocationState(this).then(() => {
           replyPost(this.state.text, this).then((res) => {
             if (res === "ok") {
               this.backTouchHandler();
@@ -76,8 +70,8 @@ class SendReplyScreen extends Component {
     }
   };
   backTouchHandler = () => {
-    console.log("back clicked -->   " ,this.props.pageName);
-    this.props.dispatch({type: actions.SET_PAGE_NAME, pageName: "PostScreen"});
+    console.log("back clicked -->   ", this.props.pageName);
+    this.props.dispatch({ type: actions.SET_PAGE_NAME, pageName: "PostScreen" });
     this.props.navigation.navigate("PostScreen");
   };
 
@@ -102,7 +96,7 @@ class SendReplyScreen extends Component {
               <Text style={this.state.isLengthOverLimit ? [styles.charRemain, styles.overChar] : [styles.charRemain, { justifyContent: 'center', alignContent: 'center' }]}>
                 {160 - this.state.textLenght}
               </Text>
-              <TouchableWithoutFeedback onPress={this.state.isSending?()=>{}:this.sendReplyToServer}>
+              <TouchableWithoutFeedback onPress={this.state.isSending ? () => { } : this.sendReplyToServer}>
                 <Image source={require('../img/send.png')} style={styles.pic} />
               </TouchableWithoutFeedback>
             </View>
