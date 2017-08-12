@@ -31,7 +31,11 @@ class HomeScreen extends Component {
   }
 
   componentWillMount() {
+    this.props.dispatch({ type: actions.SET_PAGE_NAME, pageName: "Home" });
     this.props.app.unlockDrawer();
+  }
+
+  componentDidMount() {
     setLocationState(this).then(() => {
       setPostState(this.props.accessToken, this.props.location, this);
     });
