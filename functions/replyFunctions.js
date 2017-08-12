@@ -2,11 +2,11 @@ import { SERVER_DOMIN } from '../configs/config';
 
 import {tokenProvider} from "./StateSetters"
 import actions from '../reducers/Actions';
- export const sendParentGetReplies=(that,parentPost)=>{
+ export const sendParentGetReplies=(that)=>{
      return new Promise((resol, rej) => {
 
          fetch({
-             url: SERVER_DOMIN + '/api/v4/posts/getReplies?postID=' + parentPost._id,
+             url: SERVER_DOMIN + '/api/v4/posts/getReplies?postID=' + that.props.parentPost._id,
              headers: {
                  accessToken: that.props.accessToken,
              },
@@ -14,10 +14,10 @@ import actions from '../reducers/Actions';
          }).then((res) => {
              return res.json();
          }).then((resJ) => {
-
+            console.log(resJ);
              if(!resJ.isAccessTokenValid) {
                  tokenProvider(that).then(() => {
-                     sendParentGetReplies(that,parentPost).then(()=>{
+                     sendParentGetReplies(that).then(()=>{
                          resol();
                      });
                  }).catch(() => {
@@ -42,11 +42,11 @@ import actions from '../reducers/Actions';
          });
      });
 };
-export const getMoreReplyPost=(that,parentPost,qu)=>{
+export const getMoreReplyPost=(that,qu)=>{
   return new Promise((resol, rej) => {
 
     fetch({
-      url: SERVER_DOMIN + '/api/v4/posts/getPosts?cursor=' + qu + '&postID' + parentPost._id,
+      url: SERVER_DOMIN + '/api/v4/posts/getPosts?cursor=' + qu + '&postID' + that.props.parentPost._id,
       headers: {
         accessToken: that.props.accessToken
       },
@@ -57,7 +57,7 @@ export const getMoreReplyPost=(that,parentPost,qu)=>{
 
       if(!resJ.isAccessTokenValid) {
           tokenProvider(that).then(() => {
-              getMoreReplyPost(that,parentPost,qu).then(()=>{
+              getMoreReplyPost(that,qu).then(()=>{
                   resol();
               });
           }).catch(() => {

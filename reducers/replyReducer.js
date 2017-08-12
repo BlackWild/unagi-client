@@ -10,7 +10,7 @@ export const replyReducer = (state = {parentPost: {}, replyPosts: []}, action) =
         case actions.CLONE_WITH_REPLY_POSTS:
             return{
                 ...state,
-                replyPosts: action.replyPosts,
+                replyPosts: action.newPosts,
             };
             break;
         case actions.ADD_REPLY_POSTS:

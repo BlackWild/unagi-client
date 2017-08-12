@@ -17,7 +17,7 @@ import { connect } from 'react-redux';
 import actions from '../reducers/Actions'
 import {addBackHandler} from '../functions/BackHandlerAdder';
 import PostWithoutReplay from './PostWithoutReplay';
-import { sendParentGetReplies, } from '../functions/replyFunctions';
+import { sendParentGetReplies } from '../functions/replyFunctions';
 import ActionButton from "react-native-action-button";
 
 import {likePost, unlikePost} from '../functions/LikeFunctions';
@@ -33,7 +33,7 @@ class PostScreen extends Component {
   }
 
   componentWillMount() {
-    // setPostState(this.props.accessToken, this.props.location, this);
+      sendParentGetReplies(this);
   }
 
   static navigationOptions = ({ navigation }) => {
@@ -57,18 +57,18 @@ class PostScreen extends Component {
   }
   onEndHandler = () => {
     if (this.state.hasNext) {
-      // getMorePost(this.props.accessToken, this.props.location, this, this.state.nextStr);
+      getMoreReplyPost(that,this.state.nextStr);
     }
   };
   onRefreshHandler = () => {
     this.setState({
       refreshing: true,
     }, () => {
-      // setPostState(this.props.accessToken, this.props.location, this).then(() => {
+      sendParentGetReplies(this).then(() => {
         this.setState({
           refreshing: false,
         })
-      // }).catch(() => { })
+      }).catch(() => { })
     });
   }
 
@@ -119,7 +119,7 @@ class PostScreen extends Component {
               </View>
               <View style={{justifyContent:'flex-end', flexDirection:'row',alignItems:'center'}}>
                 <Text>{this.props.parentPost.likes} پسند </Text>
-                <TouchableWithoutFeedback onPress={this.props.parentPost.isLiked?this.parentLikeHandler:this.parentLikeHandler}>
+                <TouchableWithoutFeedback onPress={this.props.parentPost.isLiked?this.parentUnlikeHandler:this.parentLikeHandler}>
                   <Image source={this.props.parentPost.isLiked?require('../img/heartLike.png'):require('../img/heartUnLike.png')} style={{height:20, width:22, margin:5,}} />
                 </TouchableWithoutFeedback>
               </View>
@@ -136,11 +136,11 @@ class PostScreen extends Component {
           {!this.props.replyPosts || this.props.replyPosts == [] ?
              (<View style={{ flex: 1, justifyContent: 'center' }}></View>) : 
             (
-              <PostWithoutReplay
+              <FlatList
                 data={this.props.replyPosts}
                 keyExtractor={(item, index) => item._id}
                 renderItem={({ item }) => (
-                  <Post
+                  <PostWithoutReplay
                     likes={item.likes}
                     isLiked={item.isLiked}
                     content={item.content}
