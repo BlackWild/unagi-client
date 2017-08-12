@@ -20,7 +20,7 @@ import LogIn from "./components/LogIn";
 import SignUp from "./components/SignUp";
 import PostScreen from "./components/PostScreen";
 import SendReplyScreen from "./components/SendReplyScreen";
-import UserPage from './components/UserPage';
+import UserPage from "./components/UserPage";
 import DrawerMenu from "./components/DrawerMenu";
 
 import { addBackHandler } from "./functions/BackHandlerAdder";
@@ -33,7 +33,7 @@ const App = StackNavigator({
   SendPostScreen: { screen: SendPostScreen },
   SendReplyScreen: { screen: SendReplyScreen },
   PostScreen: { screen: PostScreen },
-  UserPage: {screen: UserPage},
+  UserPage: { screen: UserPage }
 });
 
 class Unagi extends Component {
@@ -41,6 +41,8 @@ class Unagi extends Component {
     super(props);
     this.openDrawer = this.openDrawer.bind(this);
     this.closeDrawer = this.closeDrawer.bind(this);
+    this.lockDrawer = this.lockDrawer.bind(this);
+    this.unlockDrawer = this.unlockDrawer.bind(this);
     addBackHandler(this);
     this.state = {
       run: false
@@ -61,7 +63,7 @@ class Unagi extends Component {
 
     const config = {
       storage: AsyncStorage,
-      blacklist: ["app"]
+      blacklist: ["app", "navigation"]
     };
     persistStore(this.store, config, () => {
       console.log("Store loaded from local storage");
@@ -78,6 +80,16 @@ class Unagi extends Component {
   closeDrawer() {
     this.drawer.closeDrawer();
   }
+  unlockDrawer() {
+    this.drawer.setNativeProps({
+      drawerLockMode: "unlocked"
+    });
+  }
+  lockDrawer() {
+    this.drawer.setNativeProps({
+      drawerLockMode: "locked-closed"
+    });
+  }
 
   render() {
     return (
@@ -87,7 +99,8 @@ class Unagi extends Component {
               ref={rf => (this.drawer = rf)}
               drawerWidth={250}
               drawerPosition={DrawerLayoutAndroid.positions.Right}
-              renderNavigationView={() => (<DrawerMenu/>)}
+              renderNavigationView={() => <DrawerMenu />}
+              drawerLockMode="locked-closed"
             >
               <App />
             </DrawerLayoutAndroid>
