@@ -1,53 +1,47 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   paragraph: {
-    margin: 14,
-    fontSize: 14,//18
-    // fontWeight: 'bold',
-    textAlign: 'auto',
-    color: '#34495e',
-    fontFamily: 'Vazir',
-    
+    margin: 7,
+    marginBottom: 4,
+    fontSize: 14,
+    textAlign: "auto",
+    color: "#34495e",
+    fontFamily: "Vazir"
   },
   postBox: {
-    //paddingRight:15,
-    padding:10,
+    padding: 5,
+    paddingRight: 10,
+    paddingLeft: 10,
     marginBottom: 8,
-    backgroundColor: '#f1f1f1',
-    borderColor: '#9E9E9E',
-    borderBottomWidth: 3,
-    borderLeftWidth: 1,
-    borderRightWidth: 2,
+    backgroundColor: "#f1f1f1",
     borderRadius: 10
-    
   },
-  userBox:{
-    flexDirection:'row',
-    justifyContent: 'flex-end',
-    
+  userBox: {
+    flexDirection: "row",
+    justifyContent: "flex-end"
   },
-  likeBox:{
-    flexDirection:'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding:5 ,
+  likeBox: {
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    alignItems: "center",
+    borderColor: "#9e9e9e"
   },
-  user:{
-    color:'#689F38', 
-    // fontWeight: 'bold', 
-    // fontSize: 16,
-    fontFamily: 'Vazir',
+  user: {
+    color: "#689F38",
+    fontSize: 14,
+    fontFamily: "Vazir",
+    textAlign: "right"
   },
-  replyText:{
-    paddingRight:10,
+  replyText: {
+    paddingRight: 10,
     borderRightWidth: 3,
-    borderColor:'#689F38',
-    fontFamily: 'Vazir',
-    fontSize: 12,
+    borderColor: "#689F38",
+    fontFamily: "Vazir",
+    fontSize: 12
   },
-  reply:{
-    paddingRight:10,
-    paddingTop:5,
+  reply: {
+    paddingRight: 10,
+    paddingTop: 5
   }
 });
