@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import { Text, View, FlatList, TouchableWithoutFeedback } from "react-native";
 import ActionButton from "react-native-action-button";
 
-import async from "async";
-
 import Post from "../components/Post";
 import {
   setIDState,
@@ -33,6 +31,11 @@ class HomeScreen extends Component {
   }
 
   componentWillMount() {
+    this.props.dispatch({ type: actions.SET_PAGE_NAME, pageName: "Home" });
+    this.props.app.unlockDrawer();
+  }
+
+  componentDidMount() {
     setLocationState(this).then(() => {
       setPostState(this.props.accessToken, this.props.location, this);
     });
@@ -99,7 +102,6 @@ class HomeScreen extends Component {
       !this.props.navigation.state.params.openDrawer
     ) {
       this.props.navigation.setParams({
-        ...this.props.navigation.state.params,
         openDrawer: this.props.app.openDrawer
       });
     }

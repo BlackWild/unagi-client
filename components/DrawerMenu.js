@@ -19,6 +19,7 @@ class DrawerMenu extends Component {
       accessToken: "",
       refreshToken: ""
     });
+    this.props.app.lockDrawer();
     this.navig("LogIn");
   };
 
