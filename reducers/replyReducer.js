@@ -1,5 +1,5 @@
 import actions from './Actions'
-export const replyReducer = (state = {parentPost: {}, replayPosts: []}, action) => {
+export const replyReducer = (state = {parentPost: {}, replyPosts: []}, action) => {
     switch (action.type){
         case actions.SET_PARENT_POST :
             return {
@@ -10,19 +10,19 @@ export const replyReducer = (state = {parentPost: {}, replayPosts: []}, action) 
         case actions.CLONE_WITH_REPLY_POSTS:
             return{
                 ...state,
-                replayPosts: action.replayPosts,
+                replyPosts: action.replyPosts,
             };
             break;
         case actions.ADD_REPLY_POSTS:
             return{
                 ...state,
-                replyPosts: [...state.replayPosts,...action.newPosts],
+                replyPosts: [...state.replyPosts,...action.newPosts],
             };
             break;
         case actions.ADD_REPLY_TO_TOP:
             return{
                 ...state,
-                replayPosts: [action.newPost,...state.replayPosts],
+                replyPosts: [action.newPost,...state.replyPosts],
             };
             break;
         case actions.LIKE:
@@ -38,8 +38,8 @@ export const replyReducer = (state = {parentPost: {}, replayPosts: []}, action) 
                     return state.parentPost
                 }
             })(),
-            replayPosts: (()=>{
-                return state.replayPosts.map((post) => {
+            replyPosts: (()=>{
+                return state.replyPosts.map((post) => {
                     if (post._id === action.postID) {
                         return {
                             ...post,
@@ -66,8 +66,8 @@ export const replyReducer = (state = {parentPost: {}, replayPosts: []}, action) 
                     return state.parentPost
                 }
             })(),
-            replayPosts: (()=>{
-                return state.replayPosts.map((post) => {
+            replyPosts: (()=>{
+                return state.replyPosts.map((post) => {
                     if (post._id === action.postID) {
                         return {
                             ...post,
