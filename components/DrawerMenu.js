@@ -41,7 +41,7 @@ class DrawerMenu extends Component {
               />
             </View>
           </TouchableWithoutFeedback>
-          <TouchableWithoutFeedback>
+          <TouchableWithoutFeedback onPress={() => this.navig("AboutUsPage")}>
             <View style={styles.buttonView}>
               <Text style={styles.button}>درباره ما</Text>
               <Icon
