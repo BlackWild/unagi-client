@@ -2,17 +2,13 @@ import React, { Component } from "react";
 import { Text, View, FlatList, TouchableWithoutFeedback } from "react-native";
 import ActionButton from "react-native-action-button";
 
-import React, { Component } from 'react';
+import Post from "../components/Post";
 import {
-  Text,
-  View,
-  FlatList,
-  TouchableWithoutFeedback,
-} from 'react-native';
-import ActionButton from 'react-native-action-button';
-
-import Post from '../components/Post';
-import { setIDState, setLocationState, setHotPostState, getMoreHotPost } from '../functions/StateSetters';
+  setIDState,
+  setLocationState,
+  setHotPostState,
+  getMoreHotPost
+} from "../functions/StateSetters";
 
 import { styles } from "../styles/HomeScreenStyles";
 import { headerStyles } from "../styles/HeaderStyles";
@@ -90,12 +86,7 @@ class HotScreen extends Component {
       !this.props.navigation.state.params.openDrawer
     ) {
       this.props.navigation.setParams({
-<<<<<<< HEAD
-        ...this.props.navigation.state.params,
         openDrawer: this.props.app.openDrawer
-=======
-        openDrawer: this.props.app.openDrawer,
->>>>>>> 0442718b3c28f51ba792d5c5bbabf3c8e390978c
       });
     }
     return (
@@ -141,16 +132,10 @@ const mapStateToProps = state => {
     hotPosts: state.hotPosts,
     accessToken: state.userInfo.accessToken,
     location: state.location,
-<<<<<<< HEAD
+    pageName: state.pageName,
+    refreshToken: state.userInfo.refreshToken,
     app: state.app
   };
 };
-=======
-    pageName: state.pageName,
-    refreshToken: state.userInfo.refreshToken,    
-    app: state.app,
-  }
-}
->>>>>>> 0442718b3c28f51ba792d5c5bbabf3c8e390978c
 
 export default connect(mapStateToProps)(HotScreen);
