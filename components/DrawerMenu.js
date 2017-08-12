@@ -1,15 +1,36 @@
 import React, { Component } from "react";
 import { Text, View, TouchableWithoutFeedback } from "react-native";
 import { styles } from "../styles/DrawerMenuStyles";
+<<<<<<< HEAD
 import Icon from "react-native-vector-icons/Entypo";
+=======
+
+>>>>>>> 0442718b3c28f51ba792d5c5bbabf3c8e390978c
 import { connect } from "react-redux";
 import actions from "../reducers/Actions";
 
 class DrawerMenu extends Component {
   navig = pageName => {
+<<<<<<< HEAD
     this.props.navigation.navigate(pageName);
     this.props.app.closeDrawer();
   };
+=======
+    this.props.dispatch({ type: actions.SET_PAGE_NAME, pageName: pageName });
+    this.props.navigation.navigate(pageName);
+    this.props.app.closeDrawer();
+  };
+  logout = () => {
+    this.props.dispatch({
+      type: actions.SET_INFO,
+      username: "",
+      password: "",
+      accessToken: "",
+      refreshToken: ""
+    });
+    this.navig("LogIn");
+  };
+>>>>>>> 0442718b3c28f51ba792d5c5bbabf3c8e390978c
 
   render() {
     return (
@@ -52,7 +73,7 @@ class DrawerMenu extends Component {
               />
             </View>
           </TouchableWithoutFeedback>
-          <TouchableWithoutFeedback>
+          <TouchableWithoutFeedback onPress={() => this.logout()}>
             <View style={styles.buttonView}>
               <Text style={styles.button}>خروج</Text>
               <Icon
