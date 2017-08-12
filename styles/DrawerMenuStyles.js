@@ -32,6 +32,10 @@ export const styles = StyleSheet.create({
   },
   buttonView: {
     margin: 10,
-    marginBottom: 5
+    marginBottom: 5,
+    flexDirection: "row",
+    justifyContent: "flex-end",
+    alignContent: "center",
+    alignItems: "center"
   }
 });
