@@ -1,16 +1,15 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import { Text, View, TouchableWithoutFeedback } from "react-native";
 import { styles } from "../styles/DrawerMenuStyles";
-
-import { connect } from 'react-redux';
-import actions from '../reducers/Actions'
+import Icon from "react-native-vector-icons/Entypo";
+import { connect } from "react-redux";
+import actions from "../reducers/Actions";
 
 class DrawerMenu extends Component {
-  
-  navig = (pageName) => {
+  navig = pageName => {
     this.props.navigation.navigate(pageName);
     this.props.app.closeDrawer();
-  }
+  };
 
   render() {
     return (
@@ -20,24 +19,48 @@ class DrawerMenu extends Component {
           <Text style={styles.username}>Username!</Text>
         </View>
         <View>
-          <TouchableWithoutFeedback onPress={()=> this.navig("UserPage")}>
+          <TouchableWithoutFeedback onPress={() => this.navig("UserPage")}>
             <View style={styles.buttonView}>
               <Text style={styles.button}>حساب کاربری</Text>
+              <Icon
+                name="user"
+                size={20}
+                color="#689F38"
+                style={{ margin: 10, marginRight: 0 }}
+              />
             </View>
           </TouchableWithoutFeedback>
           <TouchableWithoutFeedback>
             <View style={styles.buttonView}>
               <Text style={styles.button}>درباره ما</Text>
+              <Icon
+                name="help"
+                size={20}
+                color="#689F38"
+                style={{ margin: 10, marginRight: 0 }}
+              />
             </View>
           </TouchableWithoutFeedback>
           <TouchableWithoutFeedback>
             <View style={styles.buttonView}>
               <Text style={styles.button}>تنظیمات</Text>
+              <Icon
+                name="cog"
+                size={20}
+                color="#689F38"
+                style={{ margin: 10, marginRight: 0 }}
+              />
             </View>
           </TouchableWithoutFeedback>
           <TouchableWithoutFeedback>
             <View style={styles.buttonView}>
               <Text style={styles.button}>خروج</Text>
+              <Icon
+                name="log-out"
+                size={20}
+                color="#689F38"
+                style={{ margin: 10, marginRight: 0 }}
+              />
             </View>
           </TouchableWithoutFeedback>
         </View>
@@ -46,11 +69,11 @@ class DrawerMenu extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     app: state.app,
-    navigation: state.navigation,
-  }
+    navigation: state.navigation
+  };
 };
 
 export default connect(mapStateToProps)(DrawerMenu);

@@ -46,7 +46,12 @@ class HomeScreen extends Component {
           <TouchableWithoutFeedback
             onPress={() => navigation.state.params.openDrawer()}
           >
-            <Icon name="menu" size={50} />
+            <Icon
+              name="menu"
+              size={50}
+              color="#ffffff"
+              style={{ margin: 10 }}
+            />
           </TouchableWithoutFeedback>
         </View>
       )
