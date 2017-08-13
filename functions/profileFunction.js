@@ -23,11 +23,47 @@ export const sendPicture = (that, arr, data) => {
         if (!resJ.isAccessTokenValid) {
           tokenProvider(that)
             .then(() => {
-              sendParentGetReplies(that).then(() => {
+              sendPicture(that, arr, data).then(() => {
                 resol();
               });
             })
             .catch(() => {
+              rej();
+            });
+        } else {
+        }
+      })
+      .catch(error => {
+        rej();
+      });
+  });
+};
+export const getPicture = (that, username) => {
+  return new Promise((resol, rej) => {
+    fetch({
+      url: SERVER_DOMIN + "/api/v4/users/getPic?username=" + username,
+      headers: {
+        accessToken: that.props.accessToken
+      },
+      method: "GET"
+    })
+      .then(res => {
+        return res.json();
+      })
+      .then(resJ => {
+        if (!resJ.isAccessTokenValid) {
+          tokenProvider(that)
+            .then(() => {
+              getPicture(that, username).then(() => {
+                resol();
+              });
+            })
+            .catch(() => {
+              that.props.dispatch({
+                type: actions.SET_PAGE_NAME,
+                pageName: "LogIn"
+              });
+              that.props.navigation.navigate("LogIn");
               rej();
             });
         } else {
