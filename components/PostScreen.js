@@ -95,18 +95,18 @@ class PostScreen extends Component {
   render() {
     var date = new Date(this.props.parentPost.date);
     var monthNames = [
-      "Jan ",
-      "Feb ",
-      "Mar ",
-      "Apr ",
-      "May ",
-      "Jun ",
-      "Jul ",
-      "Aug ",
-      "Sep ",
-      "Oct ",
-      "Nov ",
-      "Dec "
+      "ژانویه ",
+      "فوریه ",
+      "مارس ",
+      "آپریل ",
+      "می ",
+      "ژوئن ",
+      "جولای ",
+      "آگوست ",
+      "سپتامبر ",
+      "اکتبر ",
+      "نوامبر ",
+      "دسامبر "
     ];
     return (
       <View style={{ flex: 1 }}>
@@ -202,12 +202,19 @@ class PostScreen extends Component {
             style={{ justifyContent: "space-between", flexDirection: "row" }}
           >
             <View>
-              <Text style={{ color: "#757575", margin: 15, fontSize: 12 }}>
-                {monthNames[date.getMonth()]}
+              <Text
+                style={{
+                  color: "#757575",
+                  margin: 15,
+                  fontSize: 14,
+                  fontFamily: "Vazir"
+                }}
+              >
                 {date.getUTCDate()}
                 {"  "}
+                {monthNames[date.getMonth()]}
+                {"  "}
                 {date.getHours()}:{date.getMinutes()}
-                {/* 2017 Aug 9 12:12 Wed */}
               </Text>
             </View>
             <View
