@@ -1,39 +1,58 @@
+import { BackHandler } from "react-native";
 
-import {BackHandler} from 'react-native';
-import { NavigationActions } from 'react-navigation';
-
-export const addBackHandler = (that) => {
-
-  BackHandler.addEventListener('hardwareBackPress', () => {
-
-    if (that.props.pageName === 'LogIn') {
+export const addBackHandler = that => {
+  BackHandler.addEventListener("hardwareBackPress", () => {
+    if (that.props.pageName === "LogIn") {
       BackHandler.exitApp();
       return true;
     }
-    if (that.props.pageName === "SignUp"){
-      that.props.dispatch({ type: actions.SET_PAGE_NAME, pageName: "LogIn" })
-      that.props.navigation.navigate('LogIn');
+    if (that.props.pageName === "SignUp") {
+      // that.props.navigation.navigate("LogIn");
+      that.props.navigation.goBack();
+      that.props.dispatch({ type: actions.SET_PAGE_NAME, pageName: "LogIn" });
       return true;
     }
-    if (that.props.pageName === 'Home') {
+    if (that.props.pageName === "Home") {
       BackHandler.exitApp();
       return true;
     }
     if (that.props.pageName == "SendPostScreen") {
-      that.props.dispatch({type: actions.SET_PAGE_NAME, pageName: "Home"});
       that.props.navigation.goBack();
+      that.props.dispatch({ type: actions.SET_PAGE_NAME, pageName: "Home" });
       return true;
     }
     if (that.props.pageName == "PostScreen") {
-      that.props.dispatch({type: actions.SET_PAGE_NAME, pageName: "Home"});
       that.props.navigation.navigate("Home");
+      that.props.dispatch({ type: actions.SET_PAGE_NAME, pageName: "Home" });
       return true;
     }
-    if (that.props.pageName == "SendReplayScreen") {
-      that.props.dispatch({type: actions.SET_PAGE_NAME, pageName: "PostScreen"});
+    if (that.props.pageName == "SendReplyScreen") {
       that.props.navigation.navigate("PostScreen");
+      that.props.dispatch({
+        type: actions.SET_PAGE_NAME,
+        pageName: "PostScreen"
+      });
       return true;
     }
-    // return false;
+
+    //////////////   DrawerMenu Pages
+    if (that.props.pageName === "UserPage") {
+      that.props.app.unlockDrawer();
+      that.props.navigation.goBack();
+      that.props.dispatch({
+        type: actions.SET_PAGE_NAME,
+        pageName: that.props.pageNameNotFromDrawer
+      });
+      return true;
+    }
+    if (that.props.pageName === "AboutUsPage") {
+      that.props.app.unlockDrawer();
+      that.props.navigation.goBack();
+      that.props.dispatch({
+        type: actions.SET_PAGE_NAME,
+        pageName: that.props.pageNameNotFromDrawer
+      });
+      return true;
+    }
   });
-}
+};

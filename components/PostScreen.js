@@ -7,8 +7,6 @@ import {
   Image
 } from "react-native";
 
-import {} from "../functions/StateSetters";
-
 import { styles } from "../styles/PostScreenStyles";
 import { headerStyles } from "../styles/HeaderStyles";
 
@@ -21,6 +19,8 @@ import ActionButton from "react-native-action-button";
 
 import { likePost, unlikePost } from "../functions/LikeFunctions";
 
+import Icon from "react-native-vector-icons/Entypo";
+
 class PostScreen extends Component {
   constructor(props) {
     super(props);
@@ -32,6 +32,12 @@ class PostScreen extends Component {
   }
 
   componentWillMount() {
+    this.props.dispatch({
+      type: actions.SET_PAGE_NAME,
+      pageName: "PostScreen"
+    });
+  }
+  componentDidMount() {
     sendParentGetReplies(this);
   }
 
@@ -112,6 +118,16 @@ class PostScreen extends Component {
               </TouchableWithoutFeedback>
               <Text style={styles.post}> پست</Text>
             </View>
+            <TouchableWithoutFeedback
+              onPress={() => this.props.app.openDrawer()}
+            >
+              <Icon
+                name="menu"
+                size={50}
+                color="#ffffff"
+                style={{ margin: 10 }}
+              />
+            </TouchableWithoutFeedback>
           </View>
         </View>
 
@@ -277,10 +293,12 @@ const mapStateToProps = state => {
   return {
     accessToken: state.userInfo.accessToken,
     location: state.location,
-    pageName: state.pageName,
+    pageName: state.pageName.current,
+    pageNameNotFromDrawer: state.pageName.currentNotFromDrawer,
     refreshToken: state.userInfo.refreshToken,
     parentPost: state.replyContent.parentPost,
-    replyPosts: state.replyContent.replyPosts
+    replyPosts: state.replyContent.replyPosts,
+    app: state.app
   };
 };
 

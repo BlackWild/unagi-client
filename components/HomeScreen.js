@@ -152,7 +152,8 @@ const mapStateToProps = state => {
     posts: state.posts,
     accessToken: state.userInfo.accessToken,
     location: state.location,
-    pageName: state.pageName,
+    pageName: state.pageName.current,
+    pageNameNotFromDrawer: state.pageName.currentNotFromDrawer,
     refreshToken: state.userInfo.refreshToken,
     app: state.app
   };

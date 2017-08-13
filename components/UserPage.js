@@ -18,6 +18,15 @@ class UserPage extends Component {
       header: null
     };
   };
+
+  backTouchHandler = () => {
+    this.props.app.unlockDrawer();
+    this.props.navigation.goBack();
+    this.props.dispatch({
+      type: actions.SET_PAGE_NAME,
+      pageName: this.props.pageNameNotFromDrawer
+    });
+  };
   render() {
     return (
       <View style={{ flex: 1 }}>
@@ -34,7 +43,9 @@ class UserPage extends Component {
 
         <View style={styles.userBox}>
           <View style={styles.photo} />
-          <Text style={styles.username}>Username!</Text>
+          <Text style={styles.username}>
+            {this.props.username}
+          </Text>
         </View>
       </View>
     );
@@ -43,7 +54,10 @@ class UserPage extends Component {
 
 const mapStateToProps = state => {
   return {
-    pageName: state.pageName
+    username: state.userInfo.username,
+    pageName: state.pageName.current,
+    pageNameNotFromDrawer: state.pageName.currentNotFromDrawer,
+    app: state.app
   };
 };
 

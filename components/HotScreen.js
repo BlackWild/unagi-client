@@ -25,7 +25,7 @@ class HotScreen extends Component {
     };
   }
 
-  componentWillMount = () => {
+  componentDidMount = () => {
     setLocationState(this).then(() => {
       setHotPostState(this.props.accessToken, this.props.location, this);
     });
@@ -132,7 +132,8 @@ const mapStateToProps = state => {
     hotPosts: state.hotPosts,
     accessToken: state.userInfo.accessToken,
     location: state.location,
-    pageName: state.pageName,
+    pageName: state.pageName.current,
+    pageNameNotFromDrawer: state.pageName.currentNotFromDrawer,
     refreshToken: state.userInfo.refreshToken,
     app: state.app
   };
