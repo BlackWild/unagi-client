@@ -8,7 +8,7 @@ import {
 } from "react-native";
 
 import {} from "../functions/StateSetters";
-
+import Icon from "react-native-vector-icons/Entypo";
 import { styles } from "../styles/PostScreenStyles";
 import { headerStyles } from "../styles/HeaderStyles";
 
@@ -140,7 +140,14 @@ class PostScreen extends Component {
               }}
             >
               <View>
-                <Text style={{ color: "#212121", margin: 15, width: 200 }}>
+                <Text
+                  style={{
+                    color: "#212121",
+                    margin: 15,
+                    width: 200,
+                    fontFamily: "Vazir"
+                  }}
+                >
                   {this.props.parentPost.content}
                 </Text>
               </View>
@@ -201,6 +208,16 @@ class PostScreen extends Component {
                 {date.getHours()}:{date.getMinutes()}
               </Text>
             </View>
+            {/* <View
+              style={{
+                justifyContent: "flex-end",
+                flexDirection: "row",
+                alignItems: "center"
+              }}
+            >
+              <Text>پاسخ</Text>
+              <Icon name="reply" size={25} />
+            </View> */}
             <View
               style={{
                 justifyContent: "flex-end",
