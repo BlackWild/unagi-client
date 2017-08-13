@@ -260,28 +260,26 @@ class PostScreen extends Component {
           </Text>
         </View>
 
-        <View>
-          {!this.props.replyPosts || this.props.replyPosts == []
-            ? <View style={{ flex: 1, justifyContent: "center" }} />
-            : <FlatList
-                data={this.props.replyPosts}
-                keyExtractor={(item, index) => item._id}
-                renderItem={({ item }) =>
-                  <PostWithoutReplay
-                    likes={item.likes}
-                    isLiked={item.isLiked}
-                    content={item.content}
-                    date={item.date}
-                    postID={item._id}
-                    username={item.username}
-                    navigation={this.props.navigation}
-                  />}
-                onEndReached={this.onEndHandler}
-                onEndReachedThreshold={2}
-                refreshing={this.state.refreshing}
-                onRefresh={this.onRefreshHandler}
-              />}
-        </View>
+        {!this.props.replyPosts || this.props.replyPosts == []
+          ? <View style={{ flex: 1, justifyContent: "center" }} />
+          : <FlatList
+              data={this.props.replyPosts}
+              keyExtractor={(item, index) => item._id}
+              renderItem={({ item }) =>
+                <PostWithoutReplay
+                  likes={item.likes}
+                  isLiked={item.isLiked}
+                  content={item.content}
+                  date={item.date}
+                  postID={item._id}
+                  username={item.username}
+                  navigation={this.props.navigation}
+                />}
+              onEndReached={this.onEndHandler}
+              onEndReachedThreshold={1}
+              refreshing={this.state.refreshing}
+              onRefresh={this.onRefreshHandler}
+            />}
         <ActionButton
           onPress={this.onPre}
           degrees={0}
