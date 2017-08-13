@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text, View, Image, TouchableWithoutFeedback } from "react-native";
+import { Text, View, Image, TouchableNativeFeedback } from "react-native";
 import { styles } from "../styles/PostStyles";
 
 import { likePost, unlikePost } from "../functions/LikeFunctions";
@@ -84,7 +84,10 @@ class Post extends Component {
     else timeago = " همین الان";
 
     return (
-      <TouchableWithoutFeedback onPress={this.postTouchHandler}>
+      <TouchableNativeFeedback
+        onPress={this.postTouchHandler}
+        background={TouchableNativeFeedback.Ripple("green", false)}
+      >
         <View style={styles.postBox}>
           <View
             style={{
@@ -180,7 +183,7 @@ class Post extends Component {
             </View>
           </View>
         </View>
-      </TouchableWithoutFeedback>
+      </TouchableNativeFeedback>
     );
   }
 }
