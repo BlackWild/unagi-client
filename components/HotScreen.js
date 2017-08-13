@@ -114,6 +114,7 @@ class HotScreen extends Component {
                     postID={item._id}
                     username={item.username}
                     posterID={item.userID}
+                    replies={item.replies}
                     navigation={this.props.navigation}
                   />}
                 onEndReached={this.onEndHandler}

@@ -142,7 +142,9 @@ class Post extends Component {
                     margin: 5
                   }}
                 >
-                  <Text style={{ fontFamily: "Vazir" }}> 0</Text>
+                  <Text style={{ fontFamily: "Vazir" }}>
+                    {this.props.replies}
+                  </Text>
                   <Icon name="reply" color="#757575" size={25} />
                 </View>
               </TouchableWithoutFeedback>
