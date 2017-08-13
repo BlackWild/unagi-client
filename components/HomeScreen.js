@@ -110,7 +110,7 @@ class HomeScreen extends Component {
         <View style={styles.container}>
           {!this.props || !this.props.posts
             ? <View style={{ flex: 1, justifyContent: "center" }}>
-                <Text>LODING</Text>
+                <Text>LOADING</Text>
               </View>
             : <FlatList
                 data={this.props.posts}
@@ -124,6 +124,7 @@ class HomeScreen extends Component {
                     postID={item._id}
                     username={item.username}
                     posterID={item.userID}
+                    replies={item.replies}
                     navigation={this.props.navigation}
                   />}
                 onEndReached={this.onEndHandler}

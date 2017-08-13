@@ -20,7 +20,7 @@ class DrawerMenu extends Component {
       accessToken: "",
       refreshToken: ""
     });
-    navig("LogIn");
+    this.navig("LogIn");
   };
 
   render() {
