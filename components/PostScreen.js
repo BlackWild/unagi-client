@@ -9,16 +9,14 @@ import {
 
 import { styles } from "../styles/PostScreenStyles";
 import { headerStyles } from "../styles/HeaderStyles";
-
+import {} from "../functions/StateSetters";
 import { connect } from "react-redux";
 import actions from "../reducers/Actions";
 import { addBackHandler } from "../functions/BackHandlerAdder";
 import PostWithoutReplay from "./PostWithoutReplay";
 import { sendParentGetReplies } from "../functions/replyFunctions";
 import ActionButton from "react-native-action-button";
-
 import { likePost, unlikePost } from "../functions/LikeFunctions";
-
 import Icon from "react-native-vector-icons/Entypo";
 
 class PostScreen extends Component {
