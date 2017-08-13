@@ -1,5 +1,11 @@
 import React, { Component } from "react";
-import { Text, View, Image, TouchableNativeFeedback } from "react-native";
+import {
+  Text,
+  View,
+  Image,
+  TouchableWithoutFeedback,
+  TouchableNativeFeedback
+} from "react-native";
 import { styles } from "../styles/PostStyles";
 
 import { likePost, unlikePost } from "../functions/LikeFunctions";

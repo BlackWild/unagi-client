@@ -65,7 +65,7 @@ class Unagi extends Component {
 
     const config = {
       storage: AsyncStorage,
-      blacklist: ["app", "navigation"]
+      blacklist: ["app", "navigation", "pageName"]
     };
     persistStore(this.store, config, () => {
       console.log("Store loaded from local storage");
