@@ -16,7 +16,8 @@ export const likePost = (accessToken, pID, that) => {
       },
       body: JSON.stringify({
         postID: pID
-      })
+      }),
+      method: "POST"
     })
       .then(res => {
         return res.json();
