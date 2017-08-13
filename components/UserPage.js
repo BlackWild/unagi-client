@@ -6,7 +6,8 @@ import { styles } from "../styles/UserScreenStyles";
 import { connect } from "react-redux";
 import actions from "../reducers/Actions";
 import { addBackHandler } from "../functions/BackHandlerAdder";
-
+import ImagePicker from "react-native-image-picker";
+import { sendPicture } from "../functions/profileFunction";
 class UserPage extends Component {
   constructor(props) {
     super(props);
@@ -18,7 +19,35 @@ class UserPage extends Component {
       header: null
     };
   };
+  openAvatarWindow = () => {
+    var options = {
+      title: "Select Avatar",
+      customButtons: [{ name: "fb", title: "Choose Photo from Facebook" }],
+      storageOptions: {
+        skipBackup: true,
+        path: "images"
+      }
+    };
+    ImagePicker.showImagePicker(options, response => {
+      console.log("Response = ", response);
 
+      if (response.didCancel) {
+        console.log("User cancelled image picker");
+      } else if (response.error) {
+        console.log("ImagePicker Error: ", response.error);
+      } else if (response.customButton) {
+        console.log("User tapped custom button: ", response.customButton);
+      } else {
+        let source = { uri: response.uri };
+        this.setState({
+          avatarSource: source
+        });
+        var temp = response.type;
+        var arr = temp.split("/");
+        sendPicture(this, arr, response.data);
+      }
+    });
+  };
   backTouchHandler = () => {
     this.props.app.unlockDrawer();
     this.props.navigation.goBack();
@@ -42,7 +71,9 @@ class UserPage extends Component {
         </View>
 
         <View style={styles.userBox}>
-          <View style={styles.photo} />
+          <TouchableWithoutFeedback onPress={this.openAvatarWindow}>
+            <View style={styles.photo} />
+          </TouchableWithoutFeedback>
           <Text style={styles.username}>
             {this.props.username}
           </Text>
@@ -57,7 +88,8 @@ const mapStateToProps = state => {
     username: state.userInfo.username,
     pageName: state.pageName.current,
     pageNameNotFromDrawer: state.pageName.currentNotFromDrawer,
-    app: state.app
+    app: state.app,
+    accessToken: state.userInfo.accessToken
   };
 };
 
