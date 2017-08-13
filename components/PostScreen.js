@@ -7,8 +7,6 @@ import {
   Image
 } from "react-native";
 
-import {} from "../functions/StateSetters";
-import Icon from "react-native-vector-icons/Entypo";
 import { styles } from "../styles/PostScreenStyles";
 import { headerStyles } from "../styles/HeaderStyles";
 
@@ -21,6 +19,8 @@ import ActionButton from "react-native-action-button";
 
 import { likePost, unlikePost } from "../functions/LikeFunctions";
 
+import Icon from "react-native-vector-icons/Entypo";
+
 class PostScreen extends Component {
   constructor(props) {
     super(props);
@@ -32,6 +32,12 @@ class PostScreen extends Component {
   }
 
   componentWillMount() {
+    this.props.dispatch({
+      type: actions.SET_PAGE_NAME,
+      pageName: "PostScreen"
+    });
+  }
+  componentDidMount() {
     sendParentGetReplies(this);
   }
 
@@ -112,6 +118,16 @@ class PostScreen extends Component {
               </TouchableWithoutFeedback>
               <Text style={styles.post}> پست</Text>
             </View>
+            <TouchableWithoutFeedback
+              onPress={() => this.props.app.openDrawer()}
+            >
+              <Icon
+                name="menu"
+                size={50}
+                color="#ffffff"
+                style={{ margin: 10 }}
+              />
+            </TouchableWithoutFeedback>
           </View>
         </View>
 
@@ -261,28 +277,26 @@ class PostScreen extends Component {
           </Text>
         </View>
 
-        <View>
-          {!this.props.replyPosts || this.props.replyPosts == []
-            ? <View style={{ flex: 1, justifyContent: "center" }} />
-            : <FlatList
-                data={this.props.replyPosts}
-                keyExtractor={(item, index) => item._id}
-                renderItem={({ item }) =>
-                  <PostWithoutReplay
-                    likes={item.likes}
-                    isLiked={item.isLiked}
-                    content={item.content}
-                    date={item.date}
-                    postID={item._id}
-                    username={item.username}
-                    navigation={this.props.navigation}
-                  />}
-                onEndReached={this.onEndHandler}
-                onEndReachedThreshold={2}
-                refreshing={this.state.refreshing}
-                onRefresh={this.onRefreshHandler}
-              />}
-        </View>
+        {!this.props.replyPosts || this.props.replyPosts == []
+          ? <View style={{ flex: 1, justifyContent: "center" }} />
+          : <FlatList
+              data={this.props.replyPosts}
+              keyExtractor={(item, index) => item._id}
+              renderItem={({ item }) =>
+                <PostWithoutReplay
+                  likes={item.likes}
+                  isLiked={item.isLiked}
+                  content={item.content}
+                  date={item.date}
+                  postID={item._id}
+                  username={item.username}
+                  navigation={this.props.navigation}
+                />}
+              onEndReached={this.onEndHandler}
+              onEndReachedThreshold={1}
+              refreshing={this.state.refreshing}
+              onRefresh={this.onRefreshHandler}
+            />}
         <ActionButton
           onPress={this.onPre}
           degrees={0}
@@ -301,10 +315,12 @@ const mapStateToProps = state => {
   return {
     accessToken: state.userInfo.accessToken,
     location: state.location,
-    pageName: state.pageName,
+    pageName: state.pageName.current,
+    pageNameNotFromDrawer: state.pageName.currentNotFromDrawer,
     refreshToken: state.userInfo.refreshToken,
     parentPost: state.replyContent.parentPost,
-    replyPosts: state.replyContent.replyPosts
+    replyPosts: state.replyContent.replyPosts,
+    app: state.app
   };
 };
 

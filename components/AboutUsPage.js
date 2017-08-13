@@ -18,6 +18,15 @@ class AboutUsPage extends Component {
       header: null
     };
   };
+
+  backTouchHandler = () => {
+    this.props.app.unlockDrawer();
+    this.props.navigation.goBack();
+    this.props.dispatch({
+      type: actions.SET_PAGE_NAME,
+      pageName: this.props.pageNameNotFromDrawer
+    });
+  };
   render() {
     return (
       <View style={{ flex: 1 }}>
@@ -71,7 +80,9 @@ class AboutUsPage extends Component {
 
 const mapStateToProps = state => {
   return {
-    pageName: state.pageName
+    pageName: state.pageName.current,
+    pageNameNotFromDrawer: state.pageName.currentNotFromDrawer,
+    app: state.app
   };
 };
 

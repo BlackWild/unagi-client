@@ -30,6 +30,9 @@ class SignUp extends Component {
       accept: false
     };
   }
+  componentWillMount() {
+    this.props.dispatch({ type: actions.SET_PAGE_NAME, pageName: "SignUp" });
+  }
 
   clickedtime = () => {
     if (this.state.password !== this.state.repassword) {
@@ -47,11 +50,11 @@ class SignUp extends Component {
           if (!arg) {
             ToastAndroid.show("نام کاربری تکراری است", ToastAndroid.SHORT);
           } else {
+            this.props.navigation.navigate("Home");
             this.props.dispatch({
               type: actions.SET_PAGE_NAME,
               pageName: "Home"
             });
-            this.props.navigation.navigate("Home");
           }
         });
       } catch (err) {
@@ -218,7 +221,8 @@ class SignUp extends Component {
 
 const mapStateToProps = state => {
   return {
-    pageName: state.pageName
+    pageName: state.pageName.current,
+    pageNameNotFromDrawer: state.pageName.currentNotFromDrawer
   };
 };
 export default connect(mapStateToProps)(SignUp);

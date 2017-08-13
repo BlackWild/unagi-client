@@ -66,7 +66,8 @@ class LoadingScreen extends Component {
 
 const mapStateToProps = state => {
   return {
-    pageName: state.pageName,
+    pageName: state.pageName.current,
+    pageNameNotFromDrawer: state.pageName.currentNotFromDrawer,
     refreshToken: state.userInfo.refreshToken
   };
 };

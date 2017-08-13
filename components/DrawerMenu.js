@@ -4,12 +4,13 @@ import { styles } from "../styles/DrawerMenuStyles";
 import Icon from "react-native-vector-icons/Entypo";
 import { connect } from "react-redux";
 import actions from "../reducers/Actions";
+import { addBackHandler } from "../functions/BackHandlerAdder";
 
 class DrawerMenu extends Component {
   navig = pageName => {
-    this.props.dispatch({ type: actions.SET_PAGE_NAME, pageName: pageName });
     this.props.navigation.navigate(pageName);
-    this.props.app.closeDrawer();
+    this.props.dispatch({ type: actions.SET_PAGE_NAME, pageName: pageName });
+    this.props.app.lockDrawer();
   };
   logout = () => {
     this.props.dispatch({
@@ -19,7 +20,6 @@ class DrawerMenu extends Component {
       accessToken: "",
       refreshToken: ""
     });
-    this.props.app.lockDrawer();
     this.navig("LogIn");
   };
 
@@ -28,7 +28,9 @@ class DrawerMenu extends Component {
       <View style={{ flex: 1 }}>
         <View style={styles.userBox}>
           <View style={styles.photo} />
-          <Text style={styles.username}>Username!</Text>
+          <Text style={styles.username}>
+            {this.props.username}
+          </Text>
         </View>
         <View>
           <TouchableWithoutFeedback onPress={() => this.navig("UserPage")}>
@@ -84,7 +86,8 @@ class DrawerMenu extends Component {
 const mapStateToProps = state => {
   return {
     app: state.app,
-    navigation: state.navigation
+    navigation: state.navigation,
+    username: state.userInfo.username
   };
 };
 
