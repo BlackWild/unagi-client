@@ -16,6 +16,11 @@ export const registerReducer = (state = {}, action) => {
         refreshToken: action.refreshToken
       };
       break;
+    case actions.SET_IMAGE:
+      return {
+        ...state,
+        imageUri: action.uri
+      };
     default:
       return state;
   }

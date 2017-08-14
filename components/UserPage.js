@@ -1,5 +1,12 @@
 import React, { Component } from "react";
-import { Text, View, TouchableWithoutFeedback, Image } from "react-native";
+// const CachedImage = require("react-native-cached-image");
+import {
+  Text,
+  View,
+  TouchableWithoutFeedback,
+  Image,
+  ToastAndroid
+} from "react-native";
 
 import { headerStyles } from "../styles/HeaderStyles";
 import { styles } from "../styles/UserScreenStyles";
@@ -7,7 +14,7 @@ import { connect } from "react-redux";
 import actions from "../reducers/Actions";
 import { addBackHandler } from "../functions/BackHandlerAdder";
 import ImagePicker from "react-native-image-picker";
-import { sendPicture } from "../functions/profileFunction";
+import { sendPicture, getPicture } from "../functions/profileFunction";
 class UserPage extends Component {
   constructor(props) {
     super(props);
@@ -29,7 +36,7 @@ class UserPage extends Component {
       }
     };
     ImagePicker.showImagePicker(options, response => {
-      console.log("Response = ", response);
+      // console.log("Response = ", response);
 
       if (response.didCancel) {
         console.log("User cancelled image picker");
@@ -72,7 +79,17 @@ class UserPage extends Component {
 
         <View style={styles.userBox}>
           <TouchableWithoutFeedback onPress={this.openAvatarWindow}>
-            <View style={styles.photo} />
+            <View style={styles.photo}>
+              {/* <CacheImage
+                resizeMode="stretch"
+                defaultSource={app.img.tabnav_list}
+                url={this.props.url}
+                style={{
+                  width: 200,
+                  height: 200
+                }}
+              /> */}
+            </View>
           </TouchableWithoutFeedback>
           <Text style={styles.username}>
             {this.props.username}
@@ -89,7 +106,8 @@ const mapStateToProps = state => {
     pageName: state.pageName.current,
     pageNameNotFromDrawer: state.pageName.currentNotFromDrawer,
     app: state.app,
-    accessToken: state.userInfo.accessToken
+    accessToken: state.userInfo.accessToken,
+    url: state.userInfo.imageUri
   };
 };
 
