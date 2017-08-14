@@ -6,6 +6,7 @@ import { styles } from "../styles/AboutUsStyle";
 import { connect } from "react-redux";
 import actions from "../reducers/Actions";
 import { addBackHandler } from "../functions/BackHandlerAdder";
+import Icon from "react-native-vector-icons/Entypo";
 
 class AboutUsPage extends Component {
   constructor(props) {
@@ -31,17 +32,15 @@ class AboutUsPage extends Component {
     return (
       <View style={{ flex: 1 }}>
         <View style={headerStyles.pagesHeader}>
-          {/* <View style={styles.header}> */}
-          {/* <View style={{ flexDirection: "row", alignItems: "center" }}> */}
           <TouchableWithoutFeedback onPress={this.backTouchHandler}>
-            <Image
-              source={require("../img/back.png")}
-              style={headerStyles.backPic}
+            <Icon
+              name="chevron-left"
+              size={40}
+              color="#f1f1f1"
+              style={{ padding: 10 }}
             />
           </TouchableWithoutFeedback>
           <Text style={headerStyles.titleHeader}> درباره ما</Text>
-          {/* </View> */}
-          {/* </View> */}
         </View>
         <View
           style={{

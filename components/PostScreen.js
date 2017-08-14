@@ -111,10 +111,16 @@ class PostScreen extends Component {
         <View style={headerStyles.pagesHeader}>
           <View>
             <TouchableWithoutFeedback onPress={this.backTouchHandler}>
-              <Image
+              <Icon
+                name="chevron-left"
+                size={40}
+                color="#f1f1f1"
+                style={{ padding: 10 }}
+              />
+              {/* <Image
                 source={require("../img/back.png")}
                 style={headerStyles.backPic}
-              />
+              /> */}
             </TouchableWithoutFeedback>
           </View>
           <View>

@@ -4,7 +4,9 @@ import HotScreen from "./HotScreen";
 
 export const TabScreen = TabNavigator(
   {
-    خانه: { screen: HomeScreen },
+    خانه: {
+      screen: HomeScreen
+    },
     "پست های داغ": { screen: HotScreen }
   },
   {

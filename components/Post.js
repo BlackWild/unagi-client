@@ -171,11 +171,9 @@ class Post extends Component {
                     margin: 5
                   }}
                 >
-                  {/* <Text style={{ fontFamily: "Vazir" }}> 0</Text>  */}
                   <Text style={{ fontFamily: "Vazir" }}>
                     {this.props.likes}
                   </Text>
-
                   <Image
                     source={
                       this.props.isLiked

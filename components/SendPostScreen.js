@@ -15,7 +15,7 @@ import { styles } from "../styles/SendPostScreenStyles";
 import { HomeScreen } from "./HomeScreen";
 import { setIDState, setLocationState } from "../functions/StateSetters";
 import { sendPost } from "../functions/SendPost";
-
+import Icon from "react-native-vector-icons/Entypo";
 import { NavigationActions } from "react-navigation";
 import { addBackHandler } from "../functions/BackHandlerAdder";
 
@@ -106,7 +106,12 @@ class SendPostScreen extends Component {
           >
             <View style={{ flexDirection: "row", alignItems: "center" }}>
               <TouchableWithoutFeedback onPress={this.backTouchHandler}>
-                <Image source={require("../img/back.png")} style={styles.pic} />
+                <Icon
+                  name="chevron-left"
+                  size={40}
+                  color="#f1f1f1"
+                  style={{ padding: 10 }}
+                />
               </TouchableWithoutFeedback>
               <Text style={styles.post}>افزودن پست</Text>
             </View>
@@ -141,7 +146,7 @@ class SendPostScreen extends Component {
               style={styles.textarea}
               underlineColorAndroid="transparent"
               multiline={true}
-              placeholder="اونجا که هستی چه خبره!؟"
+              placeholder="اوناگ کن! "
               onChangeText={text => {
                 leng = text.split("").length;
                 this.setState({
