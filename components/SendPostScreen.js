@@ -10,7 +10,7 @@ import {
 } from "react-native";
 
 import async from "async";
-
+import { headerStyles } from "../styles/HeaderStyles";
 import { styles } from "../styles/SendPostScreenStyles";
 import { HomeScreen } from "./HomeScreen";
 import { setIDState, setLocationState } from "../functions/StateSetters";
@@ -95,7 +95,7 @@ class SendPostScreen extends Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <View style={styles.bar}>
+        <View style={headerStyles.pagesHeader}>
           <View
             style={{
               flex: 1,

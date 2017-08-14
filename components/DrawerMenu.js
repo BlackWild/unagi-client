@@ -38,9 +38,9 @@ class DrawerMenu extends Component {
               <Text style={styles.button}>حساب کاربری</Text>
               <Icon
                 name="user"
-                size={20}
+                size={16}
                 color="#689F38"
-                style={{ margin: 10, marginRight: 0 }}
+                style={{ margin: 5, marginLeft: 15 }}
               />
             </View>
           </TouchableWithoutFeedback>
@@ -49,31 +49,21 @@ class DrawerMenu extends Component {
               <Text style={styles.button}>درباره ما</Text>
               <Icon
                 name="help"
-                size={20}
+                size={16}
                 color="#689F38"
-                style={{ margin: 10, marginRight: 0 }}
+                style={{ margin: 5, marginLeft: 15 }}
               />
             </View>
           </TouchableWithoutFeedback>
-          <TouchableWithoutFeedback>
-            <View style={styles.buttonView}>
-              <Text style={styles.button}>تنظیمات</Text>
-              <Icon
-                name="cog"
-                size={20}
-                color="#689F38"
-                style={{ margin: 10, marginRight: 0 }}
-              />
-            </View>
-          </TouchableWithoutFeedback>
+
           <TouchableWithoutFeedback onPress={() => this.logout()}>
             <View style={styles.buttonView}>
               <Text style={styles.button}>خروج</Text>
               <Icon
                 name="log-out"
-                size={20}
+                size={16}
                 color="#689F38"
-                style={{ margin: 10, marginRight: 0 }}
+                style={{ margin: 5, marginLeft: 15 }}
               />
             </View>
           </TouchableWithoutFeedback>

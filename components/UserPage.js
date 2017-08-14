@@ -59,15 +59,14 @@ class UserPage extends Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <View style={styles.bar}>
-          <View style={styles.header}>
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <TouchableWithoutFeedback onPress={this.backTouchHandler}>
-                <Image source={require("../img/back.png")} style={styles.pic} />
-              </TouchableWithoutFeedback>
-              <Text style={styles.post}> حساب کاربری</Text>
-            </View>
-          </View>
+        <View style={headerStyles.pagesHeader}>
+          <TouchableWithoutFeedback onPress={this.backTouchHandler}>
+            <Image
+              source={require("../img/back.png")}
+              style={headerStyles.backPic}
+            />
+          </TouchableWithoutFeedback>
+          <Text style={headerStyles.titleHeader}> حساب کاربری</Text>
         </View>
 
         <View style={styles.userBox}>

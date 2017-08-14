@@ -13,7 +13,7 @@ export const TabScreen = TabNavigator(
         backgroundColor: "#8BC34A"
       },
       labelStyle: {
-        fontSize: 18,
+        fontSize: 14,
         fontFamily: "Vazir"
       }
     }

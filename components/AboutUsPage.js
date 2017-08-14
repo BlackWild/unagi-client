@@ -30,15 +30,18 @@ class AboutUsPage extends Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <View style={styles.bar}>
-          <View style={styles.header}>
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <TouchableWithoutFeedback onPress={this.backTouchHandler}>
-                <Image source={require("../img/back.png")} style={styles.pic} />
-              </TouchableWithoutFeedback>
-              <Text style={styles.post}> درباره ما</Text>
-            </View>
-          </View>
+        <View style={headerStyles.pagesHeader}>
+          {/* <View style={styles.header}> */}
+          {/* <View style={{ flexDirection: "row", alignItems: "center" }}> */}
+          <TouchableWithoutFeedback onPress={this.backTouchHandler}>
+            <Image
+              source={require("../img/back.png")}
+              style={headerStyles.backPic}
+            />
+          </TouchableWithoutFeedback>
+          <Text style={headerStyles.titleHeader}> درباره ما</Text>
+          {/* </View> */}
+          {/* </View> */}
         </View>
         <View
           style={{

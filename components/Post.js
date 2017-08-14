@@ -130,14 +130,14 @@ class Post extends Component {
               }}
             >
               <Text
-                style={{ color: "#9E9E9E", fontSize: 14, fontFamily: "Vazir" }}
+                style={{ color: "#9E9E9E", fontSize: 10, fontFamily: "Vazir" }}
               >
                 {timeago}
               </Text>
               <Icon
                 name="clock"
                 color="#9E9E9E"
-                size={14}
+                size={10}
                 style={{ marginLeft: 5 }}
               />
             </View>
