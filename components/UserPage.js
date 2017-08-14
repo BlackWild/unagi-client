@@ -15,6 +15,7 @@ import actions from "../reducers/Actions";
 import { addBackHandler } from "../functions/BackHandlerAdder";
 import ImagePicker from "react-native-image-picker";
 import { sendPicture, getPicture } from "../functions/profileFunction";
+import Icon from "react-native-vector-icons/Entypo";
 class UserPage extends Component {
   constructor(props) {
     super(props);
@@ -66,15 +67,20 @@ class UserPage extends Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <View style={styles.bar}>
-          <View style={styles.header}>
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <TouchableWithoutFeedback onPress={this.backTouchHandler}>
-                <Image source={require("../img/back.png")} style={styles.pic} />
-              </TouchableWithoutFeedback>
-              <Text style={styles.post}> حساب کاربری</Text>
-            </View>
-          </View>
+        <View style={headerStyles.pagesHeader}>
+          <TouchableWithoutFeedback onPress={this.backTouchHandler}>
+            <Icon
+              name="chevron-left"
+              size={40}
+              color="#f1f1f1"
+              style={{ padding: 10 }}
+            />
+            {/* <Image
+              source={require("../img/back.png")}
+              style={headerStyles.backPic}
+            /> */}
+          </TouchableWithoutFeedback>
+          <Text style={headerStyles.titleHeader}> حساب کاربری</Text>
         </View>
 
         <View style={styles.userBox}>

@@ -51,7 +51,7 @@ class PostWithoutReplay extends Component {
     else timeago = " همین الان";
 
     return (
-      <View style={styles.postBox}>
+      <View style={[styles.postBox, { margin: 10, marginBottom: 0 }]}>
         <View
           style={{
             flexDirection: "row",

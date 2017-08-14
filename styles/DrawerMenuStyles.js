@@ -27,7 +27,7 @@ export const styles = StyleSheet.create({
     color: "#689F38",
     margin: 0,
     fontFamily: "Vazir",
-    fontSize: 18,
+    fontSize: 16,
     textAlign: "right"
   },
   buttonView: {

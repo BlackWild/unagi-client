@@ -52,7 +52,7 @@ class LoadingScreen extends Component {
         <StatusBar backgroundColor="#689F38" barStyle="light-content" />
         <View style={[styles.container]}>
           <Image source={require("../img/logo.png")} style={styles.pic} />
-          <Text style={styles.welcome}> اوناگ کن! </Text>
+          <Text style={styles.welcome}>اونجا که هستی چه خبره!؟</Text>
           <ActivityIndicator
             style={{ transform: [{ scale: 1.5 }] }}
             size="large"

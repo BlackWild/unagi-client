@@ -9,16 +9,14 @@ import {
 
 import { styles } from "../styles/PostScreenStyles";
 import { headerStyles } from "../styles/HeaderStyles";
-
+import {} from "../functions/StateSetters";
 import { connect } from "react-redux";
 import actions from "../reducers/Actions";
 import { addBackHandler } from "../functions/BackHandlerAdder";
 import PostWithoutReplay from "./PostWithoutReplay";
 import { sendParentGetReplies } from "../functions/replyFunctions";
 import ActionButton from "react-native-action-button";
-
 import { likePost, unlikePost } from "../functions/LikeFunctions";
-
 import Icon from "react-native-vector-icons/Entypo";
 
 class PostScreen extends Component {
@@ -110,15 +108,26 @@ class PostScreen extends Component {
     ];
     return (
       <View style={{ flex: 1 }}>
-        <View style={styles.bar}>
-          <View style={styles.header}>
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <TouchableWithoutFeedback onPress={this.backTouchHandler}>
-                <Image source={require("../img/back.png")} style={styles.pic} />
-              </TouchableWithoutFeedback>
-              <Text style={styles.post}> پست</Text>
-            </View>
-            <TouchableWithoutFeedback
+        <View style={headerStyles.pagesHeader}>
+          <View>
+            <TouchableWithoutFeedback onPress={this.backTouchHandler}>
+              <Icon
+                name="chevron-left"
+                size={40}
+                color="#f1f1f1"
+                style={{ padding: 10 }}
+              />
+              {/* <Image
+                source={require("../img/back.png")}
+                style={headerStyles.backPic}
+              /> */}
+            </TouchableWithoutFeedback>
+          </View>
+          <View>
+            <Text style={headerStyles.titleHeader}> پست</Text>
+          </View>
+          {/* </View> */}
+          {/* <TouchableWithoutFeedback
               onPress={() => this.props.app.openDrawer()}
             >
               <Icon
@@ -127,8 +136,7 @@ class PostScreen extends Component {
                 color="#ffffff"
                 style={{ margin: 10 }}
               />
-            </TouchableWithoutFeedback>
-          </View>
+            </TouchableWithoutFeedback> */}
         </View>
 
         <View
@@ -156,7 +164,14 @@ class PostScreen extends Component {
               }}
             >
               <View>
-                <Text style={{ color: "#212121", margin: 15, width: 200 }}>
+                <Text
+                  style={{
+                    color: "#212121",
+                    margin: 15,
+                    width: 200,
+                    fontFamily: "Vazir"
+                  }}
+                >
                   {this.props.parentPost.content}
                 </Text>
               </View>
@@ -217,6 +232,16 @@ class PostScreen extends Component {
                 {date.getHours()}:{date.getMinutes()}
               </Text>
             </View>
+            {/* <View
+              style={{
+                justifyContent: "flex-end",
+                flexDirection: "row",
+                alignItems: "center"
+              }}
+            >
+              <Text>پاسخ</Text>
+              <Icon name="reply" size={25} />
+            </View> */}
             <View
               style={{
                 justifyContent: "flex-end",
