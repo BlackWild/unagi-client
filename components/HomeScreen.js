@@ -160,7 +160,7 @@ class HomeScreen extends Component {
       });
     }
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1, backgroundColor: "#b3e5fc" }}>
         <View style={styles.container}>
           {!this.props || !this.props.posts
             ? <View style={{ flex: 1, justifyContent: "center" }}>

@@ -135,7 +135,7 @@ class PostScreen extends Component {
       "دسامبر "
     ];
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1, backgroundColor: "#e1f5fe" }}>
         <View style={headerStyles.pagesHeader}>
           <View>
             <TouchableWithoutFeedback onPress={this.backTouchHandler}>
@@ -145,10 +145,6 @@ class PostScreen extends Component {
                 color="#f1f1f1"
                 style={{ padding: 10 }}
               />
-              {/* <Image
-                source={require("../img/back.png")}
-                style={headerStyles.backPic}
-              /> */}
             </TouchableWithoutFeedback>
           </View>
           <View>
@@ -171,8 +167,10 @@ class PostScreen extends Component {
           style={{
             padding: 10,
             margin: 10,
-            borderBottomWidth: 2,
-            borderColor: "#757575"
+            borderBottomWidth: 0,
+            borderColor: "#757575",
+            backgroundColor: "#b3e5fc",
+            borderRadius: 15
           }}
         >
           <View
@@ -267,7 +265,7 @@ class PostScreen extends Component {
                 alignItems: "center"
               }}
             >
-              <Text>
+              <Text style={{ fontFamily: "Vazir" }}>
                 {this.props.parentPost.likes} پسند{" "}
               </Text>
               <TouchableWithoutFeedback

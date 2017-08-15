@@ -161,13 +161,13 @@ class Post extends Component {
               }}
             >
               <Text
-                style={{ color: "#9E9E9E", fontSize: 10, fontFamily: "Vazir" }}
+                style={{ color: "#b388ff", fontSize: 10, fontFamily: "Vazir" }}
               >
                 {timeago}
               </Text>
               <Icon
                 name="clock"
-                color="#9E9E9E"
+                color="#b388ff"
                 size={10}
                 style={{ marginLeft: 5 }}
               />
@@ -182,10 +182,10 @@ class Post extends Component {
                     margin: 5
                   }}
                 >
-                  <Text style={{ fontFamily: "Vazir" }}>
+                  <Text style={{ fontFamily: "Vazir", color: "#8363ba" }}>
                     {this.props.replies}
                   </Text>
-                  <Icon name="reply" color="#757575" size={25} />
+                  <Icon name="reply" color="#8363ba" size={25} />
                 </View>
               </TouchableWithoutFeedback>
 

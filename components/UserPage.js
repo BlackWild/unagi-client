@@ -108,7 +108,7 @@ class UserPage extends Component {
                 justifyContent: "center",
                 flexDirection: "row",
                 left: 120,
-                bottom: 45
+                bottom: 40
               }}
             >
               <Icon name="camera" size={24} color="#f1f1f1" />
