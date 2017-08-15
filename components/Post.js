@@ -161,7 +161,11 @@ class Post extends Component {
                   source={{
                     uri: SERVER_DOMIN + "/" + this.props.username + ".jpeg"
                   }}
-                  style={{ width: 193, height: 110 }}
+                  style={{
+                    height: 40,
+                    width: 35,
+                    borderRadius: 20
+                  }}
                 />
               </View>
             </View>
