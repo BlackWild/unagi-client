@@ -115,7 +115,11 @@ class UserPage extends Component {
           <View style={styles.photo}>
             <Image
               source={{ uri: this.props.url }}
-              style={{ width: 193, height: 110 }}
+              style={{
+                height: 96,
+                width: 84,
+                borderRadius: 48
+              }}
             />
           </View>
           <View>

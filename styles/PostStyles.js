@@ -2,17 +2,15 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   paragraph: {
-    margin: 7,
-    marginBottom: 4,
+    marginLeft: 10,
+    paddingLeft: 10,
     fontSize: 12,
     textAlign: "auto",
     color: "#34495e",
     fontFamily: "Vazir"
   },
   postBox: {
-    padding: 5,
-    paddingRight: 10,
-    paddingLeft: 10,
+    padding: 10,
     marginBottom: 8,
     backgroundColor: "#ffffff",
     borderRadius: 10
@@ -26,7 +24,8 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "flex-start",
     alignItems: "center",
-    borderColor: "#9e9e9e"
+    borderColor: "#9e9e9e",
+    marginLeft: 20
   },
   user: {
     color: "#0077c0",
