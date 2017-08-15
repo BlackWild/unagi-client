@@ -4,7 +4,8 @@ import {
   View,
   FlatList,
   TouchableWithoutFeedback,
-  Image
+  Image,
+  TouchableOpacity
 } from "react-native";
 import { SERVER_DOMIN } from "../configs/config";
 
@@ -139,14 +140,14 @@ class PostScreen extends Component {
       <View style={{ flex: 1, backgroundColor: "#f1f1f1" }}>
         <View style={headerStyles.pagesHeader}>
           <View>
-            <TouchableWithoutFeedback onPress={this.backTouchHandler}>
+            <TouchableOpacity onPress={this.backTouchHandler}>
               <Icon
                 name="chevron-left"
                 size={30}
                 color="#f1f1f1"
                 style={{ padding: 10 }}
               />
-            </TouchableWithoutFeedback>
+            </TouchableOpacity>
           </View>
           <View>
             <Text style={headerStyles.titleHeader}> پست</Text>

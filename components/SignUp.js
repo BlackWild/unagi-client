@@ -9,7 +9,8 @@ import {
   StatusBar,
   TouchableWithoutFeedback,
   ScrollView,
-  ToastAndroid
+  ToastAndroid,
+  TouchableOpacity
 } from "react-native";
 
 import Icon from "react-native-vector-icons/Entypo";
@@ -204,7 +205,7 @@ class SignUp extends Component {
                 </View>
               </TouchableWithoutFeedback>
             </View>
-            <TouchableWithoutFeedback onPress={this.clickedtime}>
+            <TouchableOpacity onPress={this.clickedtime}>
               <View style={[styles.button, { marginBottom: 5, marginTop: 5 }]}>
                 <Text
                   style={[
@@ -215,7 +216,7 @@ class SignUp extends Component {
                   ساخت حساب کاربری
                 </Text>
               </View>
-            </TouchableWithoutFeedback>
+            </TouchableOpacity>
           </View>
         </ScrollView>
       </View>
