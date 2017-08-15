@@ -130,7 +130,6 @@ class Post extends Component {
       timeago = Math.round(seconds / 60) + " دقیقه پیش";
     else if (Math.round(seconds / 60) >= 1) timeago = "دقیقه پیش";
     else timeago = " همین الان";
-
     return (
       <TouchableNativeFeedback
         onPress={this.postTouchHandler}
@@ -140,23 +139,31 @@ class Post extends Component {
           <View
             style={{
               flexDirection: "row",
-              justifyContent: "flex-end",
-              alignContent: "center"
+              justifyContent: "flex-end"
             }}
           >
-            <View style={[styles.userBox]}>
+            <View style={{ marginRight: 10, width: 300 }}>
               <Text style={styles.user}>
                 {" "}{this.props.username ? this.props.username : "کاربر مهمان"}
               </Text>
+              <Text style={styles.paragraph}>
+                {this.props.content}
+              </Text>
+            </View>
+            <View
+              style={{
+                width: 35,
+                justifyContent: "flex-start",
+                alignItems: "center",
+                alignContent: "center"
+              }}
+            >
               <View
                 style={{
                   height: 40,
                   width: 35,
                   borderRadius: 20,
-                  backgroundColor: "#0077c0",
-                  margin: 10,
-                  marginLeft: 20,
-                  marginBottom: 5
+                  backgroundColor: "#0077c0"
                 }}
               >
                 {this.state.imageLoad
@@ -168,25 +175,19 @@ class Post extends Component {
               </View>
             </View>
           </View>
-          <View>
-            <Text style={styles.paragraph}>
-              {this.props.content}
-            </Text>
-          </View>
           <View
             style={{
+              marginTop: 10,
               flexDirection: "row",
-              justifyContent: "space-between",
-              alignItems: "center",
-              alignContent: "center"
+              justifyContent: "space-between"
             }}
           >
             <View
               style={{
                 flexDirection: "row",
-                justifyContent: "center",
-                alignItems: "center",
-                marginLeft: 10
+                justifyContent: "flex-end",
+                alignContent: "center",
+                alignItems: "center"
               }}
             >
               <Text
@@ -201,47 +202,64 @@ class Post extends Component {
                 style={{ marginLeft: 5 }}
               />
             </View>
-            <View style={styles.likeBox}>
-              <TouchableWithoutFeedback onPress={this.replyHandler}>
-                <View
-                  style={{
-                    flexDirection: "row",
-                    alignItems: "center",
-                    paddingVertical: 10,
-                    margin: 5
-                  }}
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "flex-end",
+                alignContent: "center",
+                alignItems: "center"
+              }}
+            >
+              <View>
+                <TouchableWithoutFeedback onPress={this.replyHandler}>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      alignItems: "center"
+                    }}
+                  >
+                    <Text
+                      style={{
+                        fontFamily: "Vazir",
+                        color: "#757575"
+                      }}
+                    >
+                      {this.props.replies}
+                    </Text>
+                    <Icon
+                      name="reply"
+                      color="#757575"
+                      size={25}
+                      style={{ marginLeft: 10 }}
+                    />
+                  </View>
+                </TouchableWithoutFeedback>
+              </View>
+              <View style={{ marginLeft: 20 }}>
+                <TouchableWithoutFeedback
+                  onPress={
+                    this.props.isLiked ? this.unlikeHandler : this.likeHandler
+                  }
                 >
-                  <Text style={{ fontFamily: "Vazir", color: "#757575" }}>
-                    {this.props.replies}
-                  </Text>
-                  <Icon name="reply" color="#757575" size={25} />
-                </View>
-              </TouchableWithoutFeedback>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      alignItems: "center"
+                    }}
+                  >
+                    <Text style={{ fontFamily: "Vazir" }}>
+                      {this.props.likes}
+                    </Text>
 
-              <TouchableWithoutFeedback
-                onPress={
-                  this.props.isLiked ? this.unlikeHandler : this.likeHandler
-                }
-              >
-                <View
-                  style={{
-                    flexDirection: "row",
-                    alignItems: "center",
-                    paddingVertical: 10,
-                    margin: 5
-                  }}
-                >
-                  <Text style={{ fontFamily: "Vazir" }}>
-                    {this.props.likes}
-                  </Text>
-
-                  <Icon
-                    name="heart"
-                    color={this.props.isLiked ? "#ff0000" : "#757575"}
-                    size={25}
-                  />
-                </View>
-              </TouchableWithoutFeedback>
+                    <Icon
+                      name="heart"
+                      color={this.props.isLiked ? "#ff0000" : "#757575"}
+                      size={25}
+                      style={{ marginLeft: 10 }}
+                    />
+                  </View>
+                </TouchableWithoutFeedback>
+              </View>
             </View>
           </View>
         </View>
@@ -249,7 +267,6 @@ class Post extends Component {
     );
   }
 }
-
 const mapStateToProps = state => {
   return {
     accessToken: state.userInfo.accessToken,
