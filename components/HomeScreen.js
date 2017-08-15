@@ -96,7 +96,7 @@ class HomeScreen extends Component {
           >
             <Icon
               name="menu"
-              size={36}
+              size={30}
               color="#ffffff"
               style={{ margin: 10 }}
             />
@@ -160,7 +160,7 @@ class HomeScreen extends Component {
       });
     }
     return (
-      <View style={{ flex: 1, backgroundColor: "#b3e5fc" }}>
+      <View style={{ flex: 1, backgroundColor: "#f1f1f1" }}>
         <View style={styles.container}>
           {!this.props || !this.props.posts
             ? <View style={{ flex: 1, justifyContent: "center" }}>

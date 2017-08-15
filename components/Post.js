@@ -133,10 +133,21 @@ class Post extends Component {
               alignContent: "center"
             }}
           >
-            <View style={styles.userBox}>
+            <View style={[styles.userBox]}>
               <Text style={styles.user}>
                 {" "}{this.props.username ? this.props.username : "کاربر مهمان"}
               </Text>
+              <View
+                style={{
+                  height: 40,
+                  width: 35,
+                  borderRadius: 20,
+                  backgroundColor: "#0077c0",
+                  margin: 10,
+                  marginLeft: 20,
+                  marginBottom: 5
+                }}
+              />
             </View>
           </View>
           <View>
@@ -161,13 +172,13 @@ class Post extends Component {
               }}
             >
               <Text
-                style={{ color: "#b388ff", fontSize: 10, fontFamily: "Vazir" }}
+                style={{ color: "#9e9e9e", fontSize: 10, fontFamily: "Vazir" }}
               >
                 {timeago}
               </Text>
               <Icon
                 name="clock"
-                color="#b388ff"
+                color="#9e9e9e"
                 size={10}
                 style={{ marginLeft: 5 }}
               />
@@ -182,10 +193,10 @@ class Post extends Component {
                     margin: 5
                   }}
                 >
-                  <Text style={{ fontFamily: "Vazir", color: "#8363ba" }}>
+                  <Text style={{ fontFamily: "Vazir", color: "#757575" }}>
                     {this.props.replies}
                   </Text>
-                  <Icon name="reply" color="#8363ba" size={25} />
+                  <Icon name="reply" color="#757575" size={25} />
                 </View>
               </TouchableWithoutFeedback>
 
@@ -205,13 +216,11 @@ class Post extends Component {
                   <Text style={{ fontFamily: "Vazir" }}>
                     {this.props.likes}
                   </Text>
-                  <Image
-                    source={
-                      this.props.isLiked
-                        ? require("../img/heartLike.png")
-                        : require("../img/heartUnLike.png")
-                    }
-                    style={{ height: 22, width: 24, margin: 5 }}
+
+                  <Icon
+                    name="heart"
+                    color={this.props.isLiked ? "#ff0000" : "#757575"}
+                    size={25}
                   />
                 </View>
               </TouchableWithoutFeedback>
