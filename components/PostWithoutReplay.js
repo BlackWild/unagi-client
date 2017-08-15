@@ -9,6 +9,15 @@ class PostWithoutReplay extends Component {
   constructor(props) {
     super(props);
     this.likeLock = false;
+    this.state = {
+      imageLoad: false
+    };
+  }
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({ imageLoad: true });
+      getPicture(this, this.props.username);
+    }, 500);
   }
 
   likeHandler = () => {

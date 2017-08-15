@@ -180,7 +180,7 @@ class HomeScreen extends Component {
                     posterID={item.userID}
                     replies={item.replies}
                     navigation={this.props.navigation}
-                    imageUri={item.imageUri ? item.imageUri : undefined}
+                    imageUri={item.imageUri}
                   />}
                 onEndReached={this.onEndHandler}
                 onEndReachedThreshold={2}

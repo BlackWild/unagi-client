@@ -12,12 +12,23 @@ import { likePost, unlikePost } from "../functions/LikeFunctions";
 import { connect } from "react-redux";
 import Icon from "react-native-vector-icons/Entypo";
 import actions from "../reducers/Actions";
+import { getPicture } from "../functions/profileFunction";
 
 class Post extends Component {
   constructor(props) {
     super(props);
     this.lock = false;
     this.likeLock = false;
+    this.state = {
+      imageLoad: false
+    };
+  }
+
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({ imageLoad: true });
+      getPicture(this, this.props.username);
+    }, 500);
   }
 
   thisPost = () => ({
@@ -148,10 +159,12 @@ class Post extends Component {
                   marginBottom: 5
                 }}
               >
-                <Image
-                  source={{ uri: this.props.imageUri }}
-                  style={{ width: 193, height: 110 }}
-                />
+                {this.state.imageLoad
+                  ? <Image
+                      source={{ uri: this.props.imageUri }}
+                      style={{ width: 193, height: 110 }}
+                    />
+                  : null}
               </View>
             </View>
           </View>

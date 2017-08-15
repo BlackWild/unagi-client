@@ -78,9 +78,10 @@ export const getPicture = (that, username) => {
         } else {
           that.props.dispatch({
             type: actions.SET_IMAGE,
-            uri: SERVER_DOMI + "/" + resJ.path,
+            uri: SERVER_DOMIN + "/" + resJ.url,
             username
           });
+          resol();
         }
       })
       .catch(error => {
