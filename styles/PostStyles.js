@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   paragraph: {
-    marginLeft: 10,
+    // marginLeft: 10,
     paddingLeft: 10,
     fontSize: 12,
     textAlign: "auto",
