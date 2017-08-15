@@ -121,7 +121,8 @@ class UserPage extends Component {
               style={{
                 height: 96,
                 width: 84,
-                borderRadius: 48
+                borderRadius: 48,
+                backgroundColor: "#0077c0"
               }}
             />
           </View>
