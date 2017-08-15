@@ -147,7 +147,12 @@ class Post extends Component {
                   marginLeft: 20,
                   marginBottom: 5
                 }}
-              />
+              >
+                <Image
+                  source={{ uri: this.props.imageUri }}
+                  style={{ width: 193, height: 110 }}
+                />
+              </View>
             </View>
           </View>
           <View>
