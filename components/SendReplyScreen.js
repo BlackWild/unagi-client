@@ -25,10 +25,9 @@ class SendReplyScreen extends Component {
     super(props);
     addBackHandler(this);
 
-    this.isSending = false;
+    this.lock = false;
     this.state = {
-      textLenght: 0,
-      isSending: false
+      textLenght: 0
     };
   }
   componentWillMount() {
@@ -45,47 +44,39 @@ class SendReplyScreen extends Component {
   };
 
   sendReplyToServer = () => {
-    if (
-      this.isSending ||
-      this.state.isSending ||
-      this.state.isLengthOverLimit
-    ) {
+    if (this.lock || this.state.isLengthOverLimit) {
       return null;
     } else {
-      this.isSending = true;
-      this.setState(
-        {
-          isSending: true
-        },
-        () => {
-          setLocationState(this).then(() => {
-            replyPost(this.state.text, this)
-              .then(res => {
-                if (res === "ok") {
-                  this.backTouchHandler();
-                }
-              })
-              .catch(() => {
-                this.setState(
-                  {
-                    isSending: false
-                  },
-                  () => {
-                    this.isSending = false;
-                  }
-                );
-              });
-          });
-        }
-      );
+      this.lock = true;
+      setLocationState(this)
+        .then(() => {
+          replyPost(this.state.text, this)
+            .then(res => {
+              this.lock = false;
+              if (res === "ok") {
+                this.backTouchHandler();
+              }
+            })
+            .catch(() => {
+              this.lock = false;
+            });
+        })
+        .catch(() => {
+          this.lock = false;
+        });
     }
   };
   backTouchHandler = () => {
-    this.props.dispatch({
-      type: actions.SET_PAGE_NAME,
-      pageName: "PostScreen"
-    });
-    this.props.navigation.navigate("PostScreen");
+    if (this.lock) {
+      return null;
+    } else {
+      this.lock = true;
+      this.props.dispatch({
+        type: actions.SET_PAGE_NAME,
+        pageName: "PostScreen"
+      });
+      this.props.navigation.navigate("PostScreen");
+    }
   };
 
   render() {
@@ -120,11 +111,7 @@ class SendReplyScreen extends Component {
               >
                 {160 - this.state.textLenght}
               </Text>
-              <TouchableWithoutFeedback
-                onPress={
-                  this.state.isSending ? () => {} : this.sendReplyToServer
-                }
-              >
+              <TouchableWithoutFeedback onPress={this.sendReplyToServer}>
                 <Image source={require("../img/send.png")} style={styles.pic} />
               </TouchableWithoutFeedback>
             </View>
