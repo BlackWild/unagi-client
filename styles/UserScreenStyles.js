@@ -16,7 +16,7 @@ export const styles = StyleSheet.create({
     padding: 10,
     margin: 0,
     flexDirection: "row",
-    backgroundColor: "#8BC34A",
+    backgroundColor: "#0091ea",
     justifyContent: "center"
   },
 
@@ -28,7 +28,8 @@ export const styles = StyleSheet.create({
     fontFamily: "Vazir"
   },
   userBox: {
-    backgroundColor: "#8BC34A",
+    height: 180,
+    backgroundColor: "#0091ea",
     padding: 10,
     flexDirection: "column",
     justifyContent: "center",
@@ -42,14 +43,13 @@ export const styles = StyleSheet.create({
     height: 96,
     width: 84,
     borderRadius: 48,
-    backgroundColor: "#689F38",
+    backgroundColor: "#01579b",
     borderBottomWidth: 2,
     borderColor: "#9e9e9e",
     margin: 10
   },
   username: {
     color: "#ffffff",
-    margin: 10,
     marginTop: 5,
     fontSize: 18
   }

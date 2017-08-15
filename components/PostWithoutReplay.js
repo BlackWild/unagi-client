@@ -8,18 +8,37 @@ import { connect } from "react-redux";
 class PostWithoutReplay extends Component {
   constructor(props) {
     super(props);
+    this.likeLock = false;
   }
 
   likeHandler = () => {
-    likePost(this.props.accessToken, this.props.postID, this).then(() =>
-      console.log("POST LIKED")
-    );
+    if (this.likeLock) {
+      return null;
+    } else {
+      this.likeLock = true;
+      likePost(this.props.accessToken, this.props.postID, this)
+        .then(() => {
+          this.likeLock = false;
+        })
+        .catch(() => {
+          this.likeLock = false;
+        });
+    }
   };
 
   unlikeHandler = () => {
-    unlikePost(this.props.accessToken, this.props.postID, this).then(() =>
-      console.log("POST UNLIKED")
-    );
+    if (this.likeLock) {
+      return null;
+    } else {
+      this.likeLock = true;
+      unlikePost(this.props.accessToken, this.props.postID, this)
+        .then(() => {
+          this.likeLock = false;
+        })
+        .catch(() => {
+          this.likeLock = false;
+        });
+    }
   };
 
   render() {

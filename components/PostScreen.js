@@ -27,6 +27,8 @@ class PostScreen extends Component {
     this.state = {
       refreshing: false
     };
+    this.parentPostLikeLock = false;
+    this.lock = false;
   }
 
   componentWillMount() {
@@ -45,29 +47,55 @@ class PostScreen extends Component {
     };
   };
   onPre = () => {
-    this.props.dispatch({
-      type: actions.SET_PAGE_NAME,
-      pageName: "SendReplyScreen"
-    });
-    this.props.navigation.navigate("SendReplyScreen");
+    if (this.lock) {
+      return null;
+    } else {
+      this.lock = true;
+      this.props.dispatch({
+        type: actions.SET_PAGE_NAME,
+        pageName: "SendReplyScreen"
+      });
+      this.props.navigation.navigate("SendReplyScreen");
+    }
   };
   backTouchHandler = () => {
-    this.props.dispatch({ type: actions.SET_PAGE_NAME, pageName: "Home" });
-    this.props.navigation.navigate("Home");
+    if (this.lock) {
+      return null;
+    } else {
+      this.lock = true;
+      this.props.dispatch({ type: actions.SET_PAGE_NAME, pageName: "Home" });
+      this.props.navigation.navigate("Home");
+    }
   };
   parentLikeHandler = () => {
-    likePost(this.props.accessToken, this.props.parentPost._id, this).then(() =>
-      console.log("POST LIKED")
-    );
+    if (this.parentPostLikeLock) {
+      return null;
+    } else {
+      this.parentPostLikeLock = true;
+      likePost(this.props.accessToken, this.props.parentPost._id, this)
+        .then(() => {
+          this.parentPostLikeLock = false;
+        })
+        .catch(() => {
+          this.parentPostLikeLock = false;
+        });
+    }
+  };
+  parentUnlikeHandler = () => {
+    if (this.parentPostLikeLock) {
+      return null;
+    } else {
+      this.parentPostLikeLock = true;
+      unlikePost(this.props.accessToken, this.props.parentPost._id, this)
+        .then(() => {
+          this.parentPostLikeLock = false;
+        })
+        .catch(() => {
+          this.parentPostLikeLock = false;
+        });
+    }
   };
 
-  parentUnlikeHandler = () => {
-    unlikePost(
-      this.props.accessToken,
-      this.props.parentPost._id,
-      this
-    ).then(() => console.log("POST UNLIKED"));
-  };
   onEndHandler = () => {
     if (this.state.hasNext) {
       getMoreReplyPost(that, this.state.nextStr);
@@ -107,7 +135,7 @@ class PostScreen extends Component {
       "دسامبر "
     ];
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1, backgroundColor: "#e1f5fe" }}>
         <View style={headerStyles.pagesHeader}>
           <View>
             <TouchableWithoutFeedback onPress={this.backTouchHandler}>
@@ -117,10 +145,6 @@ class PostScreen extends Component {
                 color="#f1f1f1"
                 style={{ padding: 10 }}
               />
-              {/* <Image
-                source={require("../img/back.png")}
-                style={headerStyles.backPic}
-              /> */}
             </TouchableWithoutFeedback>
           </View>
           <View>
@@ -143,8 +167,10 @@ class PostScreen extends Component {
           style={{
             padding: 10,
             margin: 10,
-            borderBottomWidth: 2,
-            borderColor: "#757575"
+            borderBottomWidth: 0,
+            borderColor: "#757575",
+            backgroundColor: "#b3e5fc",
+            borderRadius: 15
           }}
         >
           <View
@@ -190,7 +216,7 @@ class PostScreen extends Component {
                   height: 80,
                   width: 70,
                   borderRadius: 40,
-                  backgroundColor: "#689F38"
+                  backgroundColor: "#0077c0"
                 }}
               />
               <View
@@ -202,7 +228,7 @@ class PostScreen extends Component {
               >
                 <Text
                   style={{
-                    color: "#689F38",
+                    color: "#0077c0",
                     margin: 0,
                     fontSize: 18,
                     textAlign: "right"
@@ -232,16 +258,6 @@ class PostScreen extends Component {
                 {date.getHours()}:{date.getMinutes()}
               </Text>
             </View>
-            {/* <View
-              style={{
-                justifyContent: "flex-end",
-                flexDirection: "row",
-                alignItems: "center"
-              }}
-            >
-              <Text>پاسخ</Text>
-              <Icon name="reply" size={25} />
-            </View> */}
             <View
               style={{
                 justifyContent: "flex-end",
@@ -249,7 +265,7 @@ class PostScreen extends Component {
                 alignItems: "center"
               }}
             >
-              <Text>
+              <Text style={{ fontFamily: "Vazir" }}>
                 {this.props.parentPost.likes} پسند{" "}
               </Text>
               <TouchableWithoutFeedback
@@ -310,7 +326,8 @@ class PostScreen extends Component {
           degrees={0}
           offsetX={10}
           offsetY={20}
-          buttonColor="#858585"
+          buttonText={<Icon name="reply" size={30} />}
+          buttonColor="#b388ff"
           fixNativeFeedbackRadius={true}
           hideShadow={true}
         />

@@ -8,9 +8,14 @@ import { addBackHandler } from "../functions/BackHandlerAdder";
 
 class DrawerMenu extends Component {
   navig = pageName => {
-    this.props.navigation.navigate(pageName);
-    this.props.dispatch({ type: actions.SET_PAGE_NAME, pageName: pageName });
-    this.props.app.lockDrawer();
+    if (this.props.app.drawerTouchLock) {
+      return null;
+    } else {
+      this.props.app.drawerTouchLock = true;
+      this.props.navigation.navigate(pageName);
+      this.props.dispatch({ type: actions.SET_PAGE_NAME, pageName: pageName });
+      this.props.app.lockDrawer();
+    }
   };
   logout = () => {
     this.props.dispatch({
@@ -39,7 +44,7 @@ class DrawerMenu extends Component {
               <Icon
                 name="user"
                 size={16}
-                color="#689F38"
+                color="#0077c0"
                 style={{ margin: 5, marginLeft: 15 }}
               />
             </View>
@@ -50,7 +55,7 @@ class DrawerMenu extends Component {
               <Icon
                 name="help"
                 size={16}
-                color="#689F38"
+                color="#0077c0"
                 style={{ margin: 5, marginLeft: 15 }}
               />
             </View>
@@ -62,7 +67,7 @@ class DrawerMenu extends Component {
               <Icon
                 name="log-out"
                 size={16}
-                color="#689F38"
+                color="#0077c0"
                 style={{ margin: 5, marginLeft: 15 }}
               />
             </View>

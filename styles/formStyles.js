@@ -22,7 +22,7 @@ export const styles = StyleSheet.create({
     textAlign: "center"
   },
   button: {
-    backgroundColor: "#8BC34A",
+    backgroundColor: "#0091ea",
     padding: 10,
     width: 200,
     borderRadius: 8,
@@ -30,7 +30,7 @@ export const styles = StyleSheet.create({
   },
   headerBox: {
     height: 60,
-    backgroundColor: "#8BC34A",
+    backgroundColor: "#0091ea",
     flexDirection: "row",
     justifyContent: "flex-end",
     alignItems: "center"

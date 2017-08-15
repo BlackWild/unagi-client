@@ -92,6 +92,7 @@ class Unagi extends Component {
       drawerLockMode: "locked-closed"
     });
   }
+  drawerTouchLock = false;
 
   render() {
     return (
@@ -103,10 +104,13 @@ class Unagi extends Component {
               drawerPosition={DrawerLayoutAndroid.positions.Right}
               renderNavigationView={() => <DrawerMenu />}
               drawerLockMode="locked-closed"
+              onDrawerOpen={() => {
+                this.drawerTouchLock = false;
+              }}
             >
               <App />
             </DrawerLayoutAndroid>
-          : <View style={{ flex: 1, backgroundColor: "#8BC34A" }} />}
+          : <View style={{ flex: 1, backgroundColor: "#0091ea" }} />}
       </Provider>
     );
   }

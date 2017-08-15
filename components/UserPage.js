@@ -75,10 +75,6 @@ class UserPage extends Component {
               color="#f1f1f1"
               style={{ padding: 10 }}
             />
-            {/* <Image
-              source={require("../img/back.png")}
-              style={headerStyles.backPic}
-            /> */}
           </TouchableWithoutFeedback>
           <Text style={headerStyles.titleHeader}> حساب کاربری</Text>
         </View>
@@ -97,9 +93,27 @@ class UserPage extends Component {
               /> */}
             </View>
           </TouchableWithoutFeedback>
-          <Text style={styles.username}>
-            {this.props.username}
-          </Text>
+          <View>
+            <Text style={styles.username}>
+              {this.props.username}
+            </Text>
+            <View
+              style={{
+                height: 50,
+                width: 50,
+                borderRadius: 25,
+                backgroundColor: "#b388ff",
+                alignItems: "center",
+                alignContent: "center",
+                justifyContent: "center",
+                flexDirection: "row",
+                left: 120,
+                bottom: 40
+              }}
+            >
+              <Icon name="camera" size={24} color="#f1f1f1" />
+            </View>
+          </View>
         </View>
       </View>
     );
