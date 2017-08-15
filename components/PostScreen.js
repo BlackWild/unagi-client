@@ -9,6 +9,8 @@ import {
 } from "react-native";
 
 import { styles } from "../styles/PostScreenStyles";
+import { SERVER_DOMIN } from "../configs/config";
+
 import { headerStyles } from "../styles/HeaderStyles";
 import {} from "../functions/StateSetters";
 import { connect } from "react-redux";
@@ -219,7 +221,22 @@ class PostScreen extends Component {
                   borderRadius: 40,
                   backgroundColor: "#0077c0"
                 }}
-              />
+              >
+                <Image
+                  source={{
+                    uri:
+                      SERVER_DOMIN +
+                      "/" +
+                      this.props.parentPost.username +
+                      ".jpeg"
+                  }}
+                  style={{
+                    height: 80,
+                    width: 70,
+                    borderRadius: 40
+                  }}
+                />
+              </View>
               <View
                 style={{
                   flexDirection: "row",
