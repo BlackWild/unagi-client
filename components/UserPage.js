@@ -19,6 +19,7 @@ import { sendPicture, getPicture } from "../functions/profileFunction";
 import { getMoreUserPosts, getUserPosts } from "../functions/profileFunction";
 import Icon from "react-native-vector-icons/Entypo";
 import PostWithoutReplay from "../components/PostWithoutReplay";
+import { SERVER_DOMIN } from "../configs/config";
 
 class UserPage extends Component {
   constructor(props) {
@@ -114,7 +115,9 @@ class UserPage extends Component {
         <View style={styles.userBox}>
           <View style={styles.photo}>
             <Image
-              source={{ uri: this.props.url }}
+              source={{
+                uri: SERVER_DOMIN + "/" + this.props.username + ".jpeg"
+              }}
               style={{
                 height: 96,
                 width: 84,
