@@ -14,6 +14,15 @@ These instructions will get you a copy of the project up and running on your loc
 sudo apt-get install git
 ```
 
+**install NodeJs**
+
+```
+sudo apt-get install python-software-properties
+curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+
+sudo apt-get install python-software-properties
+curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+```
 
 **install other prerequisites**
 
@@ -33,7 +42,7 @@ git clone https://gitlab.rdcint.ir/CollegeNumber05/Android.git
 cd Server
 ```
 
-**Install depenencies**
+**Install dependencies**
 
 ```
 npm install
