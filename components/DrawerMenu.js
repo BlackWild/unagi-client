@@ -35,13 +35,13 @@ class DrawerMenu extends Component {
           {/* <View style={styles.photo} /> */}
           <Image
             source={{
-              uri: SERVER_DOMIN + "/" + this.props.username + ".jpeg"
+              uri:
+                SERVER_DOMIN + "/" + this.props.username.toLowerCase() + ".jpeg"
             }}
             style={{
               height: 80,
               width: 70,
-              borderRadius: 40,
-              backgroundColor: "#01579b"
+              borderRadius: 40
             }}
           />
           <Text style={styles.username}>

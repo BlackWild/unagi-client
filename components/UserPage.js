@@ -116,7 +116,11 @@ class UserPage extends Component {
           <View style={styles.photo}>
             <Image
               source={{
-                uri: SERVER_DOMIN + "/" + this.props.username + ".jpeg"
+                uri:
+                  SERVER_DOMIN +
+                  "/" +
+                  this.props.username.toLowerCase() +
+                  ".jpeg"
               }}
               style={{
                 height: 96,

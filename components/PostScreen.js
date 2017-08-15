@@ -218,7 +218,7 @@ class PostScreen extends Component {
                   uri:
                     SERVER_DOMIN +
                     "/" +
-                    this.props.parentPost.username +
+                    this.props.parentPost.username.toLowerCase() +
                     ".jpeg"
                 }}
                 style={{
