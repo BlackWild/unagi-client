@@ -328,7 +328,8 @@ class PostScreen extends Component {
           degrees={0}
           offsetX={10}
           offsetY={20}
-          buttonColor="#858585"
+          buttonText={<Icon name="reply" size={30} />}
+          buttonColor="#b388ff"
           fixNativeFeedbackRadius={true}
           hideShadow={true}
         />

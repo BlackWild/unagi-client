@@ -28,6 +28,7 @@ export const styles = StyleSheet.create({
     fontFamily: "Vazir"
   },
   userBox: {
+    height: 180,
     backgroundColor: "#0091ea",
     padding: 10,
     flexDirection: "column",
@@ -49,7 +50,6 @@ export const styles = StyleSheet.create({
   },
   username: {
     color: "#ffffff",
-    margin: 10,
     marginTop: 5,
     fontSize: 18
   }

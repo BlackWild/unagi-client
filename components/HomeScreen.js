@@ -192,7 +192,7 @@ class HomeScreen extends Component {
             degrees={0}
             offsetX={10}
             offsetY={20}
-            buttonColor="#858585"
+            buttonColor="#b388ff"
             fixNativeFeedbackRadius={true}
             hideShadow={true}
           />

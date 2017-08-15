@@ -123,7 +123,7 @@ class Post extends Component {
     return (
       <TouchableNativeFeedback
         onPress={this.postTouchHandler}
-        background={TouchableNativeFeedback.Ripple("green", false)}
+        background={TouchableNativeFeedback.Ripple("#b388ff", false)}
       >
         <View style={styles.postBox}>
           <View
