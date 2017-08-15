@@ -8,9 +8,14 @@ import { addBackHandler } from "../functions/BackHandlerAdder";
 
 class DrawerMenu extends Component {
   navig = pageName => {
-    this.props.navigation.navigate(pageName);
-    this.props.dispatch({ type: actions.SET_PAGE_NAME, pageName: pageName });
-    this.props.app.lockDrawer();
+    if (this.props.app.drawerTouchLock) {
+      return null;
+    } else {
+      this.props.app.drawerTouchLock = true;
+      this.props.navigation.navigate(pageName);
+      this.props.dispatch({ type: actions.SET_PAGE_NAME, pageName: pageName });
+      this.props.app.lockDrawer();
+    }
   };
   logout = () => {
     this.props.dispatch({
