@@ -47,3 +47,20 @@ cd Server
 ```
 npm install
 ```
+
+**Run Project**
+
+```
+react-native run-android
+```
+## Running the tests
+
+```
+npm test
+```
+
+## Authors
+
+* **Siavash Davani** - *front end*
+* **Fateme Najafi** - *front end* - [violet135](https://github.com/violet135)
+* **Mohammad mehdi Fallahi** - *front end*
