@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-import { Text, View, TouchableWithoutFeedback } from "react-native";
+import { SERVER_DOMIN } from "../configs/config";
+
+import { Text, View, TouchableWithoutFeedback, Image } from "react-native";
 import { styles } from "../styles/DrawerMenuStyles";
 import Icon from "react-native-vector-icons/Entypo";
 import { connect } from "react-redux";
@@ -32,7 +34,18 @@ class DrawerMenu extends Component {
     return (
       <View style={{ flex: 1 }}>
         <View style={styles.userBox}>
-          <View style={styles.photo} />
+          <View style={styles.photo}>
+            <Image
+              source={{
+                uri: SERVER_DOMIN + "/" + this.props.username + ".jpeg"
+              }}
+              style={{
+                height: 80,
+                width: 70,
+                borderRadius: 40
+              }}
+            />
+          </View>
           <Text style={styles.username}>
             {this.props.username}
           </Text>

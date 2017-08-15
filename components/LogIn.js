@@ -9,7 +9,8 @@ import {
   StatusBar,
   TouchableWithoutFeedback,
   ScrollView,
-  ToastAndroid
+  ToastAndroid,
+  TouchableOpacity
 } from "react-native";
 import { styles } from "../styles/formStyles";
 import { connect } from "react-redux";
@@ -161,16 +162,16 @@ export class LogIn extends Component {
                 </TouchableWithoutFeedback>
               </View>
             </View>
-            <TouchableWithoutFeedback onPress={this.logInClickHandler}>
+            <TouchableOpacity onPress={this.logInClickHandler}>
               <View style={styles.button}>
                 <Text style={styles.buttonText}>ورود به حساب کاربری</Text>
               </View>
-            </TouchableWithoutFeedback>
-            <TouchableWithoutFeedback onPress={this.signUpClickHandler}>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={this.signUpClickHandler}>
               <View style={styles.button}>
                 <Text style={styles.buttonText}> حساب کاربری ندارم </Text>
               </View>
-            </TouchableWithoutFeedback>
+            </TouchableOpacity>
           </View>
         </ScrollView>
       </View>

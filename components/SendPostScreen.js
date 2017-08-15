@@ -6,7 +6,9 @@ import {
   View,
   Image,
   TouchableWithoutFeedback,
-  BackHandler
+  BackHandler,
+  ToastAndroid,
+  TouchableOpacity
 } from "react-native";
 
 import { headerStyles } from "../styles/HeaderStyles";
@@ -44,21 +46,26 @@ class SendPostScreen extends Component {
       this.lock = true;
       setLocationState(this)
         .then(() => {
-          sendPost(
-            this.props.accessToken,
-            this.props.location,
-            this.state.text,
-            this
-          )
-            .then(res => {
-              this.lock = false;
-              if (res === "ok") {
-                this.backTouchHandler();
-              }
-            })
-            .catch(() => {
-              this.lock = false;
-            });
+          if (this.state.text)
+            sendPost(
+              this.props.accessToken,
+              this.props.location,
+              this.state.text,
+              this
+            )
+              .then(res => {
+                this.lock = false;
+                if (res === "ok") {
+                  this.backTouchHandler();
+                }
+              })
+              .catch(() => {
+                this.lock = false;
+              });
+          else {
+            this.lock = false;
+            ToastAndroid.show("یه چیزی بنویس", ToastAndroid.SHORT);
+          }
         })
         .catch(() => {
           this.lock = false;
@@ -89,14 +96,14 @@ class SendPostScreen extends Component {
             }}
           >
             <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <TouchableWithoutFeedback onPress={this.backTouchHandler}>
+              <TouchableOpacity onPress={this.backTouchHandler}>
                 <Icon
                   name="chevron-left"
                   size={30}
                   color="#f1f1f1"
                   style={{ padding: 10 }}
                 />
-              </TouchableWithoutFeedback>
+              </TouchableOpacity>
               <Text style={styles.post}>افزودن پست</Text>
             </View>
 
@@ -113,9 +120,9 @@ class SendPostScreen extends Component {
               >
                 {160 - this.state.textLenght}
               </Text>
-              <TouchableWithoutFeedback onPress={this.sendPostToServer}>
+              <TouchableOpacity onPress={this.sendPostToServer}>
                 <Image source={require("../img/send.png")} style={styles.pic} />
-              </TouchableWithoutFeedback>
+              </TouchableOpacity>
             </View>
           </View>
         </View>
