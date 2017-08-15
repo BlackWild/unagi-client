@@ -90,3 +90,113 @@ export const getPicture = (that, username) => {
       });
   });
 };
+
+export const getUserPosts = (accessToken, that) => {
+  return new Promise((resol, rej) => {
+    fetch({
+      url: SERVER_DOMIN + "/api/v4/posts/getUserPosts",
+      headers: {
+        accessToken
+      },
+      method: "GET"
+    })
+      .then(res => {
+        return res.json();
+      })
+      .then(resJ => {
+        console.log(resJ);
+        if (!resJ.isAccessTokenValid) {
+          tokenProvider(that)
+            .then(() => {
+              getUserPosts(that.props.accessToken, that).then(() => {
+                resol();
+              });
+            })
+            .catch(() => {
+              that.props.dispatch({
+                type: actions.SET_PAGE_NAME,
+                pageName: "LogIn"
+              });
+              that.props.navigation.navigate("LogIn");
+              rej();
+            });
+        } else {
+          that.props.dispatch({
+            type: actions.CLONE_WITH_USER_POSTS,
+            newPosts: resJ.results
+          });
+          that.setState(
+            () => {
+              return {
+                nextStr: resJ.next,
+                hasNext: resJ.hasNext
+              };
+            },
+            () => {
+              resol();
+            }
+          );
+        }
+      })
+      .catch(error => {
+        rej();
+      });
+  });
+};
+
+export const getMoreUserPosts = (accessToken, that, qu) => {
+  return new Promise((resol, rej) => {
+    fetch({
+      url: SERVER_DOMIN + "/api/v4/posts/getUserPosts&cursor=" + qu,
+      headers: {
+        accessToken
+      },
+      method: "GET"
+    })
+      .then(res => {
+        return res.json();
+      })
+      .then(resJ => {
+        if (!resJ.isAccessTokenValid) {
+          tokenProvider(that)
+            .then(() => {
+              getMoreUserPosts(that.props.accessToken, that, qu).then(() => {
+                resol();
+              });
+            })
+            .catch(() => {
+              that.props.dispatch({
+                type: actions.SET_PAGE_NAME,
+                pageName: "LogIn"
+              });
+              that.props.navigation.navigate("LogIn");
+              rej();
+            });
+        } else {
+          const filteredPosts = resJ.results.filter(newItem => {
+            return !that.props.hotPosts.find(item => {
+              return item._id === newItem._id;
+            });
+          });
+          that.props.dispatch({
+            type: actions.ADD_USER_POSTS,
+            newPosts: filteredPosts
+          });
+          that.setState(
+            () => {
+              return {
+                nextStr: resJ.next,
+                hasNext: resJ.hasNext
+              };
+            },
+            () => {
+              resol();
+            }
+          );
+        }
+      })
+      .catch(error => {
+        rej();
+      });
+  });
+};
