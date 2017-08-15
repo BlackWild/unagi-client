@@ -141,7 +141,7 @@ class PostScreen extends Component {
             <TouchableWithoutFeedback onPress={this.backTouchHandler}>
               <Icon
                 name="chevron-left"
-                size={40}
+                size={30}
                 color="#f1f1f1"
                 style={{ padding: 10 }}
               />
