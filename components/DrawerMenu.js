@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import { Text, View, TouchableWithoutFeedback } from "react-native";
+import { Text, View, TouchableWithoutFeedback, Image } from "react-native";
 import { styles } from "../styles/DrawerMenuStyles";
 import Icon from "react-native-vector-icons/Entypo";
 import { connect } from "react-redux";
 import actions from "../reducers/Actions";
 import { addBackHandler } from "../functions/BackHandlerAdder";
-
+import { SERVER_DOMIN } from "../configs/config";
 class DrawerMenu extends Component {
   navig = pageName => {
     if (this.props.app.drawerTouchLock) {
@@ -36,6 +36,12 @@ class DrawerMenu extends Component {
           <Image
             source={{
               uri: SERVER_DOMIN + "/" + this.props.username + ".jpeg"
+            }}
+            style={{
+              height: 80,
+              width: 70,
+              borderRadius: 40,
+              backgroundColor: "#01579b"
             }}
           />
           <Text style={styles.username}>

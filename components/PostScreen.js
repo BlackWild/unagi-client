@@ -6,6 +6,7 @@ import {
   TouchableWithoutFeedback,
   Image
 } from "react-native";
+import { SERVER_DOMIN } from "../configs/config";
 
 import { styles } from "../styles/PostScreenStyles";
 import { headerStyles } from "../styles/HeaderStyles";
