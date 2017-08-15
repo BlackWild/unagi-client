@@ -7,6 +7,7 @@ import {
   TouchableNativeFeedback
 } from "react-native";
 import { styles } from "../styles/PostStyles";
+import { SERVER_DOMIN } from "../configs/config";
 
 import { likePost, unlikePost } from "../functions/LikeFunctions";
 import { connect } from "react-redux";
@@ -19,16 +20,6 @@ class Post extends Component {
     super(props);
     this.lock = false;
     this.likeLock = false;
-    this.state = {
-      imageLoad: false
-    };
-  }
-
-  componentDidMount() {
-    setTimeout(() => {
-      this.setState({ imageLoad: true });
-      getPicture(this, this.props.username);
-    }, 500);
   }
 
   thisPost = () => ({
@@ -166,12 +157,12 @@ class Post extends Component {
                   backgroundColor: "#0077c0"
                 }}
               >
-                {this.state.imageLoad
-                  ? <Image
-                      source={{ uri: this.props.imageUri }}
-                      style={{ width: 193, height: 110 }}
-                    />
-                  : null}
+                <Image
+                  source={{
+                    uri: SERVER_DOMIN + "/" + this.props.username + ".jpeg"
+                  }}
+                  style={{ width: 193, height: 110 }}
+                />
               </View>
             </View>
           </View>
