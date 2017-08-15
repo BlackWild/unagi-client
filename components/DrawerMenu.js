@@ -1,9 +1,4 @@
 import React, { Component } from "react";
-<<<<<<< HEAD
-import { SERVER_DOMIN } from "../configs/config";
-
-=======
->>>>>>> 0886cb9ea641119f08ae5b76be7dc75f7d34951d
 import { Text, View, TouchableWithoutFeedback, Image } from "react-native";
 import { styles } from "../styles/DrawerMenuStyles";
 import Icon from "react-native-vector-icons/Entypo";
