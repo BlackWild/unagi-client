@@ -169,7 +169,7 @@ class PostScreen extends Component {
             margin: 10,
             borderBottomWidth: 0,
             borderColor: "#757575",
-            backgroundColor: "#C7ECFC",
+            backgroundColor: "#ffffff",
             borderRadius: 15
           }}
         >
