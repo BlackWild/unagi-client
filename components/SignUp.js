@@ -31,45 +31,53 @@ class SignUp extends Component {
       rePassDisply: true,
       accept: false
     };
+    this.lock = false;
   }
   componentWillMount() {
     this.props.dispatch({ type: actions.SET_PAGE_NAME, pageName: "SignUp" });
   }
 
   clickedtime = () => {
-    if (this.state.password !== this.state.repassword) {
-      ToastAndroid.show("رمز عبور تطابق ندارد", ToastAndroid.SHORT);
+    if (this.lock) {
+      return null;
     } else {
-      try {
-        if (this.state.username === "" || this.state.password === "")
-          throw "empty";
-        if (!this.state.accept) throw "didn't accept rules";
-        sendUsernameId(
-          this.state.username,
-          this.state.password,
-          this
-        ).then(arg => {
-          if (!arg) {
-            ToastAndroid.show("نام کاربری تکراری است", ToastAndroid.SHORT);
-          } else {
-            this.props.navigation.navigate("Home");
-            this.props.dispatch({
-              type: actions.SET_PAGE_NAME,
-              pageName: "Home"
-            });
-          }
-        });
-      } catch (err) {
-        if (err === "empty")
-          ToastAndroid.show(
-            "نام کاربری یا رمز عبور نمی تواند خالی باشد",
-            ToastAndroid.SHORT
-          );
-        else if (err === "didn't accept rules")
-          ToastAndroid.show(
-            "شما قوانین تیم 5 را نپذیرفتین!باید قبول کنید",
-            ToastAndroid.SHORT
-          );
+      this.lock = true;
+      if (this.state.password !== this.state.repassword) {
+        ToastAndroid.show("رمز عبور تطابق ندارد", ToastAndroid.SHORT);
+        this.lock = false;
+      } else {
+        try {
+          if (!this.state.username || !this.state.password) throw "empty";
+          if (!this.state.accept) throw "didn't accept rules";
+          sendUsernameId(
+            this.state.username,
+            this.state.password,
+            this
+          ).then(arg => {
+            if (!arg) {
+              ToastAndroid.show("نام کاربری تکراری است", ToastAndroid.SHORT);
+              this.lock = false;
+            } else {
+              this.props.navigation.navigate("Home");
+              this.props.dispatch({
+                type: actions.SET_PAGE_NAME,
+                pageName: "Home"
+              });
+            }
+          });
+        } catch (err) {
+          if (err === "empty")
+            ToastAndroid.show(
+              "نام کاربری یا رمز عبور نمی تواند خالی باشد",
+              ToastAndroid.SHORT
+            );
+          else if (err === "didn't accept rules")
+            ToastAndroid.show(
+              "شما قوانین تیم 5 را نپذیرفتین!باید قبول کنید",
+              ToastAndroid.SHORT
+            );
+          this.lock = false;
+        }
       }
     }
   };

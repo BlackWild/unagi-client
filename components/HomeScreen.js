@@ -35,6 +35,7 @@ class HomeScreen extends Component {
     this.state = {
       refreshing: false
     };
+    this.lock = false;
   }
 
   componentWillMount() {
@@ -106,11 +107,20 @@ class HomeScreen extends Component {
   };
 
   onPre = () => {
-    this.props.dispatch({
-      type: actions.SET_PAGE_NAME,
-      pageName: "SendPostScreen"
-    });
-    this.props.navigation.navigate("SendPostScreen");
+    if (this.lock) {
+      return null;
+    } else {
+      this.lock = true;
+      this.props.dispatch({
+        type: actions.SET_PAGE_NAME,
+        pageName: "SendPostScreen"
+      });
+      this.props.navigation.navigate("SendPostScreen", {
+        onGoBack: () => {
+          this.lock = false;
+        }
+      });
+    }
   };
 
   onEndHandler = () => {

@@ -7,7 +7,7 @@ export const addBackHandler = that => {
       return true;
     }
     if (that.props.pageName === "SignUp") {
-      // that.props.navigation.navigate("LogIn");
+      that.props.navigation.state.params.onGoBack();
       that.props.navigation.goBack();
       that.props.dispatch({ type: actions.SET_PAGE_NAME, pageName: "LogIn" });
       return true;
@@ -17,6 +17,7 @@ export const addBackHandler = that => {
       return true;
     }
     if (that.props.pageName == "SendPostScreen") {
+      that.props.navigation.state.params.onGoBack();
       that.props.navigation.goBack();
       that.props.dispatch({ type: actions.SET_PAGE_NAME, pageName: "Home" });
       return true;

@@ -25,6 +25,7 @@ export class LogIn extends Component {
     this.state = {
       passDisply: true
     };
+    this.lock = false;
   }
 
   componentWillMount() {
@@ -38,38 +39,53 @@ export class LogIn extends Component {
   };
 
   logInClickHandler = () => {
-    try {
-      if (this.state.username === "" || this.state.password === "")
-        throw "empty";
-      logIn(this.state.username, this.state.password, this)
-        .then(arg => {
-          // console.warn("hellow");
-
-          if (!arg) {
-            ToastAndroid.show(
-              "نام کاربری یا رمز عبور نادرست است",
-              ToastAndroid.SHORT
-            );
-          } else {
-            this.props.navigation.navigate("Home");
-            this.props.dispatch({
-              type: actions.SET_PAGE_NAME,
-              pageName: "Home"
-            });
-            //
-          }
-        })
-        .catch(() => {});
-    } catch (err) {
-      ToastAndroid.show(
-        "نام کاربری یا رمز عبور نمی تواند خالی باشد",
-        ToastAndroid.SHORT
-      );
+    if (this.lock) {
+      return null;
+    } else {
+      this.lock = true;
+      try {
+        if (!this.state.username || !this.state.password) throw "empty";
+        logIn(this.state.username, this.state.password, this)
+          .then(arg => {
+            if (!arg) {
+              ToastAndroid.show(
+                "نام کاربری یا رمز عبور نادرست است",
+                ToastAndroid.SHORT
+              );
+              this.lock = false;
+            } else {
+              this.props.navigation.navigate("Home");
+              this.props.dispatch({
+                type: actions.SET_PAGE_NAME,
+                pageName: "Home"
+              });
+            }
+          })
+          .catch(() => {});
+      } catch (err) {
+        ToastAndroid.show(
+          "نام کاربری یا رمز عبور نمی تواند خالی باشد",
+          ToastAndroid.SHORT
+        );
+        this.lock = false;
+      }
     }
   };
   signUpClickHandler = () => {
-    this.props.navigation.navigate("SignUp");
-    this.props.dispatch({ type: actions.SET_PAGE_NAME, pageName: "SignUp" });
+    if (this.lock) {
+      return null;
+    } else {
+      this.lock = true;
+      this.props.navigation.navigate("SignUp", {
+        onGoBack: () => {
+          this.lock = false;
+        }
+      });
+      this.props.dispatch({
+        type: actions.SET_PAGE_NAME,
+        pageName: "SignUp"
+      });
+    }
   };
 
   showPass = () => {

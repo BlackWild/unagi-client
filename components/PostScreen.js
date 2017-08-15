@@ -27,6 +27,8 @@ class PostScreen extends Component {
     this.state = {
       refreshing: false
     };
+    this.parentPostLikeLock = false;
+    this.lock = false;
   }
 
   componentWillMount() {
@@ -45,29 +47,55 @@ class PostScreen extends Component {
     };
   };
   onPre = () => {
-    this.props.dispatch({
-      type: actions.SET_PAGE_NAME,
-      pageName: "SendReplyScreen"
-    });
-    this.props.navigation.navigate("SendReplyScreen");
+    if (this.lock) {
+      return null;
+    } else {
+      this.lock = true;
+      this.props.dispatch({
+        type: actions.SET_PAGE_NAME,
+        pageName: "SendReplyScreen"
+      });
+      this.props.navigation.navigate("SendReplyScreen");
+    }
   };
   backTouchHandler = () => {
-    this.props.dispatch({ type: actions.SET_PAGE_NAME, pageName: "Home" });
-    this.props.navigation.navigate("Home");
+    if (this.lock) {
+      return null;
+    } else {
+      this.lock = true;
+      this.props.dispatch({ type: actions.SET_PAGE_NAME, pageName: "Home" });
+      this.props.navigation.navigate("Home");
+    }
   };
   parentLikeHandler = () => {
-    likePost(this.props.accessToken, this.props.parentPost._id, this).then(() =>
-      console.log("POST LIKED")
-    );
+    if (this.parentPostLikeLock) {
+      return null;
+    } else {
+      this.parentPostLikeLock = true;
+      likePost(this.props.accessToken, this.props.parentPost._id, this)
+        .then(() => {
+          this.parentPostLikeLock = false;
+        })
+        .catch(() => {
+          this.parentPostLikeLock = false;
+        });
+    }
+  };
+  parentUnlikeHandler = () => {
+    if (this.parentPostLikeLock) {
+      return null;
+    } else {
+      this.parentPostLikeLock = true;
+      unlikePost(this.props.accessToken, this.props.parentPost._id, this)
+        .then(() => {
+          this.parentPostLikeLock = false;
+        })
+        .catch(() => {
+          this.parentPostLikeLock = false;
+        });
+    }
   };
 
-  parentUnlikeHandler = () => {
-    unlikePost(
-      this.props.accessToken,
-      this.props.parentPost._id,
-      this
-    ).then(() => console.log("POST UNLIKED"));
-  };
   onEndHandler = () => {
     if (this.state.hasNext) {
       getMoreReplyPost(that, this.state.nextStr);
