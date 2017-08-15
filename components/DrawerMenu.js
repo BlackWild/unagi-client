@@ -32,7 +32,12 @@ class DrawerMenu extends Component {
     return (
       <View style={{ flex: 1 }}>
         <View style={styles.userBox}>
-          <View style={styles.photo} />
+          {/* <View style={styles.photo} /> */}
+          <Image
+            source={{
+              uri: SERVER_DOMIN + "/" + this.props.username + ".jpeg"
+            }}
+          />
           <Text style={styles.username}>
             {this.props.username}
           </Text>
