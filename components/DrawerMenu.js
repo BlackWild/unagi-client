@@ -40,8 +40,7 @@ class DrawerMenu extends Component {
             style={{
               height: 80,
               width: 70,
-              borderRadius: 40,
-              backgroundColor: "#01579b"
+              borderRadius: 40
             }}
           />
           <Text style={styles.username}>
