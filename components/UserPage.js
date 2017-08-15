@@ -5,7 +5,8 @@ import {
   View,
   TouchableWithoutFeedback,
   Image,
-  ToastAndroid
+  ToastAndroid,
+  FlatList
 } from "react-native";
 
 import { headerStyles } from "../styles/HeaderStyles";
@@ -15,11 +16,20 @@ import actions from "../reducers/Actions";
 import { addBackHandler } from "../functions/BackHandlerAdder";
 import ImagePicker from "react-native-image-picker";
 import { sendPicture, getPicture } from "../functions/profileFunction";
+import { getMoreUserPosts, getUserPosts } from "../functions/profileFunction";
 import Icon from "react-native-vector-icons/Entypo";
+import PostWithoutReplay from "../components/PostWithoutReplay";
+
 class UserPage extends Component {
   constructor(props) {
     super(props);
     addBackHandler(this);
+    this.state = {
+      refreshing: false
+    };
+  }
+  componentDidMount() {
+    getUserPosts(this.props.accessToken, this);
   }
 
   static navigationOptions = ({ navigation }) => {
@@ -63,6 +73,28 @@ class UserPage extends Component {
       type: actions.SET_PAGE_NAME,
       pageName: this.props.pageNameNotFromDrawer
     });
+  };
+
+  onEndHandler = () => {
+    if (this.state.hasNext) {
+      getMoreUserPosts(this.props.accessToken, this, this.state.nextStr);
+    }
+  };
+  onRefreshHandler = () => {
+    this.setState(
+      {
+        refreshing: true
+      },
+      () => {
+        getUserPosts(this.props.accessToken, this)
+          .then(() => {
+            this.setState({
+              refreshing: false
+            });
+          })
+          .catch(() => {});
+      }
+    );
   };
   render() {
     return (
@@ -110,6 +142,27 @@ class UserPage extends Component {
             </TouchableWithoutFeedback>
           </View>
         </View>
+
+        <FlatList
+          data={this.props.userPosts}
+          keyExtractor={(item, index) => item._id}
+          renderItem={({ item }) =>
+            <PostWithoutReplay
+              likes={item.likes}
+              isLiked={item.isLiked}
+              content={item.content}
+              date={item.date}
+              postID={item._id}
+              username={item.username}
+              posterID={item.userID}
+              replies={item.replies}
+              navigation={this.props.navigation}
+            />}
+          onEndReached={this.onEndHandler}
+          onEndReachedThreshold={2}
+          refreshing={this.state.refreshing}
+          onRefresh={this.onRefreshHandler}
+        />
       </View>
     );
   }
@@ -122,7 +175,8 @@ const mapStateToProps = state => {
     pageNameNotFromDrawer: state.pageName.currentNotFromDrawer,
     app: state.app,
     accessToken: state.userInfo.accessToken,
-    url: state.userInfo.imageUri
+    url: state.userInfo.imageUri,
+    userPosts: state.userPosts
   };
 };
 

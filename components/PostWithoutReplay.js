@@ -119,7 +119,7 @@ class PostWithoutReplay extends Component {
           </View>
           <View style={[styles.likeBox, { justifyContent: "flex-end" }]}>
             <Text style={{ fontFamily: "Vazir" }}> پسند </Text>
-            <Text>
+            <Text style={{ fontFamily: "Vazir" }}>
               {this.props.likes}
             </Text>
             <TouchableWithoutFeedback
@@ -127,13 +127,11 @@ class PostWithoutReplay extends Component {
                 this.props.isLiked ? this.unlikeHandler : this.likeHandler
               }
             >
-              <Image
-                source={
-                  this.props.isLiked
-                    ? require("../img/heartLike.png")
-                    : require("../img/heartUnLike.png")
-                }
-                style={{ height: 20, width: 22, margin: 5 }}
+              <Icon
+                name="heart"
+                color={this.props.isLiked ? "#ff0000" : "#757575"}
+                size={25}
+                style={{ margin: 5 }}
               />
             </TouchableWithoutFeedback>
           </View>
