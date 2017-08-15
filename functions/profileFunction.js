@@ -1,5 +1,5 @@
 import { SERVER_DOMIN } from "../configs/config";
-
+import { ImageStore } from "react-native";
 import { tokenProvider } from "./StateSetters";
 import actions from "../reducers/Actions";
 export const sendPicture = (that, arr, data) => {
@@ -23,14 +23,25 @@ export const sendPicture = (that, arr, data) => {
         if (!resJ.isAccessTokenValid) {
           tokenProvider(that)
             .then(() => {
-              sendPicture(that, arr, data).then(() => {
-                resol();
+              sendPicture(that, arr, data).then(arg => {
+                if (resJ.isSaved) resol(resJ.isSaved);
               });
             })
             .catch(() => {
               rej();
             });
         } else {
+          console.log(SERVER_DOMIN + "/" + resJ.path, that.props.username);
+          if (resJ.isSaved) {
+            that.props.dispatch({
+              type: actions.SET_IMAGE,
+              uri: SERVER_DOMIN + "/" + resJ.path,
+              username: that.props.username
+            });
+            console.log("hoy");
+
+            resol(resJ.isSaved);
+          } else rej();
         }
       })
       .catch(error => {
@@ -41,7 +52,7 @@ export const sendPicture = (that, arr, data) => {
 export const getPicture = (that, username) => {
   return new Promise((resol, rej) => {
     fetch({
-      url: SERVER_DOMIN + "/api/v4/users/getPic?username=" + username,
+      url: SERVER_DOMIN + "/api/v4/users/getUrl?username=" + username,
       headers: {
         accessToken: that.props.accessToken
       },
@@ -67,6 +78,11 @@ export const getPicture = (that, username) => {
               rej();
             });
         } else {
+          that.props.dispatch({
+            type: actions.SET_IMAGE,
+            uri: SERVER_DOMI + "/" + resJ.path,
+            username
+          });
         }
       })
       .catch(error => {

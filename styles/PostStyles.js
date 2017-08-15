@@ -4,7 +4,7 @@ export const styles = StyleSheet.create({
   paragraph: {
     margin: 7,
     marginBottom: 4,
-    fontSize: 14,
+    fontSize: 12,
     textAlign: "auto",
     color: "#34495e",
     fontFamily: "Vazir"

@@ -1,5 +1,12 @@
 import React, { Component } from "react";
-import { Text, View, TouchableWithoutFeedback, Image } from "react-native";
+// const CachedImage = require("react-native-cached-image");
+import {
+  Text,
+  View,
+  TouchableWithoutFeedback,
+  Image,
+  ToastAndroid
+} from "react-native";
 
 import { headerStyles } from "../styles/HeaderStyles";
 import { styles } from "../styles/UserScreenStyles";
@@ -7,7 +14,8 @@ import { connect } from "react-redux";
 import actions from "../reducers/Actions";
 import { addBackHandler } from "../functions/BackHandlerAdder";
 import ImagePicker from "react-native-image-picker";
-import { sendPicture } from "../functions/profileFunction";
+import { sendPicture, getPicture } from "../functions/profileFunction";
+import Icon from "react-native-vector-icons/Entypo";
 class UserPage extends Component {
   constructor(props) {
     super(props);
@@ -29,7 +37,7 @@ class UserPage extends Component {
       }
     };
     ImagePicker.showImagePicker(options, response => {
-      console.log("Response = ", response);
+      // console.log("Response = ", response);
 
       if (response.didCancel) {
         console.log("User cancelled image picker");
@@ -59,20 +67,35 @@ class UserPage extends Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <View style={styles.bar}>
-          <View style={styles.header}>
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <TouchableWithoutFeedback onPress={this.backTouchHandler}>
-                <Image source={require("../img/back.png")} style={styles.pic} />
-              </TouchableWithoutFeedback>
-              <Text style={styles.post}> حساب کاربری</Text>
-            </View>
-          </View>
+        <View style={headerStyles.pagesHeader}>
+          <TouchableWithoutFeedback onPress={this.backTouchHandler}>
+            <Icon
+              name="chevron-left"
+              size={40}
+              color="#f1f1f1"
+              style={{ padding: 10 }}
+            />
+            {/* <Image
+              source={require("../img/back.png")}
+              style={headerStyles.backPic}
+            /> */}
+          </TouchableWithoutFeedback>
+          <Text style={headerStyles.titleHeader}> حساب کاربری</Text>
         </View>
 
         <View style={styles.userBox}>
           <TouchableWithoutFeedback onPress={this.openAvatarWindow}>
-            <View style={styles.photo} />
+            <View style={styles.photo}>
+              {/* <CacheImage
+                resizeMode="stretch"
+                defaultSource={app.img.tabnav_list}
+                url={this.props.url}
+                style={{
+                  width: 200,
+                  height: 200
+                }}
+              /> */}
+            </View>
           </TouchableWithoutFeedback>
           <Text style={styles.username}>
             {this.props.username}
@@ -89,7 +112,8 @@ const mapStateToProps = state => {
     pageName: state.pageName.current,
     pageNameNotFromDrawer: state.pageName.currentNotFromDrawer,
     app: state.app,
-    accessToken: state.userInfo.accessToken
+    accessToken: state.userInfo.accessToken,
+    url: state.userInfo.imageUri
   };
 };
 

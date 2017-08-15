@@ -136,15 +136,26 @@ class PostScreen extends Component {
     ];
     return (
       <View style={{ flex: 1 }}>
-        <View style={styles.bar}>
-          <View style={styles.header}>
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <TouchableWithoutFeedback onPress={this.backTouchHandler}>
-                <Image source={require("../img/back.png")} style={styles.pic} />
-              </TouchableWithoutFeedback>
-              <Text style={styles.post}> پست</Text>
-            </View>
-            <TouchableWithoutFeedback
+        <View style={headerStyles.pagesHeader}>
+          <View>
+            <TouchableWithoutFeedback onPress={this.backTouchHandler}>
+              <Icon
+                name="chevron-left"
+                size={40}
+                color="#f1f1f1"
+                style={{ padding: 10 }}
+              />
+              {/* <Image
+                source={require("../img/back.png")}
+                style={headerStyles.backPic}
+              /> */}
+            </TouchableWithoutFeedback>
+          </View>
+          <View>
+            <Text style={headerStyles.titleHeader}> پست</Text>
+          </View>
+          {/* </View> */}
+          {/* <TouchableWithoutFeedback
               onPress={() => this.props.app.openDrawer()}
             >
               <Icon
@@ -153,8 +164,7 @@ class PostScreen extends Component {
                 color="#ffffff"
                 style={{ margin: 10 }}
               />
-            </TouchableWithoutFeedback>
-          </View>
+            </TouchableWithoutFeedback> */}
         </View>
 
         <View

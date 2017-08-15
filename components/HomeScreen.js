@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Text, View, FlatList, TouchableWithoutFeedback } from "react-native";
 import ActionButton from "react-native-action-button";
+import FCM, { FCMEvent, RemoteNotificationResult, WillPresentNotificationResult, NotificationType } from 'react-native-fcm';
 
 import Post from "../components/Post";
 import {
@@ -8,7 +9,8 @@ import {
   setLocationState,
   setPostState,
   getMorePost,
-  tokenProvider
+  tokenProvider,
+  sendFcmToken
 } from "../functions/StateSetters";
 
 import { styles } from "../styles/HomeScreenStyles";
@@ -34,12 +36,49 @@ class HomeScreen extends Component {
   componentWillMount() {
     this.props.dispatch({ type: actions.SET_PAGE_NAME, pageName: "Home" });
     this.props.app.unlockDrawer();
+    FCM.requestPermissions(); // for iOS
+    FCM.getFCMToken().then(fcmToken => {
+      console.log("yoo", fcmToken)
+      sendFcmToken(this, this.props.accessToken, fcmToken);
+    });
+    this.notificationListener = FCM.on(FCMEvent.Notification, async (notif) => {
+      console.log("boo", notif);
+      // FCM.presentLocalNotification({
+      //   title: notif.title,                     // as FCM payload
+      //   body: notif.body,                    // as FCM payload (required)
+      //   sound: "default",                                   // as FCM payload
+      //   priority: notif.priority,                                   // as FCM payload
+      //   // click_action: "ACTION",                             // as FCM payload
+      //   badge: 10,                                          // as FCM payload IOS only, set 0 to clear badges
+      //   // number: 10,                                         // Android only
+
+      //   large_icon: "ic_launcher",                           // Android only
+      //   icon: "ic_launcher",                                // as FCM payload, you can relace this with custom icon you put in mipmap
+      //   vibrate: 100,                                       // Android only default: 300, no vibration if you pass null
+      //   lights: true,                                       // Android only, LED blinking (default false)
+      //   // show_in_foreground: true                                  // notification when app is in foreground (local & remote)
+      // });
+    });
+    this.refreshTokenListener = FCM.on(FCMEvent.RefreshToken, (token) => {
+      console.log("soo", token)
+      FCM.getFCMToken().then(fcmToken => {
+        console.log("yoo", fcmToken)
+        sendFcmToken(this, this.props.accessToken, fcmToken);
+      });
+      // fcm token may not be available on first load, catch it here
+    });
   }
 
   componentDidMount() {
     setLocationState(this).then(() => {
       setPostState(this.props.accessToken, this.props.location, this);
     });
+  }
+
+  componentWillUnmount() {
+    // stop listening for events
+    this.notificationListener.remove();
+    this.refreshTokenListener.remove();
   }
 
   static navigationOptions = ({ navigation }) => {
@@ -52,7 +91,7 @@ class HomeScreen extends Component {
           >
             <Icon
               name="menu"
-              size={50}
+              size={36}
               color="#ffffff"
               style={{ margin: 10 }}
             />
@@ -101,7 +140,7 @@ class HomeScreen extends Component {
               refreshing: false
             });
           })
-          .catch(() => {});
+          .catch(() => { });
       }
     );
   };
@@ -120,28 +159,28 @@ class HomeScreen extends Component {
         <View style={styles.container}>
           {!this.props || !this.props.posts
             ? <View style={{ flex: 1, justifyContent: "center" }}>
-                <Text>LOADING</Text>
-              </View>
+              <Text>LOADING</Text>
+            </View>
             : <FlatList
-                data={this.props.posts}
-                keyExtractor={(item, index) => item._id}
-                renderItem={({ item }) =>
-                  <Post
-                    likes={item.likes}
-                    isLiked={item.isLiked}
-                    content={item.content}
-                    date={item.date}
-                    postID={item._id}
-                    username={item.username}
-                    posterID={item.userID}
-                    replies={item.replies}
-                    navigation={this.props.navigation}
-                  />}
-                onEndReached={this.onEndHandler}
-                onEndReachedThreshold={2}
-                refreshing={this.state.refreshing}
-                onRefresh={this.onRefreshHandler}
-              />}
+              data={this.props.posts}
+              keyExtractor={(item, index) => item._id}
+              renderItem={({ item }) =>
+                <Post
+                  likes={item.likes}
+                  isLiked={item.isLiked}
+                  content={item.content}
+                  date={item.date}
+                  postID={item._id}
+                  username={item.username}
+                  posterID={item.userID}
+                  replies={item.replies}
+                  navigation={this.props.navigation}
+                />}
+              onEndReached={this.onEndHandler}
+              onEndReachedThreshold={2}
+              refreshing={this.state.refreshing}
+              onRefresh={this.onRefreshHandler}
+            />}
 
           <ActionButton
             onPress={this.onPre}

@@ -11,12 +11,14 @@ import {
   ScrollView,
   ToastAndroid
 } from "react-native";
-// import {styles} from '../styles/SignUpStyles';
+
+import Icon from "react-native-vector-icons/Entypo";
 import { styles } from "../styles/formStyles";
 import { sendUsernameId } from "../functions/StateSetters";
 import { connect } from "react-redux";
 import actions from "../reducers/Actions";
 import { addBackHandler } from "../functions/BackHandlerAdder";
+
 class SignUp extends Component {
   constructor(props) {
     super(props);
@@ -107,19 +109,8 @@ class SignUp extends Component {
       <View style={{ flex: 1 }}>
         <StatusBar backgroundColor="#689F38" barStyle="light-content" />
         <View style={styles.headerBox}>
-          <Text
-            style={{
-              fontSize: 30,
-              color: "#FFFFFF",
-              textAlign: "left",
-              fontFamily: "Vazir",
-              marginLeft: 13
-            }}
-          >
-            اوناگی
-          </Text>
+          <Text style={styles.title}>اوناگی</Text>
         </View>
-        {/* <View/> */}
         <ScrollView style={{ alignContent: "center" }}>
           <View
             style={{
@@ -158,9 +149,11 @@ class SignUp extends Component {
                   onPressIn={this.showPass}
                   onPressOut={this.hidePass}
                 >
-                  <Image
-                    source={require("../img/eye.png")}
-                    style={{ height: 25, width: 25, marginHorizontal: 5 }}
+                  <Icon
+                    size={20}
+                    name="eye"
+                    color="#757575"
+                    style={{ marginHorizontal: 10 }}
                   />
                 </TouchableWithoutFeedback>
               </View>
@@ -179,9 +172,11 @@ class SignUp extends Component {
                   onPressIn={this.showRePass}
                   onPressOut={this.hideRePass}
                 >
-                  <Image
-                    source={require("../img/eye.png")}
-                    style={{ height: 25, width: 25, marginHorizontal: 5 }}
+                  <Icon
+                    size={20}
+                    name="eye"
+                    color="#757575"
+                    style={{ marginHorizontal: 10 }}
                   />
                 </TouchableWithoutFeedback>
               </View>
@@ -194,17 +189,20 @@ class SignUp extends Component {
                 alignItems: "center"
               }}
             >
-              <Text style={{ fontFamily: "Vazir" }}>
-                قوانین تیم5 را می پذیرم.
-              </Text>
               <TouchableWithoutFeedback onPress={this.acceptLow}>
-                <View
-                  style={
-                    this.state.accept
-                      ? [styles.checkBox, { backgroundColor: "#757575" }]
-                      : styles.checkBox
-                  }
-                />
+                <View style={{ flexDirection: "row" }}>
+                  <Text style={{ fontFamily: "Vazir" }}>
+                    قوانین تیم5 را می پذیرم.
+                  </Text>
+
+                  <View
+                    style={
+                      this.state.accept
+                        ? [styles.checkBox, { backgroundColor: "#757575" }]
+                        : styles.checkBox
+                    }
+                  />
+                </View>
               </TouchableWithoutFeedback>
             </View>
             <TouchableWithoutFeedback onPress={this.clickedtime}>
@@ -221,7 +219,6 @@ class SignUp extends Component {
             </TouchableWithoutFeedback>
           </View>
         </ScrollView>
-        {/* <View/> */}
       </View>
     );
   }

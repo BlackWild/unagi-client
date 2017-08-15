@@ -11,14 +11,12 @@ import {
   ScrollView,
   ToastAndroid
 } from "react-native";
-// import { styles } from '../styles/LogInStyles';
 import { styles } from "../styles/formStyles";
-
 import { connect } from "react-redux";
 import actions from "../reducers/Actions";
 import { logIn } from "../functions/StateSetters";
-
 import { addBackHandler } from "../functions/BackHandlerAdder";
+import Icon from "react-native-vector-icons/Entypo";
 
 export class LogIn extends Component {
   constructor(props) {
@@ -101,17 +99,7 @@ export class LogIn extends Component {
       <View style={{ flex: 1 }}>
         <StatusBar backgroundColor="#689F38" barStyle="light-content" />
         <View style={styles.headerBox}>
-          <Text
-            style={{
-              fontSize: 30,
-              color: "#FFFFFF",
-              textAlign: "left",
-              fontFamily: "Vazir",
-              marginLeft: 13
-            }}
-          >
-            اوناگی
-          </Text>
+          <Text style={styles.title}>اوناگی</Text>
         </View>
         <ScrollView>
           <View
@@ -161,10 +149,16 @@ export class LogIn extends Component {
                   onPressIn={this.showPass}
                   onPressOut={this.hidePass}
                 >
-                  <Image
+                  <Icon
+                    size={20}
+                    name="eye"
+                    color="#757575"
+                    style={{ marginHorizontal: 10 }}
+                  />
+                  {/* <Image
                     source={require("../img/eye.png")}
                     style={{ height: 25, width: 25, marginHorizontal: 5 }}
-                  />
+                  /> */}
                 </TouchableWithoutFeedback>
               </View>
             </View>

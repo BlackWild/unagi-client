@@ -1,0 +1,73 @@
+{
+  "project_info": {
+    "project_number": "278961569372",
+    "firebase_url": "https://test-a5857.firebaseio.com",
+    "project_id": "test-a5857",
+    "storage_bucket": "test-a5857.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:278961569372:android:6d3d304ee605d4a2",
+        "android_client_info": {
+          "package_name": "com.unagiyooooo.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "278961569372-evd6n690b58ramq2nqo2n0c5jp9ncn3o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAbyufhaxAcls2iBw_0hVOP_lK804Vi8DM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:278961569372:android:9e4af305c637bd16",
+        "android_client_info": {
+          "package_name": "com.Unagi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "278961569372-evd6n690b58ramq2nqo2n0c5jp9ncn3o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAbyufhaxAcls2iBw_0hVOP_lK804Vi8DM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
