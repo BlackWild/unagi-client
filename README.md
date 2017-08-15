@@ -14,6 +14,7 @@ These instructions will get you a copy of the project up and running on your loc
 sudo apt-get install git
 ```
 
+
 **install other prerequisites**
 
 See complete instructions in [here](https://facebook.github.io/react-native/)
@@ -24,4 +25,16 @@ See complete instructions in [here](https://facebook.github.io/react-native/)
 
 ```
 git clone https://gitlab.rdcint.ir/CollegeNumber05/Android.git
+```
+
+**Go to Android folder**
+
+```
+cd Server
+```
+
+**Install depenencies**
+
+```
+npm install
 ```
