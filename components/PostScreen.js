@@ -7,6 +7,7 @@ import {
   Image,
   TouchableOpacity
 } from "react-native";
+import { SERVER_DOMIN } from "../configs/config";
 
 import { styles } from "../styles/PostScreenStyles";
 import { headerStyles } from "../styles/HeaderStyles";
@@ -212,13 +213,28 @@ class PostScreen extends Component {
                 alignContent: "center"
               }}
             >
-              <View
+              <Image
+                source={{
+                  uri:
+                    SERVER_DOMIN +
+                    "/" +
+                    this.props.parentPost.username +
+                    ".jpeg"
+                }}
                 style={{
                   height: 80,
                   width: 70,
                   borderRadius: 40,
                   backgroundColor: "#0077c0"
                 }}
+              />
+              {/* <View
+                style={{
+                  height: 80,
+                  width: 70,
+                  borderRadius: 40,
+                  backgroundColor: "#0077c0"
+                }} */}
               />
               <View
                 style={{

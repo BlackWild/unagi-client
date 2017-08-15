@@ -106,14 +106,14 @@ class PostWithoutReplay extends Component {
             }}
           >
             <Text
-              style={{ color: "#9E9E9E", fontSize: 14, fontFamily: "Vazir" }}
+              style={{ color: "#9E9E9E", fontSize: 10, fontFamily: "Vazir" }}
             >
               {timeago}
             </Text>
             <Icon
               name="clock"
               color="#9E9E9E"
-              size={14}
+              size={10}
               style={{ marginLeft: 5 }}
             />
           </View>
@@ -131,7 +131,7 @@ class PostWithoutReplay extends Component {
                 name="heart"
                 color={this.props.isLiked ? "#ff0000" : "#757575"}
                 size={25}
-                style={{ margin: 5 }}
+                style={{ margin: 5, marginLeft: 10 }}
               />
             </TouchableWithoutFeedback>
           </View>

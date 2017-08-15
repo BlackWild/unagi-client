@@ -1,13 +1,16 @@
 import React, { Component } from "react";
+<<<<<<< HEAD
 import { SERVER_DOMIN } from "../configs/config";
 
+=======
+>>>>>>> 0886cb9ea641119f08ae5b76be7dc75f7d34951d
 import { Text, View, TouchableWithoutFeedback, Image } from "react-native";
 import { styles } from "../styles/DrawerMenuStyles";
 import Icon from "react-native-vector-icons/Entypo";
 import { connect } from "react-redux";
 import actions from "../reducers/Actions";
 import { addBackHandler } from "../functions/BackHandlerAdder";
-
+import { SERVER_DOMIN } from "../configs/config";
 class DrawerMenu extends Component {
   navig = pageName => {
     if (this.props.app.drawerTouchLock) {
@@ -34,18 +37,18 @@ class DrawerMenu extends Component {
     return (
       <View style={{ flex: 1 }}>
         <View style={styles.userBox}>
-          <View style={styles.photo}>
-            <Image
-              source={{
-                uri: SERVER_DOMIN + "/" + this.props.username + ".jpeg"
-              }}
-              style={{
-                height: 80,
-                width: 70,
-                borderRadius: 40
-              }}
-            />
-          </View>
+          {/* <View style={styles.photo} /> */}
+          <Image
+            source={{
+              uri: SERVER_DOMIN + "/" + this.props.username + ".jpeg"
+            }}
+            style={{
+              height: 80,
+              width: 70,
+              borderRadius: 40,
+              backgroundColor: "#01579b"
+            }}
+          />
           <Text style={styles.username}>
             {this.props.username}
           </Text>
