@@ -6,6 +6,8 @@ Unagi is a **location** based social network.
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
+>Notice: these instructions is only for Linux operating systems
+
 ### Prerequisites
 
 **install Git**
@@ -39,7 +41,7 @@ git clone https://gitlab.rdcint.ir/CollegeNumber05/Android.git
 **Go to Android folder**
 
 ```
-cd Server
+cd Android
 ```
 
 **Install dependencies**
