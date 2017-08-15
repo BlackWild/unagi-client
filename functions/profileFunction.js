@@ -38,8 +38,6 @@ export const sendPicture = (that, arr, data) => {
               uri: SERVER_DOMIN + "/" + resJ.path,
               username: that.props.username
             });
-            console.log("hoy");
-
             resol(resJ.isSaved);
           } else rej();
         }

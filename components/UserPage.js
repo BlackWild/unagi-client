@@ -30,7 +30,6 @@ class UserPage extends Component {
   openAvatarWindow = () => {
     var options = {
       title: "Select Avatar",
-      customButtons: [{ name: "fb", title: "Choose Photo from Facebook" }],
       storageOptions: {
         skipBackup: true,
         path: "images"
@@ -53,6 +52,7 @@ class UserPage extends Component {
         var temp = response.type;
         var arr = temp.split("/");
         sendPicture(this, arr, response.data);
+        console.log(this.props.url, "mehdiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
       }
     });
   };
@@ -80,39 +80,34 @@ class UserPage extends Component {
         </View>
 
         <View style={styles.userBox}>
-          <TouchableWithoutFeedback onPress={this.openAvatarWindow}>
-            <View style={styles.photo}>
-              {/* <CacheImage
-                resizeMode="stretch"
-                defaultSource={app.img.tabnav_list}
-                url={this.props.url}
-                style={{
-                  width: 200,
-                  height: 200
-                }}
-              /> */}
-            </View>
-          </TouchableWithoutFeedback>
+          <View style={styles.photo}>
+            <Image
+              source={{ uri: this.props.url }}
+              style={{ width: 193, height: 110 }}
+            />
+          </View>
           <View>
             <Text style={styles.username}>
               {this.props.username}
             </Text>
-            <View
-              style={{
-                height: 50,
-                width: 50,
-                borderRadius: 25,
-                backgroundColor: "#b388ff",
-                alignItems: "center",
-                alignContent: "center",
-                justifyContent: "center",
-                flexDirection: "row",
-                left: 120,
-                bottom: 40
-              }}
-            >
-              <Icon name="camera" size={24} color="#f1f1f1" />
-            </View>
+            <TouchableWithoutFeedback onPress={this.openAvatarWindow}>
+              <View
+                style={{
+                  height: 50,
+                  width: 50,
+                  borderRadius: 25,
+                  backgroundColor: "#b388ff",
+                  alignItems: "center",
+                  alignContent: "center",
+                  justifyContent: "center",
+                  flexDirection: "row",
+                  left: 120,
+                  bottom: 40
+                }}
+              >
+                <Icon name="camera" size={24} color="#f1f1f1" />
+              </View>
+            </TouchableWithoutFeedback>
           </View>
         </View>
       </View>

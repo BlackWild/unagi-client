@@ -39,6 +39,7 @@ export const postsReducer = (state = [], action) => {
       return [action.post, ...state];
       break;
     case actions.SET_IMAGE:
+      // console.log(action.uri, "postreducer");
       return state.map(function(post) {
         if (post.username === action.username) {
           return {
