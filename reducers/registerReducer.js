@@ -17,6 +17,7 @@ export const registerReducer = (state = {}, action) => {
       };
       break;
     case actions.SET_IMAGE:
+      // console.log(action.uri, "registerReducer");
       return {
         ...state,
         imageUri: action.uri

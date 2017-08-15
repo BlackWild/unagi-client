@@ -88,6 +88,7 @@ export const replyReducer = (
       return {
         parentPost: (() => {
           if (state.parentPost.username === action.username) {
+            // console.log(action.uri, "replyRducer");
             return {
               ...state.parentPost,
               imageUri: action.uri
@@ -98,6 +99,7 @@ export const replyReducer = (
         })(),
         replyPosts: (() => {
           return state.replyPosts.map(function(post) {
+            // console.log(action.uri, "replyRducer");
             if (post.username === action.username) {
               return {
                 ...post,
@@ -109,7 +111,6 @@ export const replyReducer = (
           });
         })()
       };
-      return;
       break;
     default:
       return state;

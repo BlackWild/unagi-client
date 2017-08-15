@@ -14,12 +14,13 @@ export const styles = StyleSheet.create({
     paddingRight: 10,
     paddingLeft: 10,
     marginBottom: 8,
-    backgroundColor: "#e1f5fe",
+    backgroundColor: "#ffffff",
     borderRadius: 10
   },
   userBox: {
     flexDirection: "row",
-    justifyContent: "flex-end"
+    justifyContent: "flex-end",
+    alignItems: "center"
   },
   likeBox: {
     flexDirection: "row",

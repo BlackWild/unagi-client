@@ -135,13 +135,13 @@ class PostScreen extends Component {
       "دسامبر "
     ];
     return (
-      <View style={{ flex: 1, backgroundColor: "#e1f5fe" }}>
+      <View style={{ flex: 1, backgroundColor: "#f1f1f1" }}>
         <View style={headerStyles.pagesHeader}>
           <View>
             <TouchableWithoutFeedback onPress={this.backTouchHandler}>
               <Icon
                 name="chevron-left"
-                size={40}
+                size={30}
                 color="#f1f1f1"
                 style={{ padding: 10 }}
               />
@@ -169,7 +169,7 @@ class PostScreen extends Component {
             margin: 10,
             borderBottomWidth: 0,
             borderColor: "#757575",
-            backgroundColor: "#b3e5fc",
+            backgroundColor: "#C7ECFC",
             borderRadius: 15
           }}
         >
@@ -275,13 +275,11 @@ class PostScreen extends Component {
                     : this.parentLikeHandler
                 }
               >
-                <Image
-                  source={
-                    this.props.parentPost.isLiked
-                      ? require("../img/heartLike.png")
-                      : require("../img/heartUnLike.png")
-                  }
-                  style={{ height: 20, width: 22, margin: 5 }}
+                <Icon
+                  name="heart"
+                  color={this.props.isLiked ? "#ff0000" : "#757575"}
+                  size={25}
+                  style={{ margin: 10 }}
                 />
               </TouchableWithoutFeedback>
             </View>

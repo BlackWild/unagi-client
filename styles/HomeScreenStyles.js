@@ -7,6 +7,6 @@ export const styles = StyleSheet.create({
     marginTop: 6 + 8,
     paddingHorizontal: 6,
     // backgroundColor: '#e0e0e0',
-    backgroundColor: "#b3e5fc"
+    backgroundColor: "#f1f1f1"
   }
 });

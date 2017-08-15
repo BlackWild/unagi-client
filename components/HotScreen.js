@@ -41,7 +41,7 @@ class HotScreen extends Component {
           >
             <Icon
               name="menu"
-              size={36}
+              size={30}
               color="#ffffff"
               style={{ margin: 10 }}
             />
