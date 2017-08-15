@@ -61,6 +61,6 @@ npm test
 
 ## Authors
 
-* **Siavash Davani** - *front end*
+* **Siavash Davani** - *front end* - [blackWild](https://github.com/blackWild)
 * **Fateme Najafi** - *front end* - [violet135](https://github.com/violet135)
 * **Mohammad mehdi Fallahi** - *front end*
