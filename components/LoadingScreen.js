@@ -48,8 +48,7 @@ class LoadingScreen extends Component {
 
   render() {
     return (
-      <View style={{ flex: 1, backgroundColor: "#8BC34A" }}>
-        <StatusBar backgroundColor="#689F38" barStyle="light-content" />
+      <View style={{ flex: 1, backgroundColor: "#0091ea" }}>
         <View style={[styles.container]}>
           <Image source={require("../img/logo.png")} style={styles.pic} />
           <Text style={styles.welcome}>اونجا که هستی چه خبره!؟</Text>

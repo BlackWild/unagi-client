@@ -106,7 +106,7 @@ class Unagi extends Component {
             >
               <App />
             </DrawerLayoutAndroid>
-          : <View style={{ flex: 1, backgroundColor: "#8BC34A" }} />}
+          : <View style={{ flex: 1, backgroundColor: "#0091ea" }} />}
       </Provider>
     );
   }

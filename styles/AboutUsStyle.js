@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
   text2: {
     fontSize: 20,
     fontFamily: "Vazir",
-    color: "#689F38",
+    color: "#0077c0",
     margin: 10
   },
   team5: {
@@ -16,8 +16,8 @@ export const styles = StyleSheet.create({
     fontSize: 40,
     margin: 20,
     marginBottom: 5,
-    color: "#689F38",
-    borderBottomColor: "#689F38",
+    color: "#0077c0",
+    borderBottomColor: "#0077c0",
     borderBottomWidth: 3
   },
   center: {

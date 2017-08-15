@@ -12,7 +12,7 @@ export const TabScreen = TabNavigator(
   {
     tabBarOptions: {
       style: {
-        backgroundColor: "#8BC34A"
+        backgroundColor: "#0091ea"
       },
       labelStyle: {
         fontSize: 14,

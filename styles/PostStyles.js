@@ -14,7 +14,7 @@ export const styles = StyleSheet.create({
     paddingRight: 10,
     paddingLeft: 10,
     marginBottom: 8,
-    backgroundColor: "#f1f1f1",
+    backgroundColor: "#e1f5fe",
     borderRadius: 10
   },
   userBox: {
@@ -28,7 +28,7 @@ export const styles = StyleSheet.create({
     borderColor: "#9e9e9e"
   },
   user: {
-    color: "#689F38",
+    color: "#0077c0",
     fontSize: 14,
     fontFamily: "Vazir",
     textAlign: "right"
@@ -36,7 +36,7 @@ export const styles = StyleSheet.create({
   replyText: {
     paddingRight: 10,
     borderRightWidth: 3,
-    borderColor: "#689F38",
+    borderColor: "#0077c0",
     fontFamily: "Vazir",
     fontSize: 12
   },

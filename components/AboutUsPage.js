@@ -51,7 +51,7 @@ class AboutUsPage extends Component {
           }}
         >
           <Text style={styles.team5}>تیم5</Text>
-          <Text style={{ color: "#689F38", fontSize: 20 }}>
+          <Text style={{ color: "#0077c0", fontSize: 20 }}>
             شروع از صفر سخته ولی میشه
           </Text>
           <View style={{ margin: 20 }}>

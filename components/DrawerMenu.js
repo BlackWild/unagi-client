@@ -39,7 +39,7 @@ class DrawerMenu extends Component {
               <Icon
                 name="user"
                 size={16}
-                color="#689F38"
+                color="#0077c0"
                 style={{ margin: 5, marginLeft: 15 }}
               />
             </View>
@@ -50,7 +50,7 @@ class DrawerMenu extends Component {
               <Icon
                 name="help"
                 size={16}
-                color="#689F38"
+                color="#0077c0"
                 style={{ margin: 5, marginLeft: 15 }}
               />
             </View>
@@ -62,7 +62,7 @@ class DrawerMenu extends Component {
               <Icon
                 name="log-out"
                 size={16}
-                color="#689F38"
+                color="#0077c0"
                 style={{ margin: 5, marginLeft: 15 }}
               />
             </View>

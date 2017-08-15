@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   userBox: {
-    backgroundColor: "#8BC34A",
+    backgroundColor: "#0091ea",
     padding: 10,
     justifyContent: "center",
     alignItems: "center",
@@ -12,7 +12,7 @@ export const styles = StyleSheet.create({
     height: 80,
     width: 70,
     borderRadius: 40,
-    backgroundColor: "#689F38",
+    backgroundColor: "#01579b",
     borderBottomWidth: 2,
     borderColor: "#9e9e9e",
     margin: 10
@@ -24,7 +24,7 @@ export const styles = StyleSheet.create({
     fontSize: 18
   },
   button: {
-    color: "#689F38",
+    color: "#0077c0",
     margin: 0,
     fontFamily: "Vazir",
     fontSize: 16,

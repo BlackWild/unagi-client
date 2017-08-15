@@ -190,7 +190,7 @@ class PostScreen extends Component {
                   height: 80,
                   width: 70,
                   borderRadius: 40,
-                  backgroundColor: "#689F38"
+                  backgroundColor: "#0077c0"
                 }}
               />
               <View
@@ -202,7 +202,7 @@ class PostScreen extends Component {
               >
                 <Text
                   style={{
-                    color: "#689F38",
+                    color: "#0077c0",
                     margin: 0,
                     fontSize: 18,
                     textAlign: "right"
@@ -232,16 +232,6 @@ class PostScreen extends Component {
                 {date.getHours()}:{date.getMinutes()}
               </Text>
             </View>
-            {/* <View
-              style={{
-                justifyContent: "flex-end",
-                flexDirection: "row",
-                alignItems: "center"
-              }}
-            >
-              <Text>پاسخ</Text>
-              <Icon name="reply" size={25} />
-            </View> */}
             <View
               style={{
                 justifyContent: "flex-end",

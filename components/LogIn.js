@@ -81,7 +81,6 @@ export class LogIn extends Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <StatusBar backgroundColor="#689F38" barStyle="light-content" />
         <View style={styles.headerBox}>
           <Text style={styles.title}>اوناگی</Text>
         </View>

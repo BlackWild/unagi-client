@@ -1,7 +1,12 @@
 import React, { Component } from "react";
 import { Text, View, FlatList, TouchableWithoutFeedback } from "react-native";
 import ActionButton from "react-native-action-button";
-import FCM, { FCMEvent, RemoteNotificationResult, WillPresentNotificationResult, NotificationType } from 'react-native-fcm';
+import FCM, {
+  FCMEvent,
+  RemoteNotificationResult,
+  WillPresentNotificationResult,
+  NotificationType
+} from "react-native-fcm";
 
 import Post from "../components/Post";
 import {
@@ -37,10 +42,10 @@ class HomeScreen extends Component {
     this.props.app.unlockDrawer();
     FCM.requestPermissions(); // for iOS
     FCM.getFCMToken().then(fcmToken => {
-      console.log("yoo", fcmToken)
+      console.log("yoo", fcmToken);
       sendFcmToken(this, this.props.accessToken, fcmToken);
     });
-    this.notificationListener = FCM.on(FCMEvent.Notification, async (notif) => {
+    this.notificationListener = FCM.on(FCMEvent.Notification, async notif => {
       console.log("boo", notif);
       // FCM.presentLocalNotification({
       //   title: notif.title,                     // as FCM payload
@@ -58,10 +63,10 @@ class HomeScreen extends Component {
       //   // show_in_foreground: true                                  // notification when app is in foreground (local & remote)
       // });
     });
-    this.refreshTokenListener = FCM.on(FCMEvent.RefreshToken, (token) => {
-      console.log("soo", token)
+    this.refreshTokenListener = FCM.on(FCMEvent.RefreshToken, token => {
+      console.log("soo", token);
       FCM.getFCMToken().then(fcmToken => {
-        console.log("yoo", fcmToken)
+        console.log("yoo", fcmToken);
         sendFcmToken(this, this.props.accessToken, fcmToken);
       });
       // fcm token may not be available on first load, catch it here
@@ -130,7 +135,7 @@ class HomeScreen extends Component {
               refreshing: false
             });
           })
-          .catch(() => { });
+          .catch(() => {});
       }
     );
   };
@@ -149,28 +154,28 @@ class HomeScreen extends Component {
         <View style={styles.container}>
           {!this.props || !this.props.posts
             ? <View style={{ flex: 1, justifyContent: "center" }}>
-              <Text>LOADING</Text>
-            </View>
+                <Text>LOADING</Text>
+              </View>
             : <FlatList
-              data={this.props.posts}
-              keyExtractor={(item, index) => item._id}
-              renderItem={({ item }) =>
-                <Post
-                  likes={item.likes}
-                  isLiked={item.isLiked}
-                  content={item.content}
-                  date={item.date}
-                  postID={item._id}
-                  username={item.username}
-                  posterID={item.userID}
-                  replies={item.replies}
-                  navigation={this.props.navigation}
-                />}
-              onEndReached={this.onEndHandler}
-              onEndReachedThreshold={2}
-              refreshing={this.state.refreshing}
-              onRefresh={this.onRefreshHandler}
-            />}
+                data={this.props.posts}
+                keyExtractor={(item, index) => item._id}
+                renderItem={({ item }) =>
+                  <Post
+                    likes={item.likes}
+                    isLiked={item.isLiked}
+                    content={item.content}
+                    date={item.date}
+                    postID={item._id}
+                    username={item.username}
+                    posterID={item.userID}
+                    replies={item.replies}
+                    navigation={this.props.navigation}
+                  />}
+                onEndReached={this.onEndHandler}
+                onEndReachedThreshold={2}
+                refreshing={this.state.refreshing}
+                onRefresh={this.onRefreshHandler}
+              />}
 
           <ActionButton
             onPress={this.onPre}
